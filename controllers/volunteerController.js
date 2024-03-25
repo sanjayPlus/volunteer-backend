@@ -15,6 +15,7 @@ const VotePolling = require("../models/VotePolling");
 const asyncSvg2img = promisify(svg2img);
 var ml2en = require('ml2en');
 const Notification = require("../models/Notification");
+const svgGenWithPhoto = require("../helpers/svgGenWithPhoto");
 
 const register = async (req, res) => {
     try {
@@ -280,7 +281,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty ,partyType,partyName} = req.body;
+            hardFanVote, pollingParty ,partyType,partyName,instagram} = req.body;
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ error: "User not found" });
@@ -364,6 +365,9 @@ const UpdateUser = async (req, res) => {
         }
         if (facebook) {
             user.facebook = facebook
+        }
+        if(instagram){
+            user.instagram = instagram
         }
         if (verified) {
             user.verified = verified
@@ -766,6 +770,45 @@ const getVolunteerLogo = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+const getVolunteerLogoV2 = async (req, res) => {
+    try {
+        const { booth, constituency, assembly,mandalam} = req.query;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+
+
+        const svg = svgGenWithPhoto(
+           district,
+            constituency,
+            assembly,
+            mandalam,
+            booth
+        );
+
+        // Convert SVG to PNG
+        asyncSvg2img(svg, { format: 'png' }, async (error, buffer) => {
+            if (error) {
+                console.error("Error converting SVG to PNG:", error.message);
+                return res.status(500).json({ error: "Internal Server Error" });
+            }
+
+            // Set content type header
+            res.setHeader('Content-Type', 'image/png');
+            // Set content disposition header to force browser to download
+            res.setHeader('Content-Disposition', 'attachment; filename="logo.png"');
+            // Send the PNG data as binary
+            res.status(200).send(buffer);
+        });
+    } catch (error) {
+        console.error("Error generating logo ID:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
 const loginFromApp = async (req, res) => {
     try {
         const { volunteerId } = req.body;
@@ -1109,6 +1152,7 @@ module.exports = {
     getWhatsAppByPower,
     getPollingparty,
     addDataFromJson,
-    storeNotificationToken
+    storeNotificationToken,
+    getVolunteerLogoV2,
     
 }

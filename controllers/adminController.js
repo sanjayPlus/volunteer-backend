@@ -406,7 +406,7 @@ const updateUser = async (req, res) => {
         const { district, constituency, assembly, booth, caste, infavour, voterStatus, name, gender, age, voterId,
             whatsappNo,
             guardianName,
-            houseNo, houseName, address, email, phone, sNo, verified, marriedStatus, swingVote, year, facebook, pollingParty,partyType,partyName} = req.body
+            houseNo, houseName, address, email, phone, sNo, verified, marriedStatus, swingVote, year, facebook, pollingParty,partyType,partyName,instagram} = req.body
         if (district) {
             user.district = district
         }
@@ -478,6 +478,9 @@ const updateUser = async (req, res) => {
         }
         if (facebook) {
             user.facebook = facebook
+        }
+        if (instagram) {
+            user.instagram = instagram
         }
         if (pollingParty) {
             user.pollingParty = pollingParty;

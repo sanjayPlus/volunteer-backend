@@ -18,6 +18,7 @@ router.get('/users', volunteerAuth,volunteerController.getUsers);
 router.get('/volunteer-details',volunteerAuth, volunteerController.getVolunteerDetails);
 router.get('/protected',volunteerAuth,volunteerController.Protected);
 router.get('/download-logo',volunteerAuth, volunteerController.getVolunteerLogo);
+router.get('/download-logoV2',volunteerAuth, volunteerController.getVolunteerLogoV2);
 router.get('/assignments',volunteerAuth,volunteerController.getAssignments);
 router.get('/whatsapp',volunteerAuth,volunteerController.getWhatsAppByPower);
 router.get('/polling-party',volunteerAuth,volunteerController.getPollingparty);

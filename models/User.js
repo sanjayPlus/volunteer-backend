@@ -75,7 +75,9 @@ const userSchema = new mongoose.Schema({
             enum:["hardcore","swing"]
         },
         partyName:String
-    }
+    },
+    facebook:String,
+    instagram:String,
 });
 
 // Virtual for age calculation based on date_of_birth
