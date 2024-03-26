@@ -785,7 +785,7 @@ const getVolunteerLogoV2 = async (req, res) => {
         }else{
             symbol = 'symbol.png';
         }
-        
+
         // Pre-load images
         const background = await loadImage(`${process.env.DOMAIN}/idcard/logo.jpg`);
         const sasiImage = await loadImage(`${process.env.DOMAIN}/idcard/${constituency}.png`);
@@ -807,8 +807,14 @@ const getVolunteerLogoV2 = async (req, res) => {
 
         ctx.font = '600 30px Arial';
         ctx.fillText(assembly, 130, 440);
+        if(mandalam.length>14){
 
-        ctx.font = '600 28px Arial';
+            ctx.font = '600 20px Arial';
+        }else{
+
+            ctx.font = '600 30px Arial';
+        }
+        
         ctx.fillStyle = '#A90290';
         ctx.fillText(mandalam, 280, 300);
 
