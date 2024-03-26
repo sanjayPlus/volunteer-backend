@@ -777,9 +777,9 @@ const getVolunteerLogoV2 = async (req, res) => {
         const ctx = canvas.getContext('2d');
 
         // Pre-load images
-        const background = await loadImage(`${process.env.DOMAIN}/logo.jpg`);
-        const sasiImage = await loadImage(`${process.env.DOMAIN}/sasi.png`);
-        const symbolImage = await loadImage(`${process.env.DOMAIN}/symbol.png`);
+        const background = await loadImage(`${process.env.DOMAIN}/idcard/logo.jpg`);
+        const sasiImage = await loadImage(`${process.env.DOMAIN}/idcard/${constituency}.png`);
+        const symbolImage = await loadImage(`${process.env.DOMAIN}/idcard/symbol.png`);
 
         // Draw background
         ctx.drawImage(background, 0, 0, 600, 600);
