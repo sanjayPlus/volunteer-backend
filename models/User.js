@@ -76,8 +76,14 @@ const userSchema = new mongoose.Schema({
         },
         partyName:String
     },
-    facebook:String,
-    instagram:String,
+    facebook:{
+        type:String,
+        default:""
+    },
+    instagram:{
+        type:String,
+        default:""
+    },
 });
 
 // Virtual for age calculation based on date_of_birth

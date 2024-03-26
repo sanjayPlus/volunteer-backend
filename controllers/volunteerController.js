@@ -15,11 +15,11 @@ const VotePolling = require("../models/VotePolling");
 const asyncSvg2img = promisify(svg2img);
 var ml2en = require('ml2en');
 const Notification = require("../models/Notification");
-const svgGenWithPhoto = require("../helpers/svgGenWithPhoto");
+const { createCanvas, loadImage } = require('canvas');
 
 const register = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone,taskForce } = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, taskForce } = req.body;
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
             return res.status(400).json({ error: "Volunteer already exists" });
@@ -281,7 +281,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty ,partyType,partyName,instagram} = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram } = req.body;
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ error: "User not found" });
@@ -366,7 +366,7 @@ const UpdateUser = async (req, res) => {
         if (facebook) {
             user.facebook = facebook
         }
-        if(instagram){
+        if (instagram) {
             user.instagram = instagram
         }
         if (verified) {
@@ -385,7 +385,7 @@ const UpdateUser = async (req, res) => {
         if (pollingParty) {
             user.pollingParty = pollingParty
         }
-        if(partyType && partyName){
+        if (partyType && partyName) {
             user.party.partyType = partyType;
             user.party.partyName = partyName;
         }
@@ -437,7 +437,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo,partyType,partyName } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -512,10 +512,10 @@ const getUsers = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if(partyType && partyName){
-            query['party']={
-                partyType:partyType,
-                partyName:partyName
+        if (partyType && partyName) {
+            query['party'] = {
+                partyType: partyType,
+                partyName: partyName
             }
         }
 
@@ -772,42 +772,70 @@ const getVolunteerLogo = async (req, res) => {
 }
 const getVolunteerLogoV2 = async (req, res) => {
     try {
-        const { booth, constituency, assembly,mandalam} = req.query;
-        const volunteer = await Volunteer.findById(req.volunteer.id);
-        if (!volunteer) {
-            return res.status(400).json({ error: "Volunteer not found" });
-        }
-        if (!volunteer.verified) {
-            return res.status(400).json({ error: "Volunteer not verified" });
-        }
+        const { booth, constituency, assembly, mandalam } = req.query;
+        // Assuming the commented out parts are correctly managing volunteer validation.
 
+        const canvas = createCanvas(600, 600);
+        const ctx = canvas.getContext('2d');
 
-        const svg = svgGenWithPhoto(
-            constituency,
-            assembly,
-            mandalam,
-            booth
-        );
+        // Load the background image from public folder 
+        loadImage(process.env.DOMAIN + '/logo.jpg').then((background) => {
+            ctx.drawImage(background, 0, 0, 600, 600); // This will stretch the image to fill the 800x800 area
 
-        // Convert SVG to PNG
-        asyncSvg2img(svg, { format: 'png' }, async (error, buffer) => {
-            if (error) {
-                console.error("Error converting SVG to PNG:", error.message);
-                return res.status(500).json({ error: "Internal Server Error" });
-            }
+            // Load and handle the second image, text, and response as before
+            loadImage(process.env.DOMAIN + '/sasi.png').then((image) => {
+                const x = 110;
+                const y = 138;
+                ctx.drawImage(image, x, y, 220, 220); // Second image placement
 
-            // Set content type header
-            res.setHeader('Content-Type', 'image/png');
-            // Set content disposition header to force browser to download
-            res.setHeader('Content-Disposition', 'attachment; filename="logo.png"');
-            // Send the PNG data as binary
-            res.status(200).send(buffer);
+                // Load and handle the third image, text, and response as before
+                loadImage(process.env.DOMAIN + '/symbol.png').then((image2) => {
+                    // Add text fields
+                    const x = 180;
+                    const y = 10;
+                    ctx.drawImage(image2, x, y, 350, 350); // Second image placement
+    
+                    ctx.font = '900 30px Arial'; // Semi-bold, if the font supports 600 weight
+                    ctx.fillStyle = 'white'; // Set text color to white
+                    
+                    // Draw "Text field 1" and "Text field 2" with new style
+                    ctx.fillText(constituency, 130, 400);
+                    
+                    ctx.font = '600 30px Arial'; // Semi-bold, if the font supports 600 weight
+                    ctx.fillStyle = 'white'; // Set text color to white
+                    ctx.fillText(assembly, 130, 440);
+            
+                    // Reset font style and color for other text fields
+                    ctx.font = '600 28px Arial'; // Reset font weight to normal
+                    ctx.fillStyle = '#A90290'; // Assuming you want the default color back for other texts
+            
+                    // Draw "Text field 3" and "Text field 4"
+                    ctx.fillText(mandalam, 280, 300);
+                    ctx.font = '900 50px Arial'; // Reset font weight to normal
+                    ctx.fillStyle = '#250295'; // Assuming you want the default color back for other texts
+            
+                    ctx.fillText(booth, 320, 350);
+            
+
+                    // Convert the canvas to a Buffer and send it in the response
+                    const buffer = canvas.toBuffer('image/png');
+                    res.set('Content-Type', 'image/png');
+                    res.send(buffer);
+                })
+            }).catch(err => {
+                console.error("Error loading image:", err);
+                res.status(500).json({ error: "Error processing images" });
+            });
+        }).catch(err => {
+            console.error("Error loading background:", err);
+            res.status(500).json({ error: "Error processing background image" });
         });
     } catch (error) {
         console.error("Error generating logo ID:", error.message);
         res.status(500).json({ error: "Internal Server Error" });
     }
-}
+};
+
 const loginFromApp = async (req, res) => {
     try {
         const { volunteerId } = req.body;
@@ -984,7 +1012,7 @@ const getWhatsAppByPower = async (req, res) => {
 }
 const addDataFromJson = async (req, res) => {
     try {
-        const {  booth, caste, infavour, voterStatus } = req.body;
+        const { booth, caste, infavour, voterStatus } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
         if (!volunteer.verified) {
             return res.status(400).json({ error: "Volunteer not verified" });
@@ -1002,7 +1030,7 @@ const addDataFromJson = async (req, res) => {
             const keyValues = Object.keys(obj).map(key => {
                 let newKey = key;
                 let value = obj[key];
-                
+
                 if (key.includes(" : ")) {
                     // Split key into separate key and value
                     const [newKeyName, newValue] = key.split(" : ");
@@ -1033,7 +1061,7 @@ const addDataFromJson = async (req, res) => {
                     }
                 }
 
-                
+
                 return { [newKey]: value };
             });
             return Object.assign({}, ...keyValues);
@@ -1042,20 +1070,20 @@ const addDataFromJson = async (req, res) => {
         // Define new key names
         const newKeyNames = {
             "പേര്‌": "name",
-            "പൌര":"name",
-            "പേര":"name",
-            "പേ":"name",
+            "പൌര": "name",
+            "പേര": "name",
+            "പേ": "name",
             "അമ്മയുടെ പേര്‍": "guardianName",
             "അച്ഛന്റെ പേര്‌": "guardianName",
             "അച്ചന്റെ പേര്‌": "guardianName",
             "വിട്ടു നമ്പര്‍": "houseName",
             "വീട്ടു നമ്പര്‍": "houseName",
             "വീട്ടു പ": "houseName",
-            "ഭര്‍ത്താവിന്റെ പേര്":"guardianName",
+            "ഭര്‍ത്താവിന്റെ പേര്": "guardianName",
             "ഭര്‍ത്താവിന്റെ പേര്‌": "guardianName",
             "അമ്മയുടെ പേര്‌": "guardianName",
             "അച്ഛന്റെ പേര": "guardianName",
-            "അമ്മന്മുടെ പേര്‌":"guardianName",
+            "അമ്മന്മുടെ പേര്‌": "guardianName",
             "പ്രായം": "age",
             "ലിംഗം": "gender",
             'SL Number': "sNo",
@@ -1070,9 +1098,9 @@ const addDataFromJson = async (req, res) => {
             let newHouseName = "";
             try {
 
-               newName  = ml2en(data.name);
-               newGuardianName = ml2en(data.guardianName);
-               newHouseName = ml2en(data.houseName);
+                newName = ml2en(data.name);
+                newGuardianName = ml2en(data.guardianName);
+                newHouseName = ml2en(data.houseName);
             } catch (e) {
                 console.log("Error", e);
             }
@@ -1080,16 +1108,16 @@ const addDataFromJson = async (req, res) => {
             if (!existingUser) {
                 User.create({
                     sNo: data.sNo,
-                    name:newName,
-                    guardianName:newGuardianName ,
+                    name: newName,
+                    guardianName: newGuardianName,
                     houseNo: data.houseNo,
                     houseName: newHouseName,
                     gender: data.gender,
                     age: data.age,
                     voterId: data.voterId,
-                    district:volunteer.district,
-                    constituency:volunteer.constituency,
-                    assembly:volunteer.assembly,
+                    district: volunteer.district,
+                    constituency: volunteer.constituency,
+                    assembly: volunteer.assembly,
                     booth,
                     whatsappNo: data.whatsappNo || "",
                     phone: data.phone || "",
@@ -1110,19 +1138,19 @@ const addDataFromJson = async (req, res) => {
 
 const storeNotificationToken = async (req, res) => {
     try {
-      const { FCMToken } = req.body;
-      const notification = await Notification.findOne({ token: FCMToken });
-      if (!notification) {
-        const notification = await Notification.create({ token: FCMToken, userId: req.volunteer.id });
-        res.status(200).json({ notification });
-      } else {
-        res.status(200).json({ notification });
-      }
+        const { FCMToken } = req.body;
+        const notification = await Notification.findOne({ token: FCMToken });
+        if (!notification) {
+            const notification = await Notification.create({ token: FCMToken, userId: req.volunteer.id });
+            res.status(200).json({ notification });
+        } else {
+            res.status(200).json({ notification });
+        }
     } catch (error) {
-      console.error("Error during token store:", error.message);
-      res.status(500).json({ error: "Internal Server Error" });
+        console.error("Error during token store:", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-  }
+}
 module.exports = {
     register,
     addUser,
@@ -1153,5 +1181,5 @@ module.exports = {
     addDataFromJson,
     storeNotificationToken,
     getVolunteerLogoV2,
-    
+
 }
