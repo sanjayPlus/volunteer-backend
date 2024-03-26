@@ -775,11 +775,20 @@ const getVolunteerLogoV2 = async (req, res) => {
         const { booth, constituency, assembly, mandalam } = req.query;
         const canvas = createCanvas(600, 600);
         const ctx = canvas.getContext('2d');
-
+        let symbol = '';
+        if(constituency === 'Kollam'){
+            symbol = 'symbol3.png';
+        }else if(constituency === 'Malappuram'){
+            symbol = 'symbol2.png';
+        }else if(constituency === 'Ponnani'){
+            symbol = 'symbol2.png';
+        }else{
+            symbol = 'symbol.png';
+        }
         // Pre-load images
         const background = await loadImage(`${process.env.DOMAIN}/idcard/logo.jpg`);
         const sasiImage = await loadImage(`${process.env.DOMAIN}/idcard/${constituency}.png`);
-        const symbolImage = await loadImage(`${process.env.DOMAIN}/idcard/symbol.png`);
+        const symbolImage = await loadImage(`${process.env.DOMAIN}/idcard/${symbol}`);
 
         // Draw background
         ctx.drawImage(background, 0, 0, 600, 600);
