@@ -776,7 +776,7 @@ const getVolunteerLogoV2 = async (req, res) => {
         const canvas = createCanvas(600, 600);
         const ctx = canvas.getContext('2d');
         let symbol = '';
-        if(constituency === 'Kollam'){
+        if(constituency === 'Kottayam'){
             symbol = 'symbol3.png';
         }else if(constituency === 'Malappuram'){
             symbol = 'symbol2.png';
