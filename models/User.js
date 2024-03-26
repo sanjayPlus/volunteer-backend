@@ -20,11 +20,26 @@ const userSchema = new mongoose.Schema({
     district: {
         type: String,
     },
-    mandalam:String,
-    aadhaar:String,
-    aadhaarNo:String,
-    assembly:String,
-    constituency:String,
+    mandalam:{
+        type:String,
+        default:""
+    },
+    aadhaar:{
+        type:String,
+        default:""
+    },
+    aadhaarNo:{
+        type:String,
+        default:""
+    },
+    assembly:{
+        type:String,
+        default:""
+    },
+    constituency:{
+        type:String,
+        default:""
+    },
     panchayath:{
         type:String,
         default:""
@@ -37,30 +52,80 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
-    ward:String,
-    date_of_birth:String,
-    booth:String,
-    caste:String,
-    profession:String,
-    voterId:String,
-    whatsappNo:String,
-    voterStatus:String,
-    infavour:String,
-    houseNo:String,
-    houseName:String,
-    guardianName:String,
-    gender:String,
-    age:String,
-    sNo:String,
+    ward:{
+        type:String,
+        default:""
+    },
+    date_of_birth:{
+        type:String,
+        default:""
+    },
+    booth:{
+        type:String,
+        default:""
+    },
+    caste:{
+        type:String,
+        default:""
+    },
+    profession:{
+        type:String,
+        default:""
+    },
+    voterId:{
+        type:String,
+        default:""
+    },
+    whatsappNo:{
+        type:String,
+        default:""
+    },
+    voterStatus:{
+        type:String,
+        default:""
+    },
+    infavour:{
+        type:String,
+        default:""
+    },
+    houseNo:{
+        type:String,
+        default:""
+    },
+    houseName:{
+        type:String,
+        default:""
+    },
+    guardianName:{
+        type:String,
+        default:""
+    },
+    gender:{
+        type:String,
+        default:""
+    },
+    age:{
+        type:String,
+        default:""
+    },
+    sNo:{
+        type:String,
+        default:""
+    },
     localBody:String,
     verified:{
         type:Boolean,
         default:false
     },
-    facebook:String,
     swingVote:String,
-    year:String,
-    marriedStatus:String,
+    year:{
+        type:String,
+        default:""
+    },
+    marriedStatus:{
+        type:String,
+        default:""
+    },
     votingDay:Boolean,
     pollingParty:{
         type:String,
