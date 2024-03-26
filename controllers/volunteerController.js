@@ -773,68 +773,53 @@ const getVolunteerLogo = async (req, res) => {
 const getVolunteerLogoV2 = async (req, res) => {
     try {
         const { booth, constituency, assembly, mandalam } = req.query;
-        // Assuming the commented out parts are correctly managing volunteer validation.
-
         const canvas = createCanvas(600, 600);
         const ctx = canvas.getContext('2d');
 
-        // Load the background image from public folder 
-        loadImage(process.env.DOMAIN + '/logo.jpg').then((background) => {
-            ctx.drawImage(background, 0, 0, 600, 600); // This will stretch the image to fill the 800x800 area
+        // Pre-load images
+        const background = await loadImage(`${process.env.DOMAIN}/logo.jpg`);
+        const sasiImage = await loadImage(`${process.env.DOMAIN}/sasi.png`);
+        const symbolImage = await loadImage(`${process.env.DOMAIN}/symbol.png`);
 
-            // Load and handle the second image, text, and response as before
-            loadImage(process.env.DOMAIN + '/sasi.png').then((image) => {
-                const x = 110;
-                const y = 138;
-                ctx.drawImage(image, x, y, 220, 220); // Second image placement
+        // Draw background
+        ctx.drawImage(background, 0, 0, 600, 600);
 
-                // Load and handle the third image, text, and response as before
-                loadImage(process.env.DOMAIN + '/symbol.png').then((image2) => {
-                    // Add text fields
-                    const x = 180;
-                    const y = 10;
-                    ctx.drawImage(image2, x, y, 350, 350); // Second image placement
-    
-                    ctx.font = '900 30px Arial'; // Semi-bold, if the font supports 600 weight
-                    ctx.fillStyle = 'white'; // Set text color to white
-                    
-                    // Draw "Text field 1" and "Text field 2" with new style
-                    ctx.fillText(constituency, 130, 400);
-                    
-                    ctx.font = '600 30px Arial'; // Semi-bold, if the font supports 600 weight
-                    ctx.fillStyle = 'white'; // Set text color to white
-                    ctx.fillText(assembly, 130, 440);
-            
-                    // Reset font style and color for other text fields
-                    ctx.font = '600 28px Arial'; // Reset font weight to normal
-                    ctx.fillStyle = '#A90290'; // Assuming you want the default color back for other texts
-            
-                    // Draw "Text field 3" and "Text field 4"
-                    ctx.fillText(mandalam, 280, 300);
-                    ctx.font = '900 50px Arial'; // Reset font weight to normal
-                    ctx.fillStyle = '#250295'; // Assuming you want the default color back for other texts
-            
-                    ctx.fillText(booth, 320, 350);
-            
+        // Draw second image
+        ctx.drawImage(sasiImage, 110, 138, 220, 220);
 
-                    // Convert the canvas to a Buffer and send it in the response
-                    const buffer = canvas.toBuffer('image/png');
-                    res.set('Content-Type', 'image/png');
-                    res.send(buffer);
-                })
-            }).catch(err => {
-                console.error("Error loading image:", err);
-                res.status(500).json({ error: "Error processing images" });
-            });
-        }).catch(err => {
-            console.error("Error loading background:", err);
-            res.status(500).json({ error: "Error processing background image" });
-        });
+        // Draw third image
+        ctx.drawImage(symbolImage, 180, 10, 350, 350);
+
+        // Add text fields with styles
+        ctx.font = '900 30px Arial';
+        ctx.fillStyle = 'white';
+        ctx.fillText(constituency, 130, 400);
+
+        ctx.font = '600 30px Arial';
+        ctx.fillText(assembly, 130, 440);
+
+        ctx.font = '600 28px Arial';
+        ctx.fillStyle = '#A90290';
+        ctx.fillText(mandalam, 280, 300);
+
+        ctx.font = '900 50px Arial';
+        ctx.fillStyle = '#250295';
+        ctx.fillText(booth, 320, 350);
+
+        // Convert the canvas to a Buffer and send it in the response
+        const buffer = canvas.toBuffer('image/png');
+        res.set('Content-Type', 'image/png');
+        res.send(buffer);
     } catch (error) {
-        console.error("Error generating logo ID:", error.message);
-        res.status(500).json({ error: "Internal Server Error" });
+        console.error("Error generating logo ID:", error);
+        if (error.code === 'ENOTFOUND') {
+            res.status(500).json({ error: "The domain name could not be resolved. Please check your DNS settings and environment variables." });
+        } else {
+            res.status(500).json({ error: "Internal Server Error" });
+        }
     }
 };
+
 
 const loginFromApp = async (req, res) => {
     try {
