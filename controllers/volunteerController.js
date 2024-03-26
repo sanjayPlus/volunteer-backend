@@ -785,6 +785,7 @@ const getVolunteerLogoV2 = async (req, res) => {
         }else{
             symbol = 'symbol.png';
         }
+        
         // Pre-load images
         const background = await loadImage(`${process.env.DOMAIN}/idcard/logo.jpg`);
         const sasiImage = await loadImage(`${process.env.DOMAIN}/idcard/${constituency}.png`);
