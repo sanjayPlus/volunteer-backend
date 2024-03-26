@@ -783,7 +783,6 @@ const getVolunteerLogoV2 = async (req, res) => {
 
 
         const svg = svgGenWithPhoto(
-           district,
             constituency,
             assembly,
             mandalam,
