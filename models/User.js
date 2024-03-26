@@ -137,9 +137,13 @@ const userSchema = new mongoose.Schema({
     party:{
         partyType:{
             type:String,
-            enum:["hardcore","swing"]
+            enum:["hardcore","swing",""],
+            default:""
         },
-        partyName:String
+        partyName:{
+            type:String,
+            default:""
+        }
     },
     facebook:{
         type:String,
