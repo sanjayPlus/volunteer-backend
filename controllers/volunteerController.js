@@ -548,6 +548,106 @@ const getUsers = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+const getUsersCount = async (req, res) => {
+    try {
+        const { booth, search, gender, caste, infavour, age, voterStatus,voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
+        const query = {};
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+
+        if (!volunteer) {
+            return res.status(400).json({ error: "Please provide a valid booth" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+
+        if (booth) {
+            query['booth'] = volunteer.boothRule.includes(booth) ? booth : null;
+        }
+        if (!volunteer.assembly) {
+            return res.status(400).json({ error: "Please provide a valid assembly" });
+        }
+
+        if (!volunteer.constituency) {
+            return res.status(400).json({ error: "Please provide a valid constituency" });
+        }
+        if (!volunteer.district) {
+            return res.status(400).json({ error: "Please provide a valid district" });
+        }
+        query['assembly'] = volunteer.assembly;
+        query['constituency'] = volunteer.constituency;
+        query['district'] = volunteer.district;
+
+        if (search) {
+            if (voterId) {
+
+                query['voterId'] = new RegExp(search, 'i');
+            } else if (houseNo) {
+                query['houseNo'] = new RegExp(search, 'i');
+            } else {
+                query['name'] = new RegExp(search, 'i');
+
+            }
+        }
+        if (gender) {
+            query['gender'] = gender;
+        }
+        if (caste) {
+            query['caste'] = caste;
+        }
+        if (infavour) {
+            query['infavour'] = infavour;
+        }
+        if (age) {
+            query['age'] = age;
+        }
+        if (voterStatus) {
+            query['voterStatus'] = voterStatus;
+        }
+        if (verified) {
+            query['verified'] = verified;
+        }
+        if (marriedStatus) {
+            query['marriedStatus'] = marriedStatus;
+        }
+        if (swingVote) {
+            query['swingVote'] = swingVote;
+        }
+        if (year) {
+            query['year'] = year;
+        }
+        if (abroadType) {
+            query['abroadType'] = abroadType;
+        }
+        if (hardFanVote) {
+            query['hardFanVote'] = hardFanVote;
+        }
+        if (userVotingType) {
+            query['userVotingType'] = userVotingType;
+        }
+        if (partyType && partyName) {
+            query['party'] = {
+                partyType: partyType,
+                partyName: partyName
+            }
+        }
+
+
+            users = await User.find(query)
+       
+
+        if (users.length === 0) {
+            return res.status(404).json({ error: "No users found" });
+        }
+
+        res.status(200).json({
+            count:users.length,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+};
 const getVolunteerDetails = async (req, res) => {
     try {
         const volunteer = await Volunteer.findById(req.volunteer.id).select("-password");
