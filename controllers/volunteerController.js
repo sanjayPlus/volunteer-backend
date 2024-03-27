@@ -1295,6 +1295,7 @@ module.exports = {
     verifyForgotPasswordOTP,
     resetPassword,
     getUsers,
+    getUsersCount,
     getVolunteerDetails,
     registerFromApp,
     getUserById,

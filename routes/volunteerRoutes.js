@@ -15,7 +15,7 @@ const upload = multer({ storage: storage });
 router.put('/update-user/:userId',  volunteerAuth, volunteerController.UpdateUser);
 router.delete('/delete-user/:id',volunteerAuth, volunteerController.DeleteUser);
 router.get('/users', volunteerAuth,volunteerController.getUsers);
-router.get('/users-count', volunteerAuth,volunteerController.getUsers);
+router.get('/users-count', volunteerAuth,volunteerController.getUsersCount);
 router.get('/volunteer-details',volunteerAuth, volunteerController.getVolunteerDetails);
 router.get('/protected',volunteerAuth,volunteerController.Protected);
 router.get('/download-logo',volunteerAuth, volunteerController.getVolunteerLogo);
