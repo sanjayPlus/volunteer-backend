@@ -42,4 +42,6 @@ router.post('/add-report',volunteerAuth,volunteerController.addReport);
 router.post('/add-data-from-json',upload.single('file'),volunteerAuth,volunteerController.addDataFromJson);
 router.post('/add-notification-token',volunteerAuth,volunteerController.storeNotificationToken);
 router.get('/notifications',volunteerAuth,adminController.getNotifications);
+
+router.post('/add-whatsapp-public',volunteerAuth,volunteerController.addWhatsAppPublic);
 module.exports = router;

@@ -17,6 +17,9 @@ const WhatsAppPublicSchema = new mongoose.Schema({
     },
     optional: {
         type: String,
+    },
+    membersNo: {
+        type: Number,
     }
 });
 const WhatsAppPublic = mongoose.model("WhatsAppPublic", WhatsAppPublicSchema);

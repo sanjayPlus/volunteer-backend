@@ -16,6 +16,7 @@ const asyncSvg2img = promisify(svg2img);
 var ml2en = require('ml2en');
 const Notification = require("../models/Notification");
 const { createCanvas, loadImage } = require('canvas');
+const WhatsAppPublic = require("../models/WhatsAppPublic");
 
 const register = async (req, res) => {
     try {
@@ -814,7 +815,7 @@ const getVolunteerLogoV2 = async (req, res) => {
 
             ctx.font = '600 30px Arial';
         }
-        
+
         ctx.fillStyle = '#A90290';
         ctx.fillText(mandalam, 280, 300);
 
@@ -1152,6 +1153,37 @@ const storeNotificationToken = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+const addWhatsAppPublic = async (req, res) => {
+    try {
+        const { link, booth, assembly, constituency, optional, membersNo } = req.body;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if(!volunteer.district){
+            return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        const whatsAppPublic = await WhatsAppPublic.create({
+            link,
+            optional,
+            booth,
+            assembly,
+            constituency,
+            district: volunteer.district,
+            membersNo: Number(membersNo)||0
+        })
+        await whatsAppPublic.save();
+        res.status(200).json({ message: "Whatsapp public added successfully", whatsAppPublic });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
+
+
 module.exports = {
     register,
     addUser,
@@ -1182,5 +1214,5 @@ module.exports = {
     addDataFromJson,
     storeNotificationToken,
     getVolunteerLogoV2,
-
+    addWhatsAppPublic,
 }

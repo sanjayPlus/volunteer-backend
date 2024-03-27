@@ -1416,14 +1416,16 @@ const getStaticsOfPolling = async (req, res) => {
 
 const addWhatsAppPublic = async (req, res) => {
     try {
-        const { link, booth, assembly, constituency, district, optional } = req.body;
+        const { link, booth, assembly, constituency, district, optional, membersNo } = req.body;
+
         const whatsAppPublic = await WhatsAppPublic.create({
             link,
             optional,
             booth,
             assembly,
             constituency,
-            district
+            district,
+            membersNo: Number(membersNo)||0
         })
         await whatsAppPublic.save();
         res.status(200).json({ message: "Whatsapp public added successfully", whatsAppPublic });
