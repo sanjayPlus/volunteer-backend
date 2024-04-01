@@ -1259,11 +1259,20 @@ const addWhatsAppPublic = async (req, res) => {
         if(!link){
             return res.status(400).json({ error: "Link is required" });
         }
-        if (!volunteer.verified) {
-            return res.status(400).json({ error: "Volunteer not verified" });
+        if (!booth) {
+            return res.status(400).json({ error: "Booth is required" });
+        }
+        if (!assembly) {
+            return res.status(400).json({ error: "Assembly is required" });
+        }
+        if (!constituency) {
+            return res.status(400).json({ error: "Constituency is required" });
         }
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
         }
         if (!volunteer.district) {
             return res.status(400).json({ error: "Volunteer District not found" });
