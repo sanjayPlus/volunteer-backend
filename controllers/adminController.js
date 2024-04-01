@@ -1454,6 +1454,21 @@ const getWhatsAppPublic = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
+const getWhatsAppPublicCount = async (req, res) => {
+    try {
+        const { district, assembly, constituency, booth } = req.query;
+        const query = {}
+        if (district) query.district = district
+        if (assembly) query.assembly = assembly
+        if (constituency) query.constituency = constituency
+        if (booth) query.booth = booth
+        const whatsAppPublic = await WhatsAppPublic.find(query);
+        res.status(200).json(whatsAppPublic.length);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
 const deleteWhatsAppPublic = async (req, res) => {
     try {
         const { id } = req.params;
@@ -1693,13 +1708,13 @@ const deleteNotification = async (req, res) => {
         if (!notification) {
             return res.status(404).json({ error: "Notification not found" });
         }
-
         res.status(200).json({ msg: "notification removed" });
     } catch (error) {
         console.error("Error deleting notification:", error.message);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+
 
 module.exports = {
     Login,
@@ -1764,6 +1779,7 @@ module.exports = {
     getStaticsOfPolling,
     addWhatsAppPublic,
     getWhatsAppPublic,
+    getWhatsAppPublicCount,
     deleteWhatsAppPublic,
     addDataFromJson,
     loginFromApp,
@@ -1771,4 +1787,5 @@ module.exports = {
     getNotifications,
     deleteNotification,
     
+
 }

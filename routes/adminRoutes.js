@@ -243,6 +243,7 @@ router.get('/get-statistics-polling-party',adminAuth,adminController.getStaticsO
 
 router.post('/add-whatsapp-public',adminAuth,adminController.addWhatsAppPublic);
 router.get('/whatsapp-public',adminController.getWhatsAppPublic);
+router.get('/whatsapp-public-count',adminController.getWhatsAppPublicCount);
 router.delete('/whatsapp-public/:id',adminAuth,adminController.deleteWhatsAppPublic);
 
 router.post('/add-data-from-json',upload.single('file'),adminController.addDataFromJson);
