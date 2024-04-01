@@ -516,10 +516,10 @@ const getUsers = async (req, res) => {
         if (partyType || partyName) {
             query['party'] = {};
             if (partyType) {
-                query['party']['partyType'] = partyType;
+                query['party'].partyType = partyType;
             }
             if (partyName) {
-                query['party']['partyName'] = partyName;
+                query['party'].partyName = partyName;
             }
         }
         const count = await User.countDocuments(query);
