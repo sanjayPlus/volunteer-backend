@@ -1256,6 +1256,9 @@ const addWhatsAppPublic = async (req, res) => {
     try {
         const { link, booth, assembly, constituency, optional, membersNo } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
+        if(!link){
+            return res.status(400).json({ error: "Link is required" });
+        }
         if (!volunteer.verified) {
             return res.status(400).json({ error: "Volunteer not verified" });
         }
@@ -1264,6 +1267,10 @@ const addWhatsAppPublic = async (req, res) => {
         }
         if (!volunteer.district) {
             return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        const existingLink = await WhatsAppPublic.findOne({ link });
+        if (existingLink) {
+            return res.status(400).json({ error: "Link already exists" });
         }
         const whatsAppPublic = await WhatsAppPublic.create({
             link,
