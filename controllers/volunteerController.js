@@ -530,10 +530,10 @@ const getUsers = async (req, res) => {
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
-        if(partyType){
+        if (partyType) {
             users = users.filter(user => user.party.partyType === partyType);
         }
-        if(partyName){
+        if (partyName) {
             users = users.filter(user => user.party.partyName === partyName);
         }
 
@@ -549,7 +549,7 @@ const getUsers = async (req, res) => {
 };
 const getUsersCount = async (req, res) => {
     try {
-        const { booth, search, gender, caste, infavour, age, voterStatus,voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
+        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -624,25 +624,23 @@ const getUsersCount = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType || partyName) {
-            query['party'] = {};
-            if (partyType) {
-                query['party']['partyType'] = partyType;
-            }
-            if (partyName) {
-                query['party']['partyName'] = partyName;
-            }
+
+        let users = await User.find(query)
+
+        if (partyType) {
+            users = users.filter(user => user.party.partyType === partyType);
+        }
+        if (partyName) {
+            users = users.filter(user => user.party.partyName === partyName);
         }
 
-            users = await User.find(query)
-       
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
 
         res.status(200).json({
-            count:users.length,
+            count: users.length,
         });
     } catch (error) {
         console.error(error);
@@ -878,13 +876,13 @@ const getVolunteerLogoV2 = async (req, res) => {
         const canvas = createCanvas(600, 600);
         const ctx = canvas.getContext('2d');
         let symbol = '';
-        if(constituency === 'Kollam'){
+        if (constituency === 'Kollam') {
             symbol = 'symbol2.png';
-        }else if(constituency === 'Malappuram'){
+        } else if (constituency === 'Malappuram') {
             symbol = 'symbol3.png';
-        }else if(constituency === 'Ponnani'){
+        } else if (constituency === 'Ponnani') {
             symbol = 'symbol3.png';
-        }else{
+        } else {
             symbol = 'symbol.png';
         }
 
@@ -909,10 +907,10 @@ const getVolunteerLogoV2 = async (req, res) => {
 
         ctx.font = '600 30px Arial';
         ctx.fillText(assembly, 130, 440);
-        if(mandalam.length>14){
+        if (mandalam.length > 14) {
 
             ctx.font = '600 20px Arial';
-        }else{
+        } else {
 
             ctx.font = '600 30px Arial';
         }
@@ -1264,7 +1262,7 @@ const addWhatsAppPublic = async (req, res) => {
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
         }
-        if(!volunteer.district){
+        if (!volunteer.district) {
             return res.status(400).json({ error: "Volunteer District not found" });
         }
         const whatsAppPublic = await WhatsAppPublic.create({
@@ -1274,7 +1272,7 @@ const addWhatsAppPublic = async (req, res) => {
             assembly,
             constituency,
             district: volunteer.district,
-            membersNo: Number(membersNo)||0
+            membersNo: Number(membersNo) || 0
         })
         await whatsAppPublic.save();
         res.status(200).json({ message: "Whatsapp public added successfully", whatsAppPublic });
