@@ -536,8 +536,7 @@ const getUsers = async (req, res) => {
         if(partyName){
             users = users.filter(user => user.party.partyName === partyName);
         }
-        count = users.length;   
-        
+
         res.status(200).json({
             data: users,
             currentPage: page,
