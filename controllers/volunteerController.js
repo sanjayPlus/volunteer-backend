@@ -513,9 +513,13 @@ const getUsers = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType && partyName) {
+        if (partyType) {
             query['party'] = {
                 partyType: partyType,
+            }
+        }
+        if (partyName) {
+            query['party'] = {
                 partyName: partyName
             }
         }
@@ -625,9 +629,13 @@ const getUsersCount = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType && partyName) {
+        if (partyType) {
             query['party'] = {
                 partyType: partyType,
+            }
+        }
+        if (partyName) {
+            query['party'] = {
                 partyName: partyName
             }
         }
