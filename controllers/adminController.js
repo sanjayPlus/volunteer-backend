@@ -1441,19 +1441,38 @@ const addWhatsAppPublic = async (req, res) => {
 }
 const getWhatsAppPublic = async (req, res) => {
     try {
-        const { district, assembly, constituency, booth } = req.query;
-        const query = {}
-        if (district) query.district = district
-        if (assembly) query.assembly = assembly
-        if (constituency) query.constituency = constituency
-        if (booth) query.booth = booth
-        const whatsAppPublic = await WhatsAppPublic.find(query);
-        res.status(200).json(whatsAppPublic);
+        const { district, assembly, constituency, booth, page, perPage} = req.query; // Default values for page and perPage
+        const query = {};
+        
+        if (district) query.district = district;
+        if (assembly) query.assembly = assembly;
+        if (constituency) query.constituency = constituency;
+        if (booth) query.booth = booth;
+        
+        // Calculate the total count of documents that match the query (before pagination)
+        const totalCount = await WhatsAppPublic.countDocuments(query);
+        
+        // Find documents that match the query with pagination
+        const whatsAppPublic = await WhatsAppPublic.find(query)
+            .skip((page - 1) * perPage) // Skips the documents of previous pages
+            .limit(perPage); // Limits the number of documents returned
+        
+        // Calculating total pages
+        const totalPages = Math.ceil(totalCount / perPage);
+        
+        res.status(200).json({
+            data: whatsAppPublic,
+            currentPage: Number(page),
+            perPage: Number(perPage),
+            totalCount,
+            totalPages,
+        });
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ error: "internal server error" })
+        res.status(500).json({ error: "internal server error" });
     }
-}
+};
+
 const getWhatsAppPublicCount = async (req, res) => {
     try {
         const { district, assembly, constituency, booth } = req.query;
