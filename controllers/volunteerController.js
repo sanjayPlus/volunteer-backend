@@ -513,17 +513,15 @@ const getUsers = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType) {
-            query['party'] = {
-                partyType: partyType,
+        if (partyType || partyName) {
+            query['party'] = {};
+            if (partyType) {
+                query['party']['partyType'] = partyType;
+            }
+            if (partyName) {
+                query['party']['partyName'] = partyName;
             }
         }
-        if (partyName) {
-            query['party'] = {
-                partyName: partyName
-            }
-        }
-
         const count = await User.countDocuments(query);
         let users = null;
         if (sNo === "true") {
@@ -629,17 +627,15 @@ const getUsersCount = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType) {
-            query['party'] = {
-                partyType: partyType,
+        if (partyType || partyName) {
+            query['party'] = {};
+            if (partyType) {
+                query['party']['partyType'] = partyType;
+            }
+            if (partyName) {
+                query['party']['partyName'] = partyName;
             }
         }
-        if (partyName) {
-            query['party'] = {
-                partyName: partyName
-            }
-        }
-
 
             users = await User.find(query)
        
