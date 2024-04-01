@@ -1589,10 +1589,10 @@ const addDataFromJson = async (req, res) => {
             if (!existingUser) {
                 User.create({
                     sNo: data.sNo,
-                    name: newName,
-                    guardianName: newGuardianName,
+                    name: data.name,
+                    guardianName: data.guardianName,
                     houseNo: data.houseNo || "",
-                    houseName: newHouseName,
+                    houseName: data.houseName,
                     gender: data.gender,
                     age: data.age,
                     voterId: data.voterId,
