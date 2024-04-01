@@ -1417,6 +1417,11 @@ const getStaticsOfPolling = async (req, res) => {
 const addWhatsAppPublic = async (req, res) => {
     try {
         const { link, booth, assembly, constituency, district, optional, membersNo } = req.body;
+        // Check if the link already exists
+      const existingLink = await WhatsAppPublic.findOne({ link });
+      if (existingLink) {
+        return res.status(400).json({ error: "This link is already in use" });
+      }
 
         const whatsAppPublic = await WhatsAppPublic.create({
             link,
