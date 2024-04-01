@@ -513,15 +513,6 @@ const getUsers = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType || partyName) {
-            query['party'] = {};
-            if (partyType) {
-                query['party'].partyType = partyType;
-            }
-            if (partyName) {
-                query['party'].partyName = partyName;
-            }
-        }
         const count = await User.countDocuments(query);
         let users = null;
         if (sNo === "true") {
@@ -539,7 +530,14 @@ const getUsers = async (req, res) => {
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
-
+        if(partyType){
+            users = users.filter(user => user.party.partyType === partyType);
+        }
+        if(partyName){
+            users = users.filter(user => user.party.partyName === partyName);
+        }
+        count = users.length;   
+        
         res.status(200).json({
             data: users,
             currentPage: page,
