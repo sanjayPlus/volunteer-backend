@@ -1769,6 +1769,6 @@ module.exports = {
     loginFromApp,
     sendNotificationWithDistrict,
     getNotifications,
-    deleteNotification
-
+    deleteNotification,
+    
 }
