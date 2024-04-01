@@ -1578,10 +1578,9 @@ const addDataFromJson = async (req, res) => {
             let newGuardianName = "";
             let newHouseName = "";
             try {
-
-               newName  = data.name;
-               newGuardianName =data.guardianName;
-               newHouseName = data.houseName;
+                newName = ml2en(data.name);
+                newGuardianName = ml2en(data.guardianName);
+                newHouseName = ml2en(data.houseName);
             } catch (e) {
                 console.log("Error", e);
             }
@@ -1589,10 +1588,10 @@ const addDataFromJson = async (req, res) => {
             if (!existingUser) {
                 User.create({
                     sNo: data.sNo,
-                    name: data.name,
-                    guardianName: data.guardianName,
+                    name: newName,
+                    guardianName: newGuardianName,
                     houseNo: data.houseNo || "",
-                    houseName: data.houseName,
+                    houseName: newHouseName,
                     gender: data.gender,
                     age: data.age,
                     voterId: data.voterId,
