@@ -1761,7 +1761,27 @@ const LoginFromDCCAdmin = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
-
+const getCasteV2 = async (req, res) => {
+    try {
+            const castes = [{
+                caste:"Hindu",
+                types:[
+                    {
+                        type:"Ezhaya",
+                    },
+                    {
+                        type:"Sangha",
+                    },
+                
+                ]
+            }]
+        res.status(200).json(castes);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+} 
 module.exports = {
     Login,
     Protected,
