@@ -126,7 +126,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
-    votingDay:Boolean,
+    votingDay:String,
     pollingParty:{
         type:String,
         default:""

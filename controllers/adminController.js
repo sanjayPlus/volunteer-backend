@@ -61,7 +61,7 @@ const Protected = async (req, res) => {
 }
 const CreateVolunteer = async (req, res) => {
     try {
-        const { name, email, password, gender, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone } = req.body;
+        const { name, email, password, gender, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, loksabha } = req.body;
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
             return res.status(400).json({ error: "Volunteer already exists" });
@@ -80,7 +80,8 @@ const CreateVolunteer = async (req, res) => {
             boothRule: boothRule,
             mandalamMember,
             mandlamPresident,
-            verified: true
+            verified: true,
+            loksabha
         });
         res.status(200).json({ volunteer });
     } catch (error) {
@@ -89,7 +90,7 @@ const CreateVolunteer = async (req, res) => {
 }
 const UpdateVolunteer = async (req, res) => {
     try {
-        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId } = req.body;
+        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId,loksabha,password } = req.body;
         const volunteer = await Volunteer.findById(volunteerId);
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -127,7 +128,14 @@ const UpdateVolunteer = async (req, res) => {
             volunteer.mandlamPresident = mandlamPresident;
         }
         if (gender) {
-            volunteer.gender = gender
+            volunteer.gender = gender;
+        }
+        if(loksabha){
+            volunteer.loksabha = loksabha;
+        }
+        if(password){
+            const hashedPassword = await bcrypt.hash(password, 10);
+            volunteer.password = hashedPassword;
         }
         await volunteer.save();
         res.status(200).json({ volunteer });

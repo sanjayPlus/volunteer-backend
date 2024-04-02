@@ -20,7 +20,7 @@ const WhatsAppPublic = require("../models/WhatsAppPublic");
 
 const register = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, taskForce } = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, taskForce, loksabha } = req.body;
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
             return res.status(400).json({ error: "Volunteer already exists" });
@@ -36,10 +36,9 @@ const register = async (req, res) => {
             constituency,
             phone,
             boothRule: boothRule,
-            mandalamMember,
-            mandlamPresident,
             verified: false,
-            taskForce
+            power:taskForce,
+            loksabha
         });
         res.status(200).json({ volunteer });
     } catch (error) {
@@ -282,7 +281,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram } = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram,votingDay,loksabha} = req.body;
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ error: "User not found" });
@@ -390,6 +389,12 @@ const UpdateUser = async (req, res) => {
             user.party.partyType = partyType;
             user.party.partyName = partyName;
         }
+        if(votingDay){
+            user.votingDay = votingDay
+        }
+        if(loksabha){
+            user.loksabha = loksabha
+        }
         user.updatedBy.push(req.volunteer.id);
         await user.save();
         res.status(200).json({ message: "User updated successfully", user });
@@ -439,7 +444,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -513,6 +518,9 @@ const getUsers = async (req, res) => {
         }
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
+        }
+        if(votingDay){
+            query['votingDay'] = votingDay;
         }
         const count = await User.countDocuments(query);
         let users = null;
@@ -660,7 +668,7 @@ const getVolunteerDetails = async (req, res) => {
 }
 const registerFromApp = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, aadhaar, aadhaarNo, dccappuserId, dccappurl, power } = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, aadhaar, aadhaarNo, dccappuserId, dccappurl, power ,loksabha} = req.body;
         console.log(req.body)
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
@@ -684,7 +692,8 @@ const registerFromApp = async (req, res) => {
             dccappuserId,
             dccappurl,
             verified: false,
-            power
+            power,
+            loksabha
         });
 
         res.status(200).json({ volunteer, volunteerId: volunteer._id });
