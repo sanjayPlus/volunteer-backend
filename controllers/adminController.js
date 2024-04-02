@@ -1582,10 +1582,9 @@ const addDataFromJson = async (req, res) => {
             let newGuardianName = "";
             let newHouseName = "";
             try {
-
-               newName  = ml2en(data.name);
-               newGuardianName = ml2en(data.guardianName);
-               newHouseName = ml2en(data.houseName);
+                newName = ml2en(data.name);
+                newGuardianName = ml2en(data.guardianName);
+                newHouseName = ml2en(data.houseName);
             } catch (e) {
                 console.log("Error", e);
             }

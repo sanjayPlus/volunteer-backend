@@ -246,7 +246,7 @@ router.get('/whatsapp-public',adminController.getWhatsAppPublic);
 router.get('/whatsapp-public-count',adminController.getWhatsAppPublicCount);
 router.delete('/whatsapp-public/:id',adminAuth,adminController.deleteWhatsAppPublic);
 
-router.post('/add-data-from-json',upload.single('file'),adminController.addDataFromJson);
+router.post('/add-data-from-json',upload.single('excel'),adminController.addDataFromJson);
 router.get('/login-from-app',appServerAuth,adminController.loginFromApp);
 
 router.post('/send-notification-with-district',OneImage.single('image'),adminAuth,adminController.sendNotificationWithDistrict);
