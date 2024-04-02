@@ -257,7 +257,8 @@ const addUser = async (req, res) => {
             userVotingType,
             abroadType,
             hardFanVote,
-            sNo
+            sNo,
+            updatedBy:[volunteer._id]
         });
 
         userDataEntries.forEach(([key, value]) => {
@@ -815,6 +816,7 @@ const addUserFromExcel = async (req, res) => {
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
                     booth,
+                    updatedBy:[req.volunteer.id]
                 })
             }
         })
@@ -1248,6 +1250,7 @@ const addDataFromJson = async (req, res) => {
                     infavour: infavour || data.infavour || "",
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
+                    updatedBy:[volunteer._id],
                 });
             }
         });
@@ -1319,6 +1322,7 @@ const addWhatsAppPublic = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
+
 const getPollingPartyByVolunteer = async (req, res) => {
     try {
         const volunteerId = req.volunteer.id;
