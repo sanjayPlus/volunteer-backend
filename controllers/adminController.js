@@ -1371,12 +1371,13 @@ const addPolingParty = async (req, res) => {
 }
 const getPolingParty = async (req, res) => {
     try {
-        const { district, assembly, constituency, booth } = req.query;
+        const { district, assembly, constituency, booth,loksabha } = req.query;
         const query = {}
         if (district) query.district = district
         if (assembly) query.assembly = assembly
         if (constituency) query.constituency = constituency
         if (booth) query.booth = booth
+        if (loksabha) query.loksabha = loksabha
         const polingParty = await VotePolling.find(query);
         res.status(200).json(polingParty);
     } catch (error) {
