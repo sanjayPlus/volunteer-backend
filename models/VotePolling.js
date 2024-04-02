@@ -8,6 +8,9 @@ const VotePollingSchema = new mongoose.Schema({
         type: String,
         default: ""
     },
+    loksabha: {
+        type: String,
+    },
     constituency: {
         type: String,
         default: ""

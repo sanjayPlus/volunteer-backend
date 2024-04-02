@@ -282,6 +282,7 @@ const UpdateUser = async (req, res) => {
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
             hardFanVote, pollingParty, partyType, partyName, instagram,votingDay,loksabha} = req.body;
+            console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ error: "User not found" });
