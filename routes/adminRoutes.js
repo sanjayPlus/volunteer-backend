@@ -252,6 +252,8 @@ router.get('/login-from-app',appServerAuth,adminController.loginFromApp);
 router.post('/send-notification-with-district',OneImage.single('image'),adminAuth,adminController.sendNotificationWithDistrict);
 router.get('/notifications',adminAuth,adminController.getNotifications);
 
+router.get('/login-from-dcc-admin',appServerAuth,adminController.LoginFromDCCAdmin);
+
 
 
 module.exports = router;

@@ -153,6 +153,7 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
+    updatedBy:Array,
 });
 
 // Virtual for age calculation based on date_of_birth

@@ -1255,13 +1255,17 @@ const deleteVolunteerAppLink = async (req, res) => {
 }
 const addHistory = async (req, res) => {
     try {
-        const { title, description, link, optional, year } = req.body;
+        const { title, description, link, optional, year ,party,election_type,no_of_votes,no_of_voters} = req.body;
         const history = await History.create({
             title,
             description,
             link,
             optional,
-            year
+            year,
+            party,
+            election_type,
+            no_of_votes,
+            no_of_voters
         })
         await history.save();
         res.status(200).json({ message: "History added successfully", history });
@@ -1733,7 +1737,20 @@ const deleteNotification = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
-
+const LoginFromDCCAdmin = async (req, res) => {
+    try {
+        const admin = await Admin.findOne();
+        if (!admin) {
+            return res.status(400).json({ msg: "Invalid Credentials" });
+        }
+        const token = jwt.sign({ id: admin._id }, jwtSecret);
+        res.status(200).json(token);
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+    }
+}
 
 module.exports = {
     Login,
@@ -1805,6 +1822,6 @@ module.exports = {
     sendNotificationWithDistrict,
     getNotifications,
     deleteNotification,
-    
+    LoginFromDCCAdmin
 
 }

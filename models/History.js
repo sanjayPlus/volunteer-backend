@@ -12,6 +12,32 @@ const HistorySchema = new mongoose.Schema({
     optional:{
         type: String
     },
+    party:[{
+        name:{
+            type: String,
+            default: ""
+        },
+        percentage:{
+            type: String,
+            default: ""
+        },
+        count:{
+            type: String,
+            default: ""
+        }
+    }],
+    no_of_voters:{
+        type: String,
+        default: ""
+    },
+    no_of_votes:{
+        type: String,
+        default: ""
+    },
+    election_type:{
+        type: String,
+        default: ""
+    },
     year:{
         type: String
     }

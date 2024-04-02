@@ -390,6 +390,7 @@ const UpdateUser = async (req, res) => {
             user.party.partyType = partyType;
             user.party.partyName = partyName;
         }
+        user.updatedBy.push(req.volunteer.id);
         await user.save();
         res.status(200).json({ message: "User updated successfully", user });
     } catch (error) {
