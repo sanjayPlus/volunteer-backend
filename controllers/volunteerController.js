@@ -1367,5 +1367,5 @@ module.exports = {
     storeNotificationToken,
     getVolunteerLogoV2,
     addWhatsAppPublic,
-    getPollingPartyByVolunteer
+    getPollingPartyByVolunteer,
 }
