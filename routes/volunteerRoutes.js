@@ -46,6 +46,7 @@ router.post('/add-notification-token',volunteerAuth,volunteerController.storeNot
 router.get('/notifications',volunteerAuth,adminController.getNotifications);
 
 router.post('/add-whatsapp-public',volunteerAuth,volunteerController.addWhatsAppPublic);
+router.get('/get-statics-of-voting-day',volunteerAuth,volunteerController.getStaticsOfVotingDay);
 
 
 module.exports = router;

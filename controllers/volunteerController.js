@@ -1334,6 +1334,40 @@ const getPollingPartyByVolunteer = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
+const getStaticsOfVotingDay = async (req, res) => {
+    try {
+        const { booth } = req.query;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.boothRule.includes(booth)) {
+            return res.status(400).json({ error: "Volunteer Booth not found" });
+        }
+        const users = await User.find({ district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly, booth: booth });
+        const pollingPartyList = users.filter(user => user.pollingParty);
+        const uniquePollingParty = [...new Set(pollingPartyList.map(user => user.votingDay))];
+        const statistics = uniquePollingParty.map(pollingParty => {
+            const partyUsers = pollingPartyList.filter(user => user.votingDay === pollingParty);
+            const partyCount = partyUsers.length;
+            const totalUsers = pollingPartyList.length;
+            const percentage = (partyCount / totalUsers) * 100;
+            return {
+                name: pollingParty,
+                count: partyCount,
+                percentage: percentage.toFixed(2),
+                users: partyUsers
+            };
+        });
+        res.status(200).json(statistics);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
 
 module.exports = {
     register,
@@ -1368,4 +1402,5 @@ module.exports = {
     getVolunteerLogoV2,
     addWhatsAppPublic,
     getPollingPartyByVolunteer,
+    getStaticsOfVotingDay
 }
