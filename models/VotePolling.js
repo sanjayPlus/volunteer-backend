@@ -34,6 +34,14 @@ const VotePollingSchema = new mongoose.Schema({
     optional: {
         type: String,
         default: ""
+    },
+    loksabha:{
+        type:String,
+        default:"",
+    },
+    symbol:{
+        type:String,
+        default:""
     }
 });
 

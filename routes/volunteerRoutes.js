@@ -24,6 +24,7 @@ router.get('/assignments',volunteerAuth,volunteerController.getAssignments);
 router.get('/whatsapp',volunteerAuth,volunteerController.getWhatsAppByPower);
 router.get('/polling-party',volunteerAuth,volunteerController.getPollingparty);
 router.get('/statistics-of-polling',volunteerAuth,volunteerController.getStaticsOfPolling);
+router.get('/get-polling-party-by-volunteer',volunteerAuth,volunteerController.getPollingPartyByVolunteer);
 
 router.post("/login", volunteerController.volunteerLogin);
 router.post("/add-user",volunteerAuth,volunteerController.addUser);

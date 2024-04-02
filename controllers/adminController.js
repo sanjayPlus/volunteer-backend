@@ -1348,7 +1348,7 @@ const deleteAds = async (req, res) => {
 
 const addPolingParty = async (req, res) => {
     try {
-        const { district, assembly, constituency, booth, name, party, optional } = req.body;
+        const { district, assembly, constituency, booth, name, party, optional,loksabha,symbol } = req.body;
         const imageObj = req.file;
         const polingParty = await VotePolling.create({
             district,
@@ -1358,7 +1358,9 @@ const addPolingParty = async (req, res) => {
             name,
             party,
             image: `${process.env.DOMAIN}/PolingImage/${imageObj.filename}`,
-            optional
+            optional,
+            loksabha,
+            symbol
         })
         await polingParty.save();
         res.status(200).json({ message: "Poling Party added successfully", polingParty });

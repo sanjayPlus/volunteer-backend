@@ -37,7 +37,7 @@ const register = async (req, res) => {
             phone,
             boothRule: boothRule,
             verified: false,
-            power:taskForce,
+            power: taskForce,
             loksabha
         });
         res.status(200).json({ volunteer });
@@ -281,8 +281,8 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram,votingDay,loksabha} = req.body;
-            console.log(votingDay)
+            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha } = req.body;
+        console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ error: "User not found" });
@@ -390,10 +390,10 @@ const UpdateUser = async (req, res) => {
             user.party.partyType = partyType;
             user.party.partyName = partyName;
         }
-        if(votingDay){
+        if (votingDay) {
             user.votingDay = votingDay
         }
-        if(loksabha){
+        if (loksabha) {
             user.loksabha = loksabha
         }
         user.updatedBy.push(req.volunteer.id);
@@ -520,7 +520,7 @@ const getUsers = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if(votingDay){
+        if (votingDay) {
             query['votingDay'] = votingDay;
         }
         const count = await User.countDocuments(query);
@@ -669,7 +669,7 @@ const getVolunteerDetails = async (req, res) => {
 }
 const registerFromApp = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, aadhaar, aadhaarNo, dccappuserId, dccappurl, power ,loksabha} = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, aadhaar, aadhaarNo, dccappuserId, dccappurl, power, loksabha } = req.body;
         console.log(req.body)
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
@@ -1267,7 +1267,7 @@ const addWhatsAppPublic = async (req, res) => {
     try {
         const { link, booth, assembly, constituency, optional, membersNo } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
-        if(!link){
+        if (!link) {
             return res.status(400).json({ error: "Link is required" });
         }
         if (!booth) {
@@ -1308,7 +1308,21 @@ const addWhatsAppPublic = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
+const getPollingPartyByVolunteer = async (req, res) => {
+    try {
+        const volunteerId = req.volunteer.id;
+        const volunteer = await Volunteer.findById(volunteerId);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        const pollingParties = await User.find({ loksabha: volunteer.loksabha, district: volunteer.district });
+        res.status(200).json({ pollingParties });
 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
 
 module.exports = {
     register,
@@ -1342,4 +1356,5 @@ module.exports = {
     storeNotificationToken,
     getVolunteerLogoV2,
     addWhatsAppPublic,
+    getPollingPartyByVolunteer
 }
