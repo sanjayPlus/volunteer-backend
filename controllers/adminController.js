@@ -28,6 +28,7 @@ const NotificationList = require("../models/NotificationList");
 const serviceAccount = require("../firebase/firebase");
 const admin = require("firebase-admin");
 const Notification = require("../models/Notification");
+const { type } = require("os");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -1765,14 +1766,40 @@ const getCasteV2 = async (req, res) => {
     try {
             const castes = [{
                 caste:"Hindu",
-                types:[
+                caste_types:[
                     {
-                        type:"Ezhaya",
+                        caste_type:"Ezhava",
                     },
                     {
-                        type:"Sangha",
+                        caste_type:"Nair",
                     },
+                    {
+                        caste_type:"Brahmin",
+                    },
+                    {
+                        caste_type:"Vishwakarma",
+                    },
+                    {
+                        caste_type:"SC",
+                    },
+                    {
+                        caste_type:"ST",
+                    }
                 
+                ]
+            },{
+                caste:"Muslim",
+                caste_types:{
+                    caste_type:"Muslim"
+                }
+            },
+            {
+                caste:"Christian",
+                caste_types:[
+                    {
+                        caste_type:"Christian",
+                    },
+                    
                 ]
             }]
         res.status(200).json(castes);
@@ -1852,6 +1879,7 @@ module.exports = {
     sendNotificationWithDistrict,
     getNotifications,
     deleteNotification,
-    LoginFromDCCAdmin
+    LoginFromDCCAdmin,
+    getCasteV2
 
 }

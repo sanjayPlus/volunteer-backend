@@ -68,6 +68,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
+    casteType:{
+        type:String,
+        default:""
+    },
     profession:{
         type:String,
         default:""

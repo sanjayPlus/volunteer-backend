@@ -281,7 +281,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha } = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType } = req.body;
         console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
@@ -396,6 +396,9 @@ const UpdateUser = async (req, res) => {
         if (loksabha) {
             user.loksabha = loksabha
         }
+        if (casteType) {
+            user.casteType = casteType
+        }
         user.updatedBy.push(req.volunteer.id);
         await user.save();
         res.status(200).json({ message: "User updated successfully", user });
@@ -445,7 +448,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -523,6 +526,9 @@ const getUsers = async (req, res) => {
         if (votingDay) {
             query['votingDay'] = votingDay;
         }
+        if (casteType) {
+            query['casteType'] = casteType;
+        }
         const count = await User.countDocuments(query);
         let users = null;
         if (sNo === "true") {
@@ -559,7 +565,7 @@ const getUsers = async (req, res) => {
 };
 const getUsersCount = async (req, res) => {
     try {
-        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
+        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -634,7 +640,12 @@ const getUsersCount = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-
+        if (votingDay) {
+            query['votingDay'] = votingDay;
+        }
+        if (casteType) {
+            query['casteType'] = casteType;
+        }
         let users = await User.find(query)
 
         if (partyType) {
