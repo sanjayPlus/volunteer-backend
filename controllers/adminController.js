@@ -1769,13 +1769,10 @@ const getCasteV2 = async (req, res) => {
             caste_types: [
 
                 "Ezhava",
-                ,
                 "Nair",
-                ,
                 "Brahmin",
-                ,
                 "Vishwakarma",
-                , "SC",
+                 "SC",
                 "ST",
                 "OBC",
 
@@ -1789,9 +1786,9 @@ const getCasteV2 = async (req, res) => {
         {
             caste: "Christian",
             caste_types: [
-                 "RC",
-                 "Latin",
-                 "Jewish",
+                "RC",
+                "Latin",
+                "Jewish",
             ]
         }]
         res.status(200).json(castes);

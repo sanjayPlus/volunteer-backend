@@ -1,59 +1,65 @@
 const mongoose = require("mongoose");
 const HistorySchema = new mongoose.Schema({
-    title:{
+    title: {
         type: String
     },
-    description:{
+    description: {
         type: String
     },
-    link:{
+    link: {
         type: String
     },
-    optional:{
+    optional: {
         type: String
     },
-    party:[{
-        name:{
+    party: [{
+        name: {
             type: String,
             default: ""
         },
-        percentage:{
+        percentage: {
             type: String,
             default: ""
         },
-        count:{
+        count: {
             type: String,
             default: ""
         }
     }],
-    no_of_voters:{
+    no_of_voters: {
         type: String,
         default: ""
     },
-    no_of_votes:{
+    no_of_votes: {
         type: String,
         default: ""
     },
-    election_type:{
+    election_type: {
         type: String,
         default: ""
     },
-    year:{
+    year: {
         type: String
     },
-    district:{
+    district: {
         type: String
     },
-    loksabha:{
+    loksabha: {
         type: String
     },
-    assembly:{
+    assembly: {
         type: String
     },
-    panchayath:{
+    panchayath: {
         type: String
     }
-    
+    ,
+    booth: {
+        type: String
+    }
+    , constituency: {
+        type: String
+    }
 });
 
 const History = mongoose.model("History", HistorySchema);
