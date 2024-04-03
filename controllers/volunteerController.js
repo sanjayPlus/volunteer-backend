@@ -650,7 +650,15 @@ const getUsersCount = async (req, res) => {
         if (casteType) {
             query['casteType'] = casteType;
         }
-        let users = await User.find({ ...query, ...filter })
+        if(partyType){
+            query['party.partyType'] = partyType
+        }
+        if(partyName){
+            query['party.partyName'] = partyName
+        }
+        let users = await User.find(query)
+
+
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
