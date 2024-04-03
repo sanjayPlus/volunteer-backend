@@ -205,7 +205,7 @@ router.delete('/caste/:id',adminAuth,adminController.deleteCaste);
 
 router.post('/carousel',carouselImage.single('image'),adminAuth,adminController.addCarousel);
 router.get('/carousel',adminController.getCarousel)
-router.delete('/carousel/:id',adminAuth,adminController.deleteCarousel)
+router.delete('/carousel/:id',adminAuth,adminController.deleteCarouselarousel)
 
 router.post('/daily-news',dailyNewsImage.single('image'),adminAuth,adminController.addDailyNews);
 router.get('/daily-news',adminController.getDailyNews);
