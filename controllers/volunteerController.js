@@ -482,7 +482,7 @@ const getUsers = async (req, res) => {
 
                 query['voterId'] = new RegExp(search, 'i');
             } else if (houseNo) {
-                query['houseNo'] = new RegExp(search, 'i');
+                query['houseNo'] = houseNo;
             } else {
                 query['name'] = new RegExp(search, 'i');
 
