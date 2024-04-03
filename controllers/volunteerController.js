@@ -1330,7 +1330,7 @@ const getPollingPartyByVolunteer = async (req, res) => {
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
         }
-        const pollingParties = await User.find({ loksabha: volunteer.loksabha, district: volunteer.district });
+        const pollingParties = await VotePolling.find({ loksabha: volunteer.loksabha, district: volunteer.district });
         res.status(200).json({ pollingParties });
 
     } catch (error) {
