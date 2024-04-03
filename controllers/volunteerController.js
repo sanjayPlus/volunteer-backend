@@ -647,14 +647,14 @@ const getUsersCount = async (req, res) => {
         if (casteType) {
             query['casteType'] = casteType;
         }
+        if(partyType){
+            query['party.partyType'] = partyType
+        }
+        if(partyName){
+            query['party.partyName'] = partyName
+        }
         let users = await User.find(query)
 
-        if (partyType) {
-            users = users.filter(user => user.party.partyType === partyType);
-        }
-        if (partyName) {
-            users = users.filter(user => user.party.partyName === partyName);
-        }
 
 
         if (users.length === 0) {
