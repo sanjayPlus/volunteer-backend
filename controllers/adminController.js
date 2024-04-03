@@ -34,7 +34,7 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // Replace with your Firebase project config
     databaseURL: process.env.FIREBASE_DATABASE_URL,
-  });
+});
 const Login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -91,7 +91,7 @@ const CreateVolunteer = async (req, res) => {
 }
 const UpdateVolunteer = async (req, res) => {
     try {
-        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId,loksabha,password } = req.body;
+        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password } = req.body;
         const volunteer = await Volunteer.findById(volunteerId);
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -131,10 +131,10 @@ const UpdateVolunteer = async (req, res) => {
         if (gender) {
             volunteer.gender = gender;
         }
-        if(loksabha){
+        if (loksabha) {
             volunteer.loksabha = loksabha;
         }
-        if(password){
+        if (password) {
             const hashedPassword = await bcrypt.hash(password, 10);
             volunteer.password = hashedPassword;
         }
@@ -298,7 +298,7 @@ const getUserById = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year,partyType,partyName } = req.query
+        const { ward, booth, assembly, constituency, district, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, partyType, partyName } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -353,9 +353,9 @@ const getUsers = async (req, res) => {
         }
 
         if (partyType && partyName) {
-            query['party'] ={
-                partyType:partyType,
-                partyName:partyName
+            query['party'] = {
+                partyType: partyType,
+                partyName: partyName
             }
         }
         const count = await User.countDocuments(query);
@@ -415,7 +415,7 @@ const updateUser = async (req, res) => {
         const { district, constituency, assembly, booth, caste, infavour, voterStatus, name, gender, age, voterId,
             whatsappNo,
             guardianName,
-            houseNo, houseName, address, email, phone, sNo, verified, marriedStatus, swingVote, year, facebook, pollingParty,partyType,partyName,instagram} = req.body
+            houseNo, houseName, address, email, phone, sNo, verified, marriedStatus, swingVote, year, facebook, pollingParty, partyType, partyName, instagram } = req.body
         if (district) {
             user.district = district
         }
@@ -494,7 +494,7 @@ const updateUser = async (req, res) => {
         if (pollingParty) {
             user.pollingParty = pollingParty;
         }
-        if(partyType && partyName){
+        if (partyType && partyName) {
             user.party.partyType = partyType
             user.party.partyName = partyName
         }
@@ -1264,7 +1264,7 @@ const deleteVolunteerAppLink = async (req, res) => {
 }
 const addHistory = async (req, res) => {
     try {
-        const { title, description, link, optional, year ,party,election_type,no_of_votes,no_of_voters} = req.body;
+        const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters } = req.body;
         const history = await History.create({
             title,
             description,
@@ -1349,7 +1349,7 @@ const deleteAds = async (req, res) => {
 
 const addPolingParty = async (req, res) => {
     try {
-        const { district, assembly, constituency, booth, name, party, optional,loksabha,symbol } = req.body;
+        const { district, assembly, constituency, booth, name, party, optional, loksabha, symbol } = req.body;
         const imageObj = req.file;
         const polingParty = await VotePolling.create({
             district,
@@ -1372,7 +1372,7 @@ const addPolingParty = async (req, res) => {
 }
 const getPolingParty = async (req, res) => {
     try {
-        const { district, assembly, constituency, booth,loksabha } = req.query;
+        const { district, assembly, constituency, booth, loksabha } = req.query;
         const query = {}
         if (district) query.district = district
         if (assembly) query.assembly = assembly
@@ -1434,10 +1434,10 @@ const addWhatsAppPublic = async (req, res) => {
     try {
         const { link, booth, assembly, constituency, district, optional, membersNo } = req.body;
         // Check if the link already exists
-      const existingLink = await WhatsAppPublic.findOne({ link });
-      if (existingLink) {
-        return res.status(400).json({ error: "This link is already in use" });
-      }
+        const existingLink = await WhatsAppPublic.findOne({ link });
+        if (existingLink) {
+            return res.status(400).json({ error: "This link is already in use" });
+        }
 
         const whatsAppPublic = await WhatsAppPublic.create({
             link,
@@ -1446,7 +1446,7 @@ const addWhatsAppPublic = async (req, res) => {
             assembly,
             constituency,
             district,
-            membersNo: Number(membersNo)||0
+            membersNo: Number(membersNo) || 0
         })
         await whatsAppPublic.save();
         res.status(200).json({ message: "Whatsapp public added successfully", whatsAppPublic });
@@ -1457,25 +1457,25 @@ const addWhatsAppPublic = async (req, res) => {
 }
 const getWhatsAppPublic = async (req, res) => {
     try {
-        const { district, assembly, constituency, booth, page, perPage} = req.query; // Default values for page and perPage
+        const { district, assembly, constituency, booth, page, perPage } = req.query; // Default values for page and perPage
         const query = {};
-        
+
         if (district) query.district = district;
         if (assembly) query.assembly = assembly;
         if (constituency) query.constituency = constituency;
         if (booth) query.booth = booth;
-        
+
         // Calculate the total count of documents that match the query (before pagination)
         const totalCount = await WhatsAppPublic.countDocuments(query);
-        
+
         // Find documents that match the query with pagination
         const whatsAppPublic = await WhatsAppPublic.find(query)
             .skip((page - 1) * perPage) // Skips the documents of previous pages
             .limit(perPage); // Limits the number of documents returned
-        
+
         // Calculating total pages
         const totalPages = Math.ceil(totalCount / perPage);
-        
+
         res.status(200).json({
             data: whatsAppPublic,
             currentPage: Number(page),
@@ -1764,51 +1764,43 @@ const LoginFromDCCAdmin = async (req, res) => {
 }
 const getCasteV2 = async (req, res) => {
     try {
-            const castes = [{
-                caste:"Hindu",
-                caste_types:[
-                    {
-                        caste_type:"Ezhava",
-                    },
-                    {
-                        caste_type:"Nair",
-                    },
-                    {
-                        caste_type:"Brahmin",
-                    },
-                    {
-                        caste_type:"Vishwakarma",
-                    },
-                    {
-                        caste_type:"SC",
-                    },
-                    {
-                        caste_type:"ST",
-                    }
-                
-                ]
-            },{
-                caste:"Muslim",
-                caste_types:{
-                    caste_type:"Muslim"
-                }
-            },
-            {
-                caste:"Christian",
-                caste_types:[
-                    {
-                        caste_type:"Christian",
-                    },
-                    
-                ]
-            }]
+        const castes = [{
+            caste: "Hindu",
+            caste_types: [
+
+                "Ezhava",
+                ,
+                "Nair",
+                ,
+                "Brahmin",
+                ,
+                "Vishwakarma",
+                , "SC",
+                "ST",
+                "OBC",
+
+            ]
+        }, {
+            caste: "Muslim",
+            caste_types: [
+                "Muslim",
+            ]
+        },
+        {
+            caste: "Christian",
+            caste_types: [
+                 "RC",
+                 "Latin",
+                 "Jewish",
+            ]
+        }]
         res.status(200).json(castes);
     }
     catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });
     }
-} 
+}
 module.exports = {
     Login,
     Protected,

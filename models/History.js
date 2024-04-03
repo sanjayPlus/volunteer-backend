@@ -40,7 +40,20 @@ const HistorySchema = new mongoose.Schema({
     },
     year:{
         type: String
+    },
+    district:{
+        type: String
+    },
+    loksabha:{
+        type: String
+    },
+    assembly:{
+        type: String
+    },
+    panchayath:{
+        type: String
     }
+    
 });
 
 const History = mongoose.model("History", HistorySchema);
