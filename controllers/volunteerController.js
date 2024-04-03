@@ -67,6 +67,43 @@ const volunteerLogin = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+const updateVolunteer = async (req, res) => {
+    try {
+        const { name, booth, boothRule, district, assembly, loksabha, password } = req.body;
+        const volunteer = await Volunteer.findById(req.params.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+            if(name){
+                volunteer.name = name
+            }
+            if(booth){
+                volunteer.booth = booth
+            }
+            if(boothRule){
+                volunteer.boothRule = boothRule
+            }
+            if(district){
+                volunteer.district = district
+            }
+            if(assembly){
+                
+                volunteer.assembly = assembly
+            }
+            if(loksabha){
+                volunteer.loksabha = loksabha
+            }
+            if(password){
+                const hashedPassword = await bcrypt.hash(password, 10);
+                volunteer.password = hashedPassword
+            }
+            const updatedVolunteer = await volunteer.save();
+            res.status(200).json({ volunteer: updatedVolunteer })
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+        
+    }
+}
 const forgetPassword = async (req, res) => {
     try {
         const { email } = req.body;
@@ -654,8 +691,6 @@ const getUsersCount = async (req, res) => {
             query['party.partyName'] = partyName
         }
         let users = await User.find(query)
-
-
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
@@ -1377,6 +1412,7 @@ module.exports = {
     register,
     addUser,
     volunteerLogin,
+    updateVolunteer,
     Protected,
     UpdateUser,
     DeleteUser,
@@ -1406,5 +1442,6 @@ module.exports = {
     getVolunteerLogoV2,
     addWhatsAppPublic,
     getPollingPartyByVolunteer,
-    getStaticsOfVotingDay
+    getStaticsOfVotingDay,
+
 }

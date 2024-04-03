@@ -13,6 +13,7 @@ const upload = multer({ storage: storage });
 
 
 router.put('/update-user/:userId',  volunteerAuth, volunteerController.UpdateUser);
+router.put('/update-volunteer/:id',volunteerAuth, volunteerController.updateVolunteer);
 router.delete('/delete-user/:id',volunteerAuth, volunteerController.DeleteUser);
 router.get('/users', volunteerAuth,volunteerController.getUsers);
 router.get('/users-count', volunteerAuth,volunteerController.getUsersCount);
