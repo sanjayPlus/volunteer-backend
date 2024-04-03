@@ -1264,7 +1264,7 @@ const deleteVolunteerAppLink = async (req, res) => {
 }
 const addHistory = async (req, res) => {
     try {
-        const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters } = req.body;
+        const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters,district,loksabha,assembly,constituency,booth } = req.body;
         const history = await History.create({
             title,
             description,
@@ -1274,7 +1274,12 @@ const addHistory = async (req, res) => {
             party,
             election_type,
             no_of_votes,
-            no_of_voters
+            no_of_voters,
+            district,
+            loksabha,
+            assembly,
+            constituency,
+            booth
         })
         await history.save();
         res.status(200).json({ message: "History added successfully", history });
@@ -1285,7 +1290,24 @@ const addHistory = async (req, res) => {
 }
 const getHistory = async (req, res) => {
     try {
-        const history = await History.find({});
+        const {district,loksabha,assembly,constituency,booth} = req.query
+        let query = {};
+        if(district){
+            query.district = district
+        }
+        if(loksabha){
+            query.loksabha = loksabha
+        }
+        if(assembly){
+            query.assembly = assembly
+        }
+        if(constituency){
+            query.constituency = constituency
+        }
+        if(booth){
+            query.booth = booth
+        }
+        const history = await History.find(query);
         res.status(200).json({ history });
     } catch (error) {
         console.error(error.message);
