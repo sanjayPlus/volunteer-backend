@@ -20,7 +20,7 @@ const WhatsAppPublic = require("../models/WhatsAppPublic");
 
 const register = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, taskForce } = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, taskForce, loksabha } = req.body;
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
             return res.status(400).json({ error: "Volunteer already exists" });
@@ -36,10 +36,9 @@ const register = async (req, res) => {
             constituency,
             phone,
             boothRule: boothRule,
-            mandalamMember,
-            mandlamPresident,
             verified: false,
-            taskForce
+            power: taskForce,
+            loksabha
         });
         res.status(200).json({ volunteer });
     } catch (error) {
@@ -258,7 +257,8 @@ const addUser = async (req, res) => {
             userVotingType,
             abroadType,
             hardFanVote,
-            sNo
+            sNo,
+            updatedBy:[volunteer._id]
         });
 
         userDataEntries.forEach(([key, value]) => {
@@ -282,7 +282,8 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram } = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType } = req.body;
+        console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
             return res.status(400).json({ error: "User not found" });
@@ -390,6 +391,16 @@ const UpdateUser = async (req, res) => {
             user.party.partyType = partyType;
             user.party.partyName = partyName;
         }
+        if (votingDay) {
+            user.votingDay = votingDay
+        }
+        if (loksabha) {
+            user.loksabha = loksabha
+        }
+        if (casteType) {
+            user.casteType = casteType
+        }
+        user.updatedBy.push(req.volunteer.id);
         await user.save();
         res.status(200).json({ message: "User updated successfully", user });
     } catch (error) {
@@ -438,7 +449,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -471,7 +482,7 @@ const getUsers = async (req, res) => {
 
                 query['voterId'] = new RegExp(search, 'i');
             } else if (houseNo) {
-                query['houseNo'] = new RegExp(search, 'i');
+                query['houseNo'] = search;
             } else {
                 query['name'] = new RegExp(search, 'i');
 
@@ -513,13 +524,12 @@ const getUsers = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType && partyName) {
-            query['party'] = {
-                partyType: partyType,
-                partyName: partyName
-            }
+        if (votingDay) {
+            query['votingDay'] = votingDay;
         }
-
+        if (casteType) {
+            query['casteType'] = casteType;
+        }
         const count = await User.countDocuments(query);
         let users = null;
         if (sNo === "true") {
@@ -537,6 +547,12 @@ const getUsers = async (req, res) => {
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
+        if (partyType) {
+            users = users.filter(user => user.party.partyType === partyType);
+        }
+        if (partyName) {
+            users = users.filter(user => user.party.partyName === partyName);
+        }
 
         res.status(200).json({
             data: users,
@@ -550,7 +566,7 @@ const getUsers = async (req, res) => {
 };
 const getUsersCount = async (req, res) => {
     try {
-        const { booth, search, gender, caste, infavour, age, voterStatus,voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName } = req.query;
+        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -625,23 +641,28 @@ const getUsersCount = async (req, res) => {
         if (userVotingType) {
             query['userVotingType'] = userVotingType;
         }
-        if (partyType && partyName) {
-            query['party'] = {
-                partyType: partyType,
-                partyName: partyName
-            }
+        if (votingDay) {
+            query['votingDay'] = votingDay;
+        }
+        if (casteType) {
+            query['casteType'] = casteType;
+        }
+        let users = await User.find(query)
+
+        if (partyType) {
+            users = users.filter(user => user.party.partyType === partyType);
+        }
+        if (partyName) {
+            users = users.filter(user => user.party.partyName === partyName);
         }
 
-
-            users = await User.find(query)
-       
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
 
         res.status(200).json({
-            count:users.length,
+            count: users.length,
         });
     } catch (error) {
         console.error(error);
@@ -660,7 +681,7 @@ const getVolunteerDetails = async (req, res) => {
 }
 const registerFromApp = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, aadhaar, aadhaarNo, dccappuserId, dccappurl, power } = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, aadhaar, aadhaarNo, dccappuserId, dccappurl, power, loksabha } = req.body;
         console.log(req.body)
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
@@ -684,7 +705,8 @@ const registerFromApp = async (req, res) => {
             dccappuserId,
             dccappurl,
             verified: false,
-            power
+            power,
+            loksabha
         });
 
         res.status(200).json({ volunteer, volunteerId: volunteer._id });
@@ -794,6 +816,7 @@ const addUserFromExcel = async (req, res) => {
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
                     booth,
+                    updatedBy:[req.volunteer.id]
                 })
             }
         })
@@ -877,13 +900,13 @@ const getVolunteerLogoV2 = async (req, res) => {
         const canvas = createCanvas(600, 600);
         const ctx = canvas.getContext('2d');
         let symbol = '';
-        if(constituency === 'Kollam'){
+        if (constituency === 'Kollam') {
             symbol = 'symbol2.png';
-        }else if(constituency === 'Malappuram'){
+        } else if (constituency === 'Malappuram') {
             symbol = 'symbol3.png';
-        }else if(constituency === 'Ponnani'){
+        } else if (constituency === 'Ponnani') {
             symbol = 'symbol3.png';
-        }else{
+        } else {
             symbol = 'symbol.png';
         }
 
@@ -908,10 +931,10 @@ const getVolunteerLogoV2 = async (req, res) => {
 
         ctx.font = '600 30px Arial';
         ctx.fillText(assembly, 130, 440);
-        if(mandalam.length>14){
+        if (mandalam.length > 14) {
 
             ctx.font = '600 20px Arial';
-        }else{
+        } else {
 
             ctx.font = '600 30px Arial';
         }
@@ -1227,6 +1250,7 @@ const addDataFromJson = async (req, res) => {
                     infavour: infavour || data.infavour || "",
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
+                    updatedBy:[volunteer._id],
                 });
             }
         });
@@ -1257,14 +1281,30 @@ const addWhatsAppPublic = async (req, res) => {
     try {
         const { link, booth, assembly, constituency, optional, membersNo } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
-        if (!volunteer.verified) {
-            return res.status(400).json({ error: "Volunteer not verified" });
+        if (!link) {
+            return res.status(400).json({ error: "Link is required" });
+        }
+        if (!booth) {
+            return res.status(400).json({ error: "Booth is required" });
+        }
+        if (!assembly) {
+            return res.status(400).json({ error: "Assembly is required" });
+        }
+        if (!constituency) {
+            return res.status(400).json({ error: "Constituency is required" });
         }
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
         }
-        if(!volunteer.district){
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.district) {
             return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        const existingLink = await WhatsAppPublic.findOne({ link });
+        if (existingLink) {
+            return res.status(400).json({ error: "Link already exists" });
         }
         const whatsAppPublic = await WhatsAppPublic.create({
             link,
@@ -1273,7 +1313,7 @@ const addWhatsAppPublic = async (req, res) => {
             assembly,
             constituency,
             district: volunteer.district,
-            membersNo: Number(membersNo)||0
+            membersNo: Number(membersNo) || 0
         })
         await whatsAppPublic.save();
         res.status(200).json({ message: "Whatsapp public added successfully", whatsAppPublic });
@@ -1283,6 +1323,55 @@ const addWhatsAppPublic = async (req, res) => {
     }
 }
 
+const getPollingPartyByVolunteer = async (req, res) => {
+    try {
+        const volunteerId = req.volunteer.id;
+        const volunteer = await Volunteer.findById(volunteerId);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        const pollingParties = await VotePolling.find({ loksabha: volunteer.loksabha, district: volunteer.district });
+        res.status(200).json({ pollingParties });
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
+const getStaticsOfVotingDay = async (req, res) => {
+    try {
+        const { booth } = req.query;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.boothRule.includes(booth)) {
+            return res.status(400).json({ error: "Volunteer Booth not found" });
+        }
+        const users = await User.find({ district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly, booth: booth });
+        const pollingPartyList = users.filter(user => user.pollingParty);
+        const uniquePollingParty = [...new Set(pollingPartyList.map(user => user.votingDay))];
+        const statistics = uniquePollingParty.map(pollingParty => {
+            const partyUsers = pollingPartyList.filter(user => user.votingDay === pollingParty);
+            const partyCount = partyUsers.length;
+            const totalUsers = pollingPartyList.length;
+            const percentage = (partyCount / totalUsers) * 100;
+            return {
+                name: pollingParty,
+                count: partyCount,
+                percentage: percentage.toFixed(2),
+                users: partyUsers
+            };
+        });
+        res.status(200).json(statistics);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
 
 module.exports = {
     register,
@@ -1316,4 +1405,6 @@ module.exports = {
     storeNotificationToken,
     getVolunteerLogoV2,
     addWhatsAppPublic,
+    getPollingPartyByVolunteer,
+    getStaticsOfVotingDay
 }

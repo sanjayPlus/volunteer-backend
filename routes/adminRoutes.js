@@ -243,14 +243,17 @@ router.get('/get-statistics-polling-party',adminAuth,adminController.getStaticsO
 
 router.post('/add-whatsapp-public',adminAuth,adminController.addWhatsAppPublic);
 router.get('/whatsapp-public',adminController.getWhatsAppPublic);
+router.get('/whatsapp-public-count',adminController.getWhatsAppPublicCount);
 router.delete('/whatsapp-public/:id',adminAuth,adminController.deleteWhatsAppPublic);
 
-router.post('/add-data-from-json',upload.single('file'),adminController.addDataFromJson);
+router.post('/add-data-from-json',upload.single('excel'),adminController.addDataFromJson);
 router.get('/login-from-app',appServerAuth,adminController.loginFromApp);
 
 router.post('/send-notification-with-district',OneImage.single('image'),adminAuth,adminController.sendNotificationWithDistrict);
 router.get('/notifications',adminAuth,adminController.getNotifications);
 
+router.get('/login-from-dcc',appServerAuth,adminController.LoginFromDCCAdmin);
 
+router.get('/get-caste-v2',adminController.getCasteV2);
 
 module.exports = router;

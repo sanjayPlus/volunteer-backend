@@ -71,7 +71,8 @@ const volunteerSchema = new mongoose.Schema({
         description:{
             type:String
         }
-    }]
+    }],
+    loksabha:String,
 });
 
 module.exports = mongoose.model("Volunteer", volunteerSchema);
