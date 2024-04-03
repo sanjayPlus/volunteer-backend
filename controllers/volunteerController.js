@@ -479,13 +479,11 @@ const getUsers = async (req, res) => {
 
         if (search) {
             if (voterId) {
-
                 query['voterId'] = new RegExp(search, 'i');
             } else if (houseNo) {
                 query['houseNo'] = search;
             } else {
                 query['name'] = new RegExp(search, 'i');
-
             }
         }
         if (gender) {
@@ -530,28 +528,32 @@ const getUsers = async (req, res) => {
         if (casteType) {
             query['casteType'] = casteType;
         }
-        const count = await User.countDocuments(query);
+
+        let filter = {};
+        if (partyType || partyName) {
+            filter = {
+                'party.partyType': partyType,
+                'party.partyName': partyName
+            };
+        }
+
+        const count = await User.countDocuments({ ...query, ...filter });
+
         let users = null;
         if (sNo === "true") {
-            users = await User.find(query)
+            users = await User.find({ ...query, ...filter })
                 .sort({ sNo: 1 })
                 .collation({ locale: 'en', numericOrdering: true })
                 .skip((page - 1) * perPage)
                 .limit(perPage);
         } else {
-            users = await User.find(query)
+            users = await User.find({ ...query, ...filter })
                 .skip((page - 1) * perPage)
                 .limit(perPage);
         }
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
-        }
-        if (partyType) {
-            users = users.filter(user => user.party.partyType === partyType);
-        }
-        if (partyName) {
-            users = users.filter(user => user.party.partyName === partyName);
         }
 
         res.status(200).json({
@@ -564,6 +566,7 @@ const getUsers = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
 const getUsersCount = async (req, res) => {
     try {
         const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
@@ -647,15 +650,7 @@ const getUsersCount = async (req, res) => {
         if (casteType) {
             query['casteType'] = casteType;
         }
-        let users = await User.find(query)
-
-        if (partyType) {
-            users = users.filter(user => user.party.partyType === partyType);
-        }
-        if (partyName) {
-            users = users.filter(user => user.party.partyName === partyName);
-        }
-
+        let users = await User.find({ ...query, ...filter })
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
