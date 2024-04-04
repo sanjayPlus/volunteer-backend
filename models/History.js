@@ -52,12 +52,10 @@ const HistorySchema = new mongoose.Schema({
     },
     panchayath: {
         type: String
-    }
-    ,
+    },
     booth: {
         type: String
-    }
-    , constituency: {
+    },constituency: {
         type: String
     }
 });
