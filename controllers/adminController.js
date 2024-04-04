@@ -210,7 +210,7 @@ const DeleteVolunteer = async (req, res) => {
 }
 const getVolunteers = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, search, page, perPage } = req.query
+        const { ward, booth, assembly, constituency, district, search, page, perPage,power } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -229,6 +229,9 @@ const getVolunteers = async (req, res) => {
         }
         if (search) {
             query['name'] = new RegExp(search, 'i')
+        }
+        if(power){
+            query['power'] = power
         }
         query['verified'] = true
         const count = await Volunteer.countDocuments(query)
