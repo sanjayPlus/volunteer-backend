@@ -20,7 +20,7 @@ const WhatsAppPublic = require("../models/WhatsAppPublic");
 
 const register = async (req, res) => {
     try {
-        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, taskForce, loksabha } = req.body;
+        const { name, email, password, booth, boothRule, district, assembly, constituency, mandalamMember, mandlamPresident, phone, power, loksabha } = req.body;
         const volunteerExists = await Volunteer.findOne({ email });
         if (volunteerExists) {
             return res.status(400).json({ error: "Volunteer already exists" });
@@ -37,7 +37,7 @@ const register = async (req, res) => {
             phone,
             boothRule: boothRule,
             verified: false,
-            power: taskForce,
+            power: power,
             loksabha
         });
         res.status(200).json({ volunteer });
