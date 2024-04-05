@@ -248,7 +248,7 @@ const getVolunteers = async (req, res) => {
 }
 const getVolunteersNotVerified = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, search, page, perPage } = req.query
+        const { ward, booth, assembly, constituency, district, power,search, page, perPage } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -268,6 +268,10 @@ const getVolunteersNotVerified = async (req, res) => {
         if (search) {
             query['name'] = new RegExp(search, 'i')
         }
+            if(power){
+                query['power'] = power;
+            }
+
         query['verified'] = false
         const count = await Volunteer.countDocuments(query)
         const volunteers = await Volunteer.find(query).skip((page - 1) * perPage).limit(perPage)
