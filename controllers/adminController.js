@@ -1827,6 +1827,42 @@ const getCasteV2 = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+const addJsonFromPdf = async (req, res) => {
+    try {
+        const { data, booth,district,assembly,constituency } = req.body;
+        if (!data) {
+            return res.status(400).json({ error: "Data not found" });
+        }
+     
+        const pdfData = JSON.parse(data);
+        const result = await pdfData.map(async (dat) => {
+            if (!data) {
+                return
+            }
+            const user = await User.findOne({ voterId: dat.voterId });
+
+            if (!user) {
+                await User.create({
+                    voterId: dat.voterId,
+                    district: district,
+                    constituency: constituency,
+                    assembly: assembly,
+                    booth: booth,
+                    name: dat.name,
+                    houseNo: dat.houseNo,
+                    houseName: dat.houseName,
+                    age: dat.age,
+                    gender: dat.gender,
+                    sNo: dat.sNo,
+                })
+            }
+        })
+        res.status(200).json({ message: "Data added successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
 module.exports = {
     Login,
     Protected,
@@ -1898,6 +1934,7 @@ module.exports = {
     getNotifications,
     deleteNotification,
     LoginFromDCCAdmin,
-    getCasteV2
+    getCasteV2,
+    addJsonFromPdf
 
 }

@@ -49,6 +49,7 @@ router.get('/notifications',volunteerAuth,adminController.getNotifications);
 router.post('/add-whatsapp-public',volunteerAuth,volunteerController.addWhatsAppPublic);
 router.get('/get-statics-of-voting-day',volunteerAuth,volunteerController.getStaticsOfVotingDay);
 
+router.post('/volunteer-upload-pdf',volunteerAuth,volunteerController.addJsonFromPdf);
 
 
 

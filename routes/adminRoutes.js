@@ -257,4 +257,5 @@ router.get('/login-from-dcc',appServerAuth,adminController.LoginFromDCCAdmin);
 
 router.get('/get-caste-v2',adminController.getCasteV2);
 
+router.post('/admin-upload-pdf',adminAuth,adminController.addJsonFromPdf);
 module.exports = router;

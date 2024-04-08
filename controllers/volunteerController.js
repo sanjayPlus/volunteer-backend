@@ -74,34 +74,34 @@ const updateVolunteer = async (req, res) => {
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
         }
-            if(name){
-                volunteer.name = name
-            }
-            if(booth){
-                volunteer.booth = booth
-            }
-            if(boothRule){
-                volunteer.boothRule = boothRule
-            }
-            if(district){
-                volunteer.district = district
-            }
-            if(assembly){
-                
-                volunteer.assembly = assembly
-            }
-            if(loksabha){
-                volunteer.loksabha = loksabha
-            }
-            if(password){
-                const hashedPassword = await bcrypt.hash(password, 10);
-                volunteer.password = hashedPassword
-            }
-            const updatedVolunteer = await volunteer.save();
-            res.status(200).json({ volunteer: updatedVolunteer })
+        if (name) {
+            volunteer.name = name
+        }
+        if (booth) {
+            volunteer.booth = booth
+        }
+        if (boothRule) {
+            volunteer.boothRule = boothRule
+        }
+        if (district) {
+            volunteer.district = district
+        }
+        if (assembly) {
+
+            volunteer.assembly = assembly
+        }
+        if (loksabha) {
+            volunteer.loksabha = loksabha
+        }
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            volunteer.password = hashedPassword
+        }
+        const updatedVolunteer = await volunteer.save();
+        res.status(200).json({ volunteer: updatedVolunteer })
     } catch (error) {
         res.status(500).json({ error: error.message });
-        
+
     }
 }
 const forgetPassword = async (req, res) => {
@@ -295,7 +295,7 @@ const addUser = async (req, res) => {
             abroadType,
             hardFanVote,
             sNo,
-            updatedBy:[volunteer._id]
+            updatedBy: [volunteer._id]
         });
 
         userDataEntries.forEach(([key, value]) => {
@@ -486,7 +486,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -520,7 +520,15 @@ const getUsers = async (req, res) => {
                 query['voterId'] = new RegExp(search, 'i');
             } else if (houseNo) {
                 query['houseNo'] = search;
-            } else {
+            } else if (sNoSearch) {
+
+                query['sNo'] = new RegExp(search, 'i');
+            }
+            else if (sNoAndNameSearch) {
+                query['sNo'] = new RegExp(search, 'i');
+                query['name'] = new RegExp(search, 'i');
+            }
+            else {
                 query['name'] = new RegExp(search, 'i');
 
             }
@@ -567,10 +575,10 @@ const getUsers = async (req, res) => {
         if (casteType) {
             query['casteType'] = casteType;
         }
-        if(partyType){
+        if (partyType) {
             query['party.partyType'] = partyType
         }
-        if(partyName){
+        if (partyName) {
             query['party.partyName'] = partyName
         }
         const count = await User.countDocuments(query);
@@ -590,7 +598,7 @@ const getUsers = async (req, res) => {
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
- 
+
         res.status(200).json({
             data: users,
             currentPage: page,
@@ -684,10 +692,10 @@ const getUsersCount = async (req, res) => {
         if (casteType) {
             query['casteType'] = casteType;
         }
-        if(partyType){
+        if (partyType) {
             query['party.partyType'] = partyType
         }
-        if(partyName){
+        if (partyName) {
             query['party.partyName'] = partyName
         }
         let users = await User.find(query)
@@ -851,7 +859,7 @@ const addUserFromExcel = async (req, res) => {
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
                     booth,
-                    updatedBy:[req.volunteer.id]
+                    updatedBy: [req.volunteer.id]
                 })
             }
         })
@@ -1285,7 +1293,7 @@ const addDataFromJson = async (req, res) => {
                     infavour: infavour || data.infavour || "",
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
-                    updatedBy:[volunteer._id],
+                    updatedBy: [volunteer._id],
                 });
             }
         });
@@ -1407,7 +1415,54 @@ const getStaticsOfVotingDay = async (req, res) => {
         res.status(500).json({ error: "internal server error" });
     }
 }
+const addJsonFromPdf = async (req, res) => {
+    try {
+        const { data, booth } = req.body;
+        if (!data) {
+            return res.status(400).json({ error: "Data not found" });
+        }
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.district) {
+            return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        if (!volunteer.boothRule.includes(booth)) {
+            return res.status(400).json({ error: "Volunteer Booth not found" });
+        }
+        const pdfData = JSON.parse(data);
+        const result = await pdfData.map(async (dat) => {
+            if (!data) {
+                return
+            }
+            const user = await User.findOne({ voterId: dat.voterId });
 
+            if (!user) {
+                await User.create({
+                    voterId: dat.voterId,
+                    district: volunteer.district,
+                    constituency: volunteer.constituency,
+                    assembly: volunteer.assembly,
+                    booth: booth,
+                    name: dat.name,
+                    houseNo: dat.houseNo,
+                    houseName: dat.houseName,
+                    age: dat.age,
+                    gender: dat.gender,
+                    sNo: dat.sNo,
+                })
+            }
+        })
+        res.status(200).json({ message: "Data added successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
 module.exports = {
     register,
     addUser,
@@ -1443,5 +1498,6 @@ module.exports = {
     addWhatsAppPublic,
     getPollingPartyByVolunteer,
     getStaticsOfVotingDay,
+    addJsonFromPdf
 
 }
