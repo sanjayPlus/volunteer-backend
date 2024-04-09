@@ -1834,7 +1834,7 @@ const addJsonFromPdf = async (req, res) => {
             return res.status(400).json({ error: "Data not found" });
         }
      
-        const pdfData = JSON.parse(data);
+        const pdfData = data;
         const result = await pdfData.map(async (dat) => {
             if (!data) {
                 return

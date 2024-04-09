@@ -1434,7 +1434,7 @@ const addJsonFromPdf = async (req, res) => {
         if (!volunteer.boothRule.includes(booth)) {
             return res.status(400).json({ error: "Volunteer Booth not found" });
         }
-        const pdfData = JSON.parse(data);
+        const pdfData =data;
         const result = await pdfData.map(async (dat) => {
             if (!data) {
                 return
