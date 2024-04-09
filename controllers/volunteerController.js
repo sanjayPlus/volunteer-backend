@@ -295,7 +295,8 @@ const addUser = async (req, res) => {
             abroadType,
             hardFanVote,
             sNo,
-            updatedBy: [volunteer._id]
+            updatedBy: [volunteer._id],
+            uploadedBy: volunteer._id,
         });
 
         userDataEntries.forEach(([key, value]) => {
@@ -1460,6 +1461,8 @@ const addJsonFromPdf = async (req, res) => {
                     age: dat.age,
                     gender: dat.gender,
                     sNo: dat.sNo,
+                    uploadedBy: req.volunteer.id,
+                    updatedBy:[req.volunteer.id],
                 })
             }
         })
