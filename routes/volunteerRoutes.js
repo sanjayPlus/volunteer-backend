@@ -13,6 +13,7 @@ const upload = multer({ storage: storage });
 
 
 router.put('/update-user/:userId',  volunteerAuth, volunteerController.UpdateUser);
+router.put('/update-volunteer/:id',volunteerAuth, volunteerController.updateVolunteer);
 router.delete('/delete-user/:id',volunteerAuth, volunteerController.DeleteUser);
 router.get('/users', volunteerAuth,volunteerController.getUsers);
 router.get('/users-count', volunteerAuth,volunteerController.getUsersCount);
@@ -48,6 +49,7 @@ router.get('/notifications',volunteerAuth,adminController.getNotifications);
 router.post('/add-whatsapp-public',volunteerAuth,volunteerController.addWhatsAppPublic);
 router.get('/get-statics-of-voting-day',volunteerAuth,volunteerController.getStaticsOfVotingDay);
 
+router.post('/volunteer-upload-pdf',volunteerAuth,volunteerController.addJsonFromPdf);
 
 
 

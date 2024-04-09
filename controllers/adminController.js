@@ -91,7 +91,7 @@ const CreateVolunteer = async (req, res) => {
 }
 const UpdateVolunteer = async (req, res) => {
     try {
-        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password } = req.body;
+        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password,constituency } = req.body;
         const volunteer = await Volunteer.findById(volunteerId);
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -118,6 +118,9 @@ const UpdateVolunteer = async (req, res) => {
         }
         if (district) {
             volunteer.district = district;
+        }
+        if (constituency) {
+            volunteer.constituency = constituency;
         }
         if (assembly) {
             volunteer.assembly = assembly;
@@ -210,7 +213,7 @@ const DeleteVolunteer = async (req, res) => {
 }
 const getVolunteers = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, search, page, perPage } = req.query
+        const { ward, booth, assembly, constituency, district, search, page, perPage,power } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -229,6 +232,9 @@ const getVolunteers = async (req, res) => {
         }
         if (search) {
             query['name'] = new RegExp(search, 'i')
+        }
+        if(power){
+            query['power'] = power
         }
         query['verified'] = true
         const count = await Volunteer.countDocuments(query)
@@ -245,7 +251,7 @@ const getVolunteers = async (req, res) => {
 }
 const getVolunteersNotVerified = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, search, page, perPage } = req.query
+        const { ward, booth, assembly, constituency, district, power,search, page, perPage } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -265,6 +271,10 @@ const getVolunteersNotVerified = async (req, res) => {
         if (search) {
             query['name'] = new RegExp(search, 'i')
         }
+            if(power){
+                query['power'] = power;
+            }
+
         query['verified'] = false
         const count = await Volunteer.countDocuments(query)
         const volunteers = await Volunteer.find(query).skip((page - 1) * perPage).limit(perPage)
@@ -1820,6 +1830,42 @@ const getCasteV2 = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+const addJsonFromPdf = async (req, res) => {
+    try {
+        const { data, booth,district,assembly,constituency } = req.body;
+        if (!data) {
+            return res.status(400).json({ error: "Data not found" });
+        }
+     
+        const pdfData = data;
+        const result = await pdfData.map(async (dat) => {
+            if (!data) {
+                return
+            }
+            const user = await User.findOne({ voterId: dat.voterId });
+
+            if (!user) {
+                await User.create({
+                    voterId: dat.voterId,
+                    district: district,
+                    constituency: constituency,
+                    assembly: assembly,
+                    booth: booth,
+                    name: dat.name,
+                    houseNo: dat.houseNo,
+                    houseName: dat.houseName,
+                    age: dat.age,
+                    gender: dat.gender,
+                    sNo: dat.sNo,
+                })
+            }
+        })
+        res.status(200).json({ message: "Data added successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
 module.exports = {
     Login,
     Protected,
@@ -1891,6 +1937,7 @@ module.exports = {
     getNotifications,
     deleteNotification,
     LoginFromDCCAdmin,
-    getCasteV2
+    getCasteV2,
+    addJsonFromPdf
 
 }
