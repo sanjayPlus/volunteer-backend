@@ -91,7 +91,7 @@ const CreateVolunteer = async (req, res) => {
 }
 const UpdateVolunteer = async (req, res) => {
     try {
-        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password } = req.body;
+        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password,constituency } = req.body;
         const volunteer = await Volunteer.findById(volunteerId);
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -118,6 +118,9 @@ const UpdateVolunteer = async (req, res) => {
         }
         if (district) {
             volunteer.district = district;
+        }
+        if (constituency) {
+            volunteer.constituency = constituency;
         }
         if (assembly) {
             volunteer.assembly = assembly;
