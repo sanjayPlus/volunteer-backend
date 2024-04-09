@@ -524,6 +524,21 @@ const deleteUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+const deleteBulkUsers = async (req, res) => {
+    try {
+        const {district,constituency,assembly,booth} = req.body;
+        const deleteResult = await User.deleteMany({
+            district,
+            constituency,
+            assembly,
+            booth
+        });
+        res.status(200).json({ deletedCount: deleteResult.deletedCount });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 const addUserFromExcel = async (req, res) => {
     try {
         const { district, constituency, assembly, booth, caste, infavour, voterStatus } = req.body
@@ -1881,6 +1896,7 @@ module.exports = {
     addUser,
     updateUser,
     deleteUser,
+    deleteBulkUsers,
     addUserFromExcel,
     getUsersByDistrict,
     getStateDistrictV1,

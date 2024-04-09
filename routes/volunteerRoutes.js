@@ -30,6 +30,7 @@ router.get('/get-polling-party-by-volunteer',volunteerAuth,volunteerController.g
 router.post("/login", volunteerController.volunteerLogin);
 router.post("/add-user",volunteerAuth,volunteerController.addUser);
 router.get('/user/:id',volunteerAuth, volunteerController.getUserById);
+
 router.post("/forget-password", volunteerController.forgetPassword);
 router.post("/verify-otp", volunteerController.verifyForgotPasswordOTP);
 router.post("/reset-password",volunteerAuth, volunteerController.resetPassword);
