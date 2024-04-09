@@ -502,7 +502,7 @@ const getUsers = async (req, res) => {
         }
 
         if (booth) {
-            query['booth'] = volunteer.boothRule.includes(booth) ? booth : null;
+            query['booth'] = volunteer.boothRule.includes(booth) ? booth : volunteer.booth;
         }
         if (!volunteer.assembly) {
             return res.status(400).json({ error: "Please provide a valid assembly" });
