@@ -650,8 +650,13 @@ const getUsersCount = async (req, res) => {
         }
 
         if (booth) {
-            query['booth'] = volunteer.boothRule.includes(booth) ? booth : null;
+            // If booth exists in the request body
+            query['booth'] = volunteer.boothRule.includes(booth) ? booth : volunteer.booth;
+        } else {
+            // If booth doesn't exist in the request body, use volunteer.booth as fallback
+            query['booth'] = volunteer.booth;
         }
+        
         if (!volunteer.assembly) {
             return res.status(400).json({ error: "Please provide a valid assembly" });
         }
