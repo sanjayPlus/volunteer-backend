@@ -320,7 +320,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType } = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType,eligibleForVoting } = req.body;
         console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
@@ -438,6 +438,9 @@ const UpdateUser = async (req, res) => {
         if (casteType) {
             user.casteType = casteType
         }
+        if (eligibleForVoting) {
+            user.eligibleForVoting = eligibleForVoting
+        }
         user.updatedBy.push(req.volunteer.id);
         await user.save();
         res.status(200).json({ message: "User updated successfully", user });
@@ -487,7 +490,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch,eligibleForVoting,isVotingDone } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -587,6 +590,13 @@ const getUsers = async (req, res) => {
         }
         if (partyName) {
             query['party.partyName'] = partyName
+        }
+        if(eligibleForVoting){
+            query['eligibleForVoting'] = eligibleForVoting
+        }
+        if(isVotingDone){
+            //get users with votingDay Not ""
+                query['votingDay'] = { $ne: "" };
         }
         const count = await User.countDocuments(query);
         let users = null;
@@ -1441,7 +1451,7 @@ const addJsonFromPdf = async (req, res) => {
         if (!volunteer.boothRule.includes(booth)) {
             return res.status(400).json({ error: "Volunteer Booth not found" });
         }
-        const pdfData =data;
+        const pdfData = data;
         const result = await pdfData.map(async (dat) => {
             if (!data) {
                 return

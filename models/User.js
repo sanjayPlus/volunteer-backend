@@ -160,6 +160,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
+    eligibleForVoting:{
+        type:Boolean,
+        default:true  
+    },
     updatedBy:Array,
     uploadedBy:String,
 });
