@@ -525,8 +525,14 @@ const getUsers = async (req, res) => {
                 query['sNo'] = new RegExp(search, 'i');
             }
             else if (sNoAndNameSearch) {
-                query['sNo'] = new RegExp(search, 'i');
-                query['name'] = new RegExp(search, 'i');
+                // Construct a regex pattern for the search term
+                const searchRegex = new RegExp(search, 'i');
+            
+                // Construct the query using $or operator to match either sNo or name
+                query['$or'] = [
+                    { 'sNo': searchRegex },
+                    { 'name': searchRegex }
+                ];
             }
             else {
                 query['name'] = new RegExp(search, 'i');
