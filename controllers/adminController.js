@@ -526,13 +526,25 @@ const deleteUser = async (req, res) => {
 }
 const deleteBulkUsers = async (req, res) => {
     try {
-        const {district,constituency,assembly,booth} = req.body;
+        const { district, constituency, assembly, booth } = req.body;
+
+        // Check if required fields are provided
+        if (!district || !constituency || !assembly || !booth) {
+            return res.status(400).json({ error: "Missing required fields in request body" });
+        }
+
         const deleteResult = await User.deleteMany({
             district,
             constituency,
             assembly,
             booth
         });
+
+        // Check if any users were deleted
+        if (deleteResult.deletedCount === 0) {
+            return res.status(404).json({ error: "No users found matching the provided criteria" });
+        }
+
         res.status(200).json({ deletedCount: deleteResult.deletedCount });
     } catch (error) {
         res.status(500).json({ error: error.message });
