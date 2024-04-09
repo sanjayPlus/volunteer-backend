@@ -594,11 +594,11 @@ const getUsers = async (req, res) => {
         if(eligibleForVoting){
             query['eligibleForVoting'] = eligibleForVoting
         }
-        if(isVotingDone == true){
+        if(isVotingDone === true){
             //get users with votingDay Not ""
                 query['votingDay'] = { $ne: "" };
         }
-        if(isVotingDone == false){
+        if(isVotingDone === false){
             query['votingDay'] = { $eq: "" };
         }
         const count = await User.countDocuments(query);
