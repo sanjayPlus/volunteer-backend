@@ -594,11 +594,11 @@ const getUsers = async (req, res) => {
         if(eligibleForVoting){
             query['eligibleForVoting'] = eligibleForVoting
         }
-        if (isVotingDone != undefined && isVotingDone != null) {
-            if (isVotingDone == "true") {
+        if (isVotingDone != "2" && isVotingDone != "2") {
+            if (isVotingDone == "1") {
                 // Get users with votingDay Not ""
                 query['votingDay'] = { $ne: "" };
-            } else{
+            } else if(isVotingDone == "0") {
                 // Get users with votingDay ""
                 query['votingDay'] = { $eq: "" };
             }
