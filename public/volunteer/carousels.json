@@ -1,0 +1,50 @@
+[{
+  "_id": {
+    "$oid": "6606be37464e4af50d8c616e"
+  },
+  "name": "how to use this app",
+  "link": "",
+  "image": "https://volunteer-backend.dmckpcc.in/CarouselImage/1711717943612-84471039-WhatsApp Image 2024-03-29 at 5.37.23 PM (2).jpeg",
+  "type": "image",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6606be71464e4af50d8c6172"
+  },
+  "name": "how to use polling machine ",
+  "link": "",
+  "image": "https://volunteer-backend.dmckpcc.in/CarouselImage/1711718001744-237384261-WhatsApp Image 2024-03-29 at 5.37.22 PM (1).jpeg",
+  "type": "photo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6606be88464e4af50d8c6176"
+  },
+  "name": "update detail",
+  "link": "",
+  "image": "https://volunteer-backend.dmckpcc.in/CarouselImage/1711718024770-494194845-WhatsApp Image 2024-03-29 at 5.37.23 PM (1).jpeg",
+  "type": "image",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6606be9d464e4af50d8c617a"
+  },
+  "name": "history",
+  "link": "",
+  "image": "https://volunteer-backend.dmckpcc.in/CarouselImage/1711718045158-136835789-WhatsApp Image 2024-03-29 at 5.37.23 PM.jpeg",
+  "type": "image",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6606bef6464e4af50d8c617e"
+  },
+  "name": "social media",
+  "link": "",
+  "image": "https://volunteer-backend.dmckpcc.in/CarouselImage/1711718134742-858666630-WhatsApp Image 2024-03-29 at 5.37.23 PM (3).jpeg",
+  "type": "imager",
+  "__v": 0
+}]
