@@ -1884,6 +1884,9 @@ const addJsonFromPdf = async (req, res) => {
                     age: dat.age,
                     gender: dat.gender,
                     sNo: dat.sNo,
+                    guardianName: dat.guardianName,
+                    uploadedBy: "admin",
+                    updatedBy:["admin"],
                 })
             }
         })
