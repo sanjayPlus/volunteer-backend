@@ -1288,6 +1288,15 @@ const addDataFromJson = async (req, res) => {
             "ലിംഗം": "gender",
             'SL Number': "sNo",
             "VoterID": "voterId",
+            "voterId": "voterId",
+            "sNo": "sNo",
+            "guardianName": "guardianName",
+            "houseName": "houseName",
+            "age": "age",
+            "gender": "gender",
+            "name": "name",
+            "houseNo": "houseNo",
+            
 
         };
 
