@@ -1718,7 +1718,7 @@ const addDataFromJson = async (req, res) => {
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
                     updatedBy: ['admin'],
-                    uploadedBy: ['admin'],
+                    uploadedBy: 'admin',
                 });
             }
         });
