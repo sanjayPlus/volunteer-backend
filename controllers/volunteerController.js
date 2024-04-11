@@ -1226,82 +1226,9 @@ const addDataFromJson = async (req, res) => {
         }
         const jsonData = JSON.parse(req.file.buffer.toString());
 
-        function renameKeys(obj, newKeys) {
-            const keyValues = Object.keys(obj).map(key => {
-                let newKey = key;
-                let value = obj[key];
-
-                if (key.includes(" : ")) {
-                    // Split key into separate key and value
-                    const [newKeyName, newValue] = key.split(" : ");
-                    newKey = newKeyName.trim(); // Remove any leading/trailing spaces
-                    value = newValue.trim(); // Remove any leading/trailing spaces
-                } else if (key.startsWith("പ്രായം")) {
-                    const value = key.split(" : ")[1];
-                    newKey = "age";
-                }
-
-                // Check for additional characters like semicolons, commas, single quotes, and spaces
-                if (newKey.includes(" ; ")) {
-                    newKey = newKey.split(" ; ")[1].trim(); // Extract the desired key
-                } else if (newKey.includes(" , ")) {
-                    newKey = newKey.split(" , ")[1].trim(); // Extract the desired key
-                } else if (newKey.includes(" ' ")) {
-                    newKey = newKey.split(" ' ")[1].trim(); // Extract the desired key
-                }
-                newKey = newKeys[newKey] || newKey;
-                // Transform gender field values
-                if (newKey === "gender") {
-                    if (value.includes("സ്ത്രീ")) {
-                        value = "F";
-                    } else if (value.includes("പുരുഷന്‍")) {
-                        value = "M";
-                    } else {
-                        value = "N";
-                    }
-                }
-
-
-                return { [newKey]: value };
-            });
-            return Object.assign({}, ...keyValues);
-        }
-
-        // Define new key names
-        const newKeyNames = {
-            "പേര്‌": "name",
-            "പൌര": "name",
-            "പേര": "name",
-            "പേ": "name",
-            "അമ്മയുടെ പേര്‍": "guardianName",
-            "അച്ഛന്റെ പേര്‌": "guardianName",
-            "അച്ചന്റെ പേര്‌": "guardianName",
-            "വിട്ടു നമ്പര്‍": "houseName",
-            "വീട്ടു നമ്പര്‍": "houseName",
-            "വീട്ടു പ": "houseName",
-            "ഭര്‍ത്താവിന്റെ പേര്": "guardianName",
-            "ഭര്‍ത്താവിന്റെ പേര്‌": "guardianName",
-            "അമ്മയുടെ പേര്‌": "guardianName",
-            "അച്ഛന്റെ പേര": "guardianName",
-            "അമ്മന്മുടെ പേര്‌": "guardianName",
-            "പ്രായം": "age",
-            "ലിംഗം": "gender",
-            'SL Number': "sNo",
-            "VoterID": "voterId",
-            "voterId": "voterId",
-            "sNo": "sNo",
-            "guardianName": "guardianName",
-            "houseName": "houseName",
-            "age": "age",
-            "gender": "gender",
-            "name": "name",
-            "houseNo": "houseNo",
-            
-
-        };
-
-        const modifiedData = jsonData.map(obj => renameKeys(obj, newKeyNames));
-        modifiedData.map(async (data) => {
+     
+       
+        jsonData.map(async (data) => {
             let newName = "";
             let newGuardianName = "";
             let newHouseName = "";
@@ -1317,10 +1244,10 @@ const addDataFromJson = async (req, res) => {
             if (!existingUser) {
                 User.create({
                     sNo: data.sNo,
-                    name: newName,
-                    guardianName: newGuardianName,
+                    name: data.name,
+                    guardianName: data.guardianName,
                     houseNo: data.houseNo,
-                    houseName: newHouseName,
+                    houseName: data.houseName,
                     gender: data.gender,
                     age: data.age,
                     voterId: data.voterId,
@@ -1345,6 +1272,140 @@ const addDataFromJson = async (req, res) => {
         res.status(500).json({ error: 'Failed to handle file upload' });
     }
 };
+// const addDataFromJson = async (req, res) => {
+//     try {
+//         const { booth, caste, infavour, voterStatus } = req.body;
+//         const volunteer = await Volunteer.findById(req.volunteer.id);
+//         if (!volunteer.verified) {
+//             return res.status(400).json({ error: "Volunteer not verified" });
+//         }
+//         if (!volunteer) {
+//             return res.status(400).json({ error: "Volunteer not found" });
+//         }
+//         if (volunteer.boothRule.includes(booth) === false) {
+//             return res.status(400).json({ error: "Volunteer Booth not found" });
+
+//         }
+//         const jsonData = JSON.parse(req.file.buffer.toString());
+
+//         function renameKeys(obj, newKeys) {
+//             const keyValues = Object.keys(obj).map(key => {
+//                 let newKey = key;
+//                 let value = obj[key];
+
+//                 if (key.includes(" : ")) {
+//                     // Split key into separate key and value
+//                     const [newKeyName, newValue] = key.split(" : ");
+//                     newKey = newKeyName.trim(); // Remove any leading/trailing spaces
+//                     value = newValue.trim(); // Remove any leading/trailing spaces
+//                 } else if (key.startsWith("പ്രായം")) {
+//                     const value = key.split(" : ")[1];
+//                     newKey = "age";
+//                 }
+
+//                 // Check for additional characters like semicolons, commas, single quotes, and spaces
+//                 if (newKey.includes(" ; ")) {
+//                     newKey = newKey.split(" ; ")[1].trim(); // Extract the desired key
+//                 } else if (newKey.includes(" , ")) {
+//                     newKey = newKey.split(" , ")[1].trim(); // Extract the desired key
+//                 } else if (newKey.includes(" ' ")) {
+//                     newKey = newKey.split(" ' ")[1].trim(); // Extract the desired key
+//                 }
+//                 newKey = newKeys[newKey] || newKey;
+//                 // Transform gender field values
+//                 if (newKey === "gender") {
+//                     if (value.includes("സ്ത്രീ")) {
+//                         value = "F";
+//                     } else if (value.includes("പുരുഷന്‍")) {
+//                         value = "M";
+//                     } else {
+//                         value = "N";
+//                     }
+//                 }
+
+
+//                 return { [newKey]: value };
+//             });
+//             return Object.assign({}, ...keyValues);
+//         }
+
+//         // Define new key names
+//         const newKeyNames = {
+//             "പേര്‌": "name",
+//             "പൌര": "name",
+//             "പേര": "name",
+//             "പേ": "name",
+//             "അമ്മയുടെ പേര്‍": "guardianName",
+//             "അച്ഛന്റെ പേര്‌": "guardianName",
+//             "അച്ചന്റെ പേര്‌": "guardianName",
+//             "വിട്ടു നമ്പര്‍": "houseName",
+//             "വീട്ടു നമ്പര്‍": "houseName",
+//             "വീട്ടു പ": "houseName",
+//             "ഭര്‍ത്താവിന്റെ പേര്": "guardianName",
+//             "ഭര്‍ത്താവിന്റെ പേര്‌": "guardianName",
+//             "അമ്മയുടെ പേര്‌": "guardianName",
+//             "അച്ഛന്റെ പേര": "guardianName",
+//             "അമ്മന്മുടെ പേര്‌": "guardianName",
+//             "പ്രായം": "age",
+//             "ലിംഗം": "gender",
+//             'SL Number': "sNo",
+//             "VoterID": "voterId",
+//             "voterId": "voterId",
+//             "sNo": "sNo",
+//             "guardianName": "guardianName",
+//             "houseName": "houseName",
+//             "age": "age",
+//             "gender": "gender",
+//             "name": "name",
+//             "houseNo": "houseNo",
+//         };
+
+//         const modifiedData = jsonData.map(obj => renameKeys(obj, newKeyNames));
+//         modifiedData.map(async (data) => {
+//             let newName = "";
+//             let newGuardianName = "";
+//             let newHouseName = "";
+//             try {
+
+//                 newName = ml2en(data.name);
+//                 newGuardianName = ml2en(data.guardianName);
+//                 newHouseName = ml2en(data.houseName);
+//             } catch (e) {
+//                 console.log("Error", e);
+//             }
+//             const existingUser = await User.findOne({ voterId: data.voterId });
+//             if (!existingUser) {
+//                 User.create({
+//                     sNo: data.sNo,
+//                     name: newName,
+//                     guardianName: newGuardianName,
+//                     houseNo: data.houseNo,
+//                     houseName: newHouseName,
+//                     gender: data.gender,
+//                     age: data.age,
+//                     voterId: data.voterId,
+//                     district: volunteer.district,
+//                     constituency: volunteer.constituency,
+//                     assembly: volunteer.assembly,
+//                     booth,
+//                     whatsappNo: data.whatsappNo || "",
+//                     phone: data.phone || "",
+//                     email: data.email || "",
+//                     infavour: infavour || data.infavour || "",
+//                     caste: caste || data.caste || "",
+//                     voterStatus: voterStatus || data.voterStatus || "",
+//                     updatedBy: [volunteer._id],
+//                 });
+//             }
+//         });
+
+//         res.status(200).json(modifiedData);
+//     } catch (error) {
+//         console.error('Error handling file upload:', error.message);
+//         res.status(500).json({ error: 'Failed to handle file upload' });
+//     }
+// };
+
 
 const storeNotificationToken = async (req, res) => {
     try {
