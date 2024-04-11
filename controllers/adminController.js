@@ -91,7 +91,7 @@ const CreateVolunteer = async (req, res) => {
 }
 const UpdateVolunteer = async (req, res) => {
     try {
-        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password,constituency } = req.body;
+        const { name, email, phone, gender, address, booth, boothRule, district, assembly, mandalamMember, mandlamPresident, volunteerId, loksabha, password, constituency } = req.body;
         const volunteer = await Volunteer.findById(volunteerId);
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -213,7 +213,7 @@ const DeleteVolunteer = async (req, res) => {
 }
 const getVolunteers = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, search, page, perPage,power } = req.query
+        const { ward, booth, assembly, constituency, district, search, page, perPage, power } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -233,7 +233,7 @@ const getVolunteers = async (req, res) => {
         if (search) {
             query['name'] = new RegExp(search, 'i')
         }
-        if(power){
+        if (power) {
             query['power'] = power
         }
         query['verified'] = true
@@ -251,7 +251,7 @@ const getVolunteers = async (req, res) => {
 }
 const getVolunteersNotVerified = async (req, res) => {
     try {
-        const { ward, booth, assembly, constituency, district, power,search, page, perPage } = req.query
+        const { ward, booth, assembly, constituency, district, power, search, page, perPage } = req.query
         const query = {};
         if (ward) {
             query['ward'] = ward
@@ -271,9 +271,9 @@ const getVolunteersNotVerified = async (req, res) => {
         if (search) {
             query['name'] = new RegExp(search, 'i')
         }
-            if(power){
-                query['power'] = power;
-            }
+        if (power) {
+            query['power'] = power;
+        }
 
         query['verified'] = false
         const count = await Volunteer.countDocuments(query)
@@ -1301,7 +1301,7 @@ const deleteVolunteerAppLink = async (req, res) => {
 }
 const addHistory = async (req, res) => {
     try {
-        const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters,district,loksabha,assembly,constituency,booth } = req.body;
+        const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters, district, loksabha, assembly, constituency, booth } = req.body;
         const history = await History.create({
             title,
             description,
@@ -1327,21 +1327,21 @@ const addHistory = async (req, res) => {
 }
 const getHistory = async (req, res) => {
     try {
-        const {district,loksabha,assembly,constituency,booth} = req.query
+        const { district, loksabha, assembly, constituency, booth } = req.query
         let query = {};
-        if(district){
+        if (district) {
             query.district = district
         }
-        if(loksabha){
+        if (loksabha) {
             query.loksabha = loksabha
         }
-        if(assembly){
+        if (assembly) {
             query.assembly = assembly
         }
-        if(constituency){
+        if (constituency) {
             query.constituency = constituency
         }
-        if(booth){
+        if (booth) {
             query.booth = booth
         }
         const history = await History.find(query);
@@ -1692,22 +1692,12 @@ const deleteWhatsAppPublic = async (req, res) => {
 // };
 const addDataFromJson = async (req, res) => {
     try {
-        const { booth, caste, infavour, voterStatus } = req.body;
-        const volunteer = await Volunteer.findById(req.volunteer.id);
-        if (!volunteer.verified) {
-            return res.status(400).json({ error: "Volunteer not verified" });
-        }
-        if (!volunteer) {
-            return res.status(400).json({ error: "Volunteer not found" });
-        }
-        if (volunteer.boothRule.includes(booth) === false) {
-            return res.status(400).json({ error: "Volunteer Booth not found" });
+        const { district, constituency, assembly, booth, caste, infavour, voterStatus } = req.body;
 
-        }
         const jsonData = JSON.parse(req.file.buffer.toString());
 
-     
-       
+
+
         jsonData.map(async (data) => {
             let newName = "";
             let newGuardianName = "";
@@ -1731,9 +1721,9 @@ const addDataFromJson = async (req, res) => {
                     gender: data.gender,
                     age: data.age,
                     voterId: data.voterId,
-                    district: volunteer.district,
-                    constituency: volunteer.constituency,
-                    assembly: volunteer.assembly,
+                    district,
+                    constituency,
+                    assembly,
                     booth,
                     whatsappNo: data.whatsappNo || "",
                     phone: data.phone || "",
@@ -1893,7 +1883,7 @@ const getCasteV2 = async (req, res) => {
                 "Nair",
                 "Brahmin",
                 "Vishwakarma",
-                 "SC",
+                "SC",
                 "ST",
                 "OBC",
 
@@ -1921,11 +1911,11 @@ const getCasteV2 = async (req, res) => {
 }
 const addJsonFromPdf = async (req, res) => {
     try {
-        const { data, booth,district,assembly,constituency } = req.body;
+        const { data, booth, district, assembly, constituency } = req.body;
         if (!data) {
             return res.status(400).json({ error: "Data not found" });
         }
-     
+
         const pdfData = data;
         const result = await pdfData.map(async (dat) => {
             if (!data) {
@@ -1948,7 +1938,7 @@ const addJsonFromPdf = async (req, res) => {
                     sNo: dat.sNo,
                     guardianName: dat.guardianName,
                     uploadedBy: "admin",
-                    updatedBy:["admin"],
+                    updatedBy: ["admin"],
                 })
             }
         })
