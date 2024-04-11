@@ -1693,11 +1693,7 @@ const deleteWhatsAppPublic = async (req, res) => {
 const addDataFromJson = async (req, res) => {
     try {
         const { district, constituency, assembly, booth, caste, infavour, voterStatus } = req.body;
-
         const jsonData = JSON.parse(req.file.buffer.toString());
-
-
-
         jsonData.map(async (data) => {
   
             const existingUser = await User.findOne({ voterId: data.voterId });
@@ -1721,12 +1717,13 @@ const addDataFromJson = async (req, res) => {
                     infavour: infavour || data.infavour || "",
                     caste: caste || data.caste || "",
                     voterStatus: voterStatus || data.voterStatus || "",
-                    updatedBy: [volunteer._id],
+                    updatedBy: ['admin'],
+                    uploadedBy: ['admin'],
                 });
             }
         });
 
-        res.status(200).json(modifiedData);
+        res.status(200).json(jsonData);
     } catch (error) {
         console.error('Error handling file upload:', error.message);
         res.status(500).json({ error: 'Failed to handle file upload' });
