@@ -1229,17 +1229,7 @@ const addDataFromJson = async (req, res) => {
      
        
         jsonData.map(async (data) => {
-            let newName = "";
-            let newGuardianName = "";
-            let newHouseName = "";
-            try {
-
-                newName = ml2en(data.name);
-                newGuardianName = ml2en(data.guardianName);
-                newHouseName = ml2en(data.houseName);
-            } catch (e) {
-                console.log("Error", e);
-            }
+  
             const existingUser = await User.findOne({ voterId: data.voterId });
             if (!existingUser) {
                 User.create({
