@@ -1865,7 +1865,6 @@ const getCasteV2 = async (req, res) => {
         const castes = [{
             caste: "Hindu",
             caste_types: [
-
                 "Ezhava",
                 "Nair",
                 "Brahmin",
@@ -1873,7 +1872,6 @@ const getCasteV2 = async (req, res) => {
                 "SC",
                 "ST",
                 "OBC",
-
             ]
         }, {
             caste: "Muslim",
@@ -1886,7 +1884,13 @@ const getCasteV2 = async (req, res) => {
             caste_types: [
                 "RC",
                 "Latin",
-                "Jewish",
+            ],
+            
+        },{
+
+            caste: "Others",
+            caste_types: [
+                "Others",
             ]
         }]
         res.status(200).json(castes);

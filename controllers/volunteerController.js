@@ -320,7 +320,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType,eligibleForVoting } = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType, eligibleForVoting } = req.body;
         console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
@@ -490,7 +490,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch,eligibleForVoting,isVotingDone } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -508,7 +508,7 @@ const getUsers = async (req, res) => {
             // If booth doesn't exist in the request body, use volunteer.booth as fallback
             query['booth'] = volunteer.booth;
         }
-        
+
         if (!volunteer.assembly) {
             return res.status(400).json({ error: "Please provide a valid assembly" });
         }
@@ -536,7 +536,7 @@ const getUsers = async (req, res) => {
             else if (sNoAndNameSearch) {
                 // Construct a regex pattern for the search term
                 const searchRegex = new RegExp(search, 'i');
-            
+
                 // Construct the query using $or operator to match either sNo or name
                 query['$or'] = [
                     { 'sNo': searchRegex },
@@ -596,14 +596,14 @@ const getUsers = async (req, res) => {
         if (partyName) {
             query['party.partyName'] = partyName
         }
-        if(eligibleForVoting){
+        if (eligibleForVoting) {
             query['eligibleForVoting'] = eligibleForVoting
         }
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
                 // Get users with votingDay Not ""
                 query['votingDay'] = { $ne: "" };
-            } else if(isVotingDone == "0") {
+            } else if (isVotingDone == "0") {
                 // Get users with votingDay ""
                 query['votingDay'] = { $eq: "" };
             }
@@ -656,7 +656,7 @@ const getUsersCount = async (req, res) => {
             // If booth doesn't exist in the request body, use volunteer.booth as fallback
             query['booth'] = volunteer.booth;
         }
-        
+
         if (!volunteer.assembly) {
             return res.status(400).json({ error: "Please provide a valid assembly" });
         }
@@ -1225,11 +1225,8 @@ const addDataFromJson = async (req, res) => {
 
         }
         const jsonData = JSON.parse(req.file.buffer.toString());
-
-     
-       
         jsonData.map(async (data) => {
-  
+
             const existingUser = await User.findOne({ voterId: data.voterId });
             if (!existingUser) {
                 User.create({
@@ -1256,7 +1253,7 @@ const addDataFromJson = async (req, res) => {
             }
         });
 
-        res.status(200).json(modifiedData);
+        res.status(200).json(jsonData);
     } catch (error) {
         console.error('Error handling file upload:', error.message);
         res.status(500).json({ error: 'Failed to handle file upload' });
@@ -1548,7 +1545,7 @@ const addJsonFromPdf = async (req, res) => {
                     gender: dat.gender,
                     sNo: dat.sNo,
                     uploadedBy: req.volunteer.id,
-                    updatedBy:[req.volunteer.id],
+                    updatedBy: [req.volunteer.id],
                 })
             }
         })
@@ -1556,6 +1553,40 @@ const addJsonFromPdf = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
+    }
+}
+const getStaticsByHouseName = async (req, res) => {
+    try {
+        const { houseName, booth, houseNo } = req.query;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.district) {
+            return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        if (!volunteer.boothRule.includes(booth)) {
+            return res.status(400).json({ error: "Volunteer Booth not found" });
+        }
+
+        const users = await User.find({ houseName: houseName, booth: booth, district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly });
+        
+        //get the unique set of housename from the users
+        let uniqueHouseName = [...new Set(users.map(user => user.houseName))];
+        //create a map of housename with users in side and count
+        let houseNameMap = uniqueHouseName.map(houseName => {
+            const count = users.filter(user => user.houseName === houseName).length;
+
+            return { houseName, count };
+        })
+        res.status(200).json(houseNameMap);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+
     }
 }
 module.exports = {
@@ -1593,6 +1624,7 @@ module.exports = {
     addWhatsAppPublic,
     getPollingPartyByVolunteer,
     getStaticsOfVotingDay,
-    addJsonFromPdf
+    addJsonFromPdf,
+    getStaticsByHouseName
 
 }
