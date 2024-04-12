@@ -481,6 +481,39 @@ const DeleteUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+const CreateNonEligibleUser = async (req, res) => {
+    try {
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        const isBooth = volunteer.boothRule.includes(user.booth);
+
+        if (!isBooth) {
+            return res.status(400).json({ error: "Please provide a valid booth" });
+        }
+        if (user.district !== volunteer.district) {
+            return res.status(400).json({ error: "Please provide a valid district" });
+        }
+        if (user.constituency !== volunteer.constituency) {
+            return res.status(400).json({ error: "Please provide a valid constituency" });
+        }
+        if (user.assembly !== volunteer.assembly) {
+            return res.status(400).json({ error: "Please provide a valid assembly" });
+        }
+        const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
+        const user = new User({ name, houseNo, gender, age,
+             voterId, booth, guardianName, instagram, facebook,
+              whatsappNo, infavour, caste, casteType, partyName, 
+              partyType, voterStatus, phone,
+              updatedBy: [req.volunteer.id] ,eligibleForVoting:false,
+              uploadedBy: req.volunteer.id });
+        await user.save();
+        res.status(200).json({ message: "User created successfully", user });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
 const Protected = async (req, res) => {
     try {
         res.status(200).json({ msg: "Protected route" });
@@ -596,12 +629,12 @@ const getUsers = async (req, res) => {
         if (partyName) {
             query['party.partyName'] = partyName
         }
-        if (eligibleForVoting ==="1") {
+        if (eligibleForVoting === "1") {
             query['eligibleForVoting'] = true
-        }else if (eligibleForVoting ==="0") {
+        } else if (eligibleForVoting === "0") {
             query['eligibleForVoting'] = false
-        }else{
-            query['eligibleForVoting'] = true
+        } else {
+            query['eligibleForVoting'] = true;
         }
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
@@ -642,7 +675,7 @@ const getUsers = async (req, res) => {
 };
 const getUsersCount = async (req, res) => {
     try {
-        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
+        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, eligibleForVoting, isVotingDone } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -733,6 +766,22 @@ const getUsersCount = async (req, res) => {
         }
         if (partyName) {
             query['party.partyName'] = partyName
+        }
+        if (eligibleForVoting === "1") {
+            query['eligibleForVoting'] = true
+        } else if (eligibleForVoting === "0") {
+            query['eligibleForVoting'] = false
+        } else {
+            query['eligibleForVoting'] = true;
+        }
+        if (isVotingDone != "2" && isVotingDone != "2") {
+            if (isVotingDone == "1") {
+                // Get users with votingDay Not ""
+                query['votingDay'] = { $ne: "" };
+            } else if (isVotingDone == "0") {
+                // Get users with votingDay ""
+                query['votingDay'] = { $eq: "" };
+            }
         }
         let users = await User.find(query)
 
@@ -1577,7 +1626,7 @@ const getStaticsByHouseName = async (req, res) => {
         }
 
         const users = await User.find({ houseName: houseName, booth: booth, district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly });
-        
+
         //get the unique set of housename from the users
         let uniqueHouseName = [...new Set(users.map(user => user.houseName))];
         //create a map of housename with users in side and count
