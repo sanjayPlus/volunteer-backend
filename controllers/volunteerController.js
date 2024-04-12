@@ -596,8 +596,12 @@ const getUsers = async (req, res) => {
         if (partyName) {
             query['party.partyName'] = partyName
         }
-        if (eligibleForVoting) {
-            query['eligibleForVoting'] = eligibleForVoting
+        if (eligibleForVoting ==="1") {
+            query['eligibleForVoting'] = true
+        }else if (eligibleForVoting ==="0") {
+            query['eligibleForVoting'] = false
+        }else{
+            query['eligibleForVoting'] = true
         }
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
