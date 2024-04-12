@@ -502,12 +502,14 @@ const CreateNonEligibleUser = async (req, res) => {
             return res.status(400).json({ error: "Please provide a valid assembly" });
         }
         const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
-        const user = new User({ name, houseNo, gender, age,
-             voterId, booth, guardianName, instagram, facebook,
-              whatsappNo, infavour, caste, casteType, partyName, 
-              partyType, voterStatus, phone,
-              updatedBy: [req.volunteer.id] ,eligibleForVoting:false,
-              uploadedBy: req.volunteer.id });
+        const user = new User({
+            name, houseNo, gender, age,
+            voterId, booth, guardianName, instagram, facebook,
+            whatsappNo, infavour, caste, casteType, partyName,
+            partyType, voterStatus, phone,
+            updatedBy: [req.volunteer.id], eligibleForVoting: false,
+            uploadedBy: req.volunteer.id
+        });
         await user.save();
         res.status(200).json({ message: "User created successfully", user });
     } catch (error) {
@@ -1650,6 +1652,7 @@ module.exports = {
     Protected,
     UpdateUser,
     DeleteUser,
+    CreateNonEligibleUser,
     forgetPassword,
     verifyForgotPasswordOTP,
     resetPassword,

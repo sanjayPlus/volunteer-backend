@@ -53,6 +53,7 @@ router.get('/get-statics-of-voting-day',volunteerAuth,volunteerController.getSta
 router.post('/volunteer-upload-pdf',volunteerAuth,volunteerController.addJsonFromPdf);
 
 router.get('/get-statics-by-house',volunteerAuth,volunteerController.getStaticsByHouseName);
+router.post('/create-non-eligible-user',volunteerAuth,volunteerController.CreateNonEligibleUser);
 
 
 
