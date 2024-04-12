@@ -485,6 +485,9 @@ const CreateNonEligibleUser = async (req, res) => {
     try {
         const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
+        if(!booth){
+            return res.status(400).json({error: "Please provide a valid booth"});
+        }
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
         }
@@ -504,7 +507,11 @@ const CreateNonEligibleUser = async (req, res) => {
             whatsappNo, infavour, caste, casteType, partyName,
             partyType, voterStatus, phone,
             updatedBy: [req.volunteer.id], eligibleForVoting: false,
-            uploadedBy: req.volunteer.id
+            uploadedBy: req.volunteer.id,
+            district: volunteer.district,
+            constituency: volunteer.constituency,
+            assembly: volunteer.assembly,
+            
         });
         await user.save();
         res.status(200).json({ message: "User created successfully", user });
