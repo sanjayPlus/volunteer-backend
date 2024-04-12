@@ -483,25 +483,21 @@ const DeleteUser = async (req, res) => {
 }
 const CreateNonEligibleUser = async (req, res) => {
     try {
+        const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
         if (!volunteer.verified) {
             return res.status(400).json({ error: "Volunteer not verified" });
         }
-        const isBooth = volunteer.boothRule.includes(user.booth);
-
+        let isBooth = volunteer.boothRule.includes(booth);
         if (!isBooth) {
             return res.status(400).json({ error: "Please provide a valid booth" });
         }
-        if (user.district !== volunteer.district) {
-            return res.status(400).json({ error: "Please provide a valid district" });
+        if (!volunteer.district || !volunteer.assembly || !volunteer.constituency) {
+            return res.status(400).json({ error: "Volunteer fields are not found" });
         }
-        if (user.constituency !== volunteer.constituency) {
-            return res.status(400).json({ error: "Please provide a valid constituency" });
-        }
-        if (user.assembly !== volunteer.assembly) {
-            return res.status(400).json({ error: "Please provide a valid assembly" });
-        }
-        const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
         const user = new User({
             name, houseNo, gender, age,
             voterId, booth, guardianName, instagram, facebook,
