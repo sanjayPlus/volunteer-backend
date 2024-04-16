@@ -320,7 +320,7 @@ const UpdateUser = async (req, res) => {
         const { userId } = req.params;
         const { name, gender, age, phone, voterStatus, infavour, caste, profession, whatsappNo, houseName, houseNo, guardianName, address, email, sNo, voterId, marriedStatus, swingVote, year, facebook, verified, userVotingType,
             abroadType,
-            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType } = req.body;
+            hardFanVote, pollingParty, partyType, partyName, instagram, votingDay, loksabha, casteType, eligibleForVoting } = req.body;
         console.log(votingDay)
         const user = await User.findById(userId);
         if (!user) {
@@ -438,6 +438,9 @@ const UpdateUser = async (req, res) => {
         if (casteType) {
             user.casteType = casteType
         }
+        if (eligibleForVoting) {
+            user.eligibleForVoting = eligibleForVoting
+        }
         user.updatedBy.push(req.volunteer.id);
         await user.save();
         res.status(200).json({ message: "User updated successfully", user });
@@ -478,6 +481,44 @@ const DeleteUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+const CreateNonEligibleUser = async (req, res) => {
+    try {
+        const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if(!booth){
+            return res.status(400).json({error: "Please provide a valid booth"});
+        }
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        let isBooth = volunteer.boothRule.includes(booth);
+        if (!isBooth) {
+            return res.status(400).json({ error: "Please provide a valid booth" });
+        }
+        if (!volunteer.district || !volunteer.assembly || !volunteer.constituency) {
+            return res.status(400).json({ error: "Volunteer fields are not found" });
+        }
+        const user = new User({
+            name, houseNo, gender, age,
+            voterId, booth, guardianName, instagram, facebook,
+            whatsappNo, infavour, caste, casteType, partyName,
+            partyType, voterStatus, phone,
+            updatedBy: [req.volunteer.id], eligibleForVoting: false,
+            uploadedBy: req.volunteer.id,
+            district: volunteer.district,
+            constituency: volunteer.constituency,
+            assembly: volunteer.assembly,
+            sNo:"1"
+        });
+        await user.save();
+        res.status(200).json({ message: "User created successfully", user });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
 const Protected = async (req, res) => {
     try {
         res.status(200).json({ msg: "Protected route" });
@@ -487,7 +528,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -499,8 +540,13 @@ const getUsers = async (req, res) => {
         }
 
         if (booth) {
-            query['booth'] = volunteer.boothRule.includes(booth) ? booth : null;
+            // If booth exists in the request body
+            query['booth'] = volunteer.boothRule.includes(booth) ? booth : volunteer.booth;
+        } else {
+            // If booth doesn't exist in the request body, use volunteer.booth as fallback
+            query['booth'] = volunteer.booth;
         }
+
         if (!volunteer.assembly) {
             return res.status(400).json({ error: "Please provide a valid assembly" });
         }
@@ -528,7 +574,7 @@ const getUsers = async (req, res) => {
             else if (sNoAndNameSearch) {
                 // Construct a regex pattern for the search term
                 const searchRegex = new RegExp(search, 'i');
-            
+
                 // Construct the query using $or operator to match either sNo or name
                 query['$or'] = [
                     { 'sNo': searchRegex },
@@ -588,6 +634,22 @@ const getUsers = async (req, res) => {
         if (partyName) {
             query['party.partyName'] = partyName
         }
+        if (eligibleForVoting === "1") {
+            query['eligibleForVoting'] = true
+        } else if (eligibleForVoting === "0") {
+            query['eligibleForVoting'] = false
+        } else {
+            query['eligibleForVoting'] = true;
+        }
+        if (isVotingDone != "2" && isVotingDone != "2") {
+            if (isVotingDone == "1") {
+                // Get users with votingDay Not ""
+                query['votingDay'] = { $ne: "" };
+            } else if (isVotingDone == "0") {
+                // Get users with votingDay ""
+                query['votingDay'] = { $eq: "" };
+            }
+        }
         const count = await User.countDocuments(query);
         let users = null;
         if (sNo === "true") {
@@ -618,7 +680,7 @@ const getUsers = async (req, res) => {
 };
 const getUsersCount = async (req, res) => {
     try {
-        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType } = req.query;
+        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, eligibleForVoting, isVotingDone } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -630,8 +692,13 @@ const getUsersCount = async (req, res) => {
         }
 
         if (booth) {
-            query['booth'] = volunteer.boothRule.includes(booth) ? booth : null;
+            // If booth exists in the request body
+            query['booth'] = volunteer.boothRule.includes(booth) ? booth : volunteer.booth;
+        } else {
+            // If booth doesn't exist in the request body, use volunteer.booth as fallback
+            query['booth'] = volunteer.booth;
         }
+
         if (!volunteer.assembly) {
             return res.status(400).json({ error: "Please provide a valid assembly" });
         }
@@ -704,6 +771,22 @@ const getUsersCount = async (req, res) => {
         }
         if (partyName) {
             query['party.partyName'] = partyName
+        }
+        if (eligibleForVoting === "1") {
+            query['eligibleForVoting'] = true
+        } else if (eligibleForVoting === "0") {
+            query['eligibleForVoting'] = false
+        } else {
+            query['eligibleForVoting'] = true;
+        }
+        if (isVotingDone != "2" && isVotingDone != "2") {
+            if (isVotingDone == "1") {
+                // Get users with votingDay Not ""
+                query['votingDay'] = { $ne: "" };
+            } else if (isVotingDone == "0") {
+                // Get users with votingDay ""
+                query['votingDay'] = { $eq: "" };
+            }
         }
         let users = await User.find(query)
 
@@ -1200,93 +1283,16 @@ const addDataFromJson = async (req, res) => {
 
         }
         const jsonData = JSON.parse(req.file.buffer.toString());
+        jsonData.map(async (data) => {
 
-        function renameKeys(obj, newKeys) {
-            const keyValues = Object.keys(obj).map(key => {
-                let newKey = key;
-                let value = obj[key];
-
-                if (key.includes(" : ")) {
-                    // Split key into separate key and value
-                    const [newKeyName, newValue] = key.split(" : ");
-                    newKey = newKeyName.trim(); // Remove any leading/trailing spaces
-                    value = newValue.trim(); // Remove any leading/trailing spaces
-                } else if (key.startsWith("പ്രായം")) {
-                    const value = key.split(" : ")[1];
-                    newKey = "age";
-                }
-
-                // Check for additional characters like semicolons, commas, single quotes, and spaces
-                if (newKey.includes(" ; ")) {
-                    newKey = newKey.split(" ; ")[1].trim(); // Extract the desired key
-                } else if (newKey.includes(" , ")) {
-                    newKey = newKey.split(" , ")[1].trim(); // Extract the desired key
-                } else if (newKey.includes(" ' ")) {
-                    newKey = newKey.split(" ' ")[1].trim(); // Extract the desired key
-                }
-                newKey = newKeys[newKey] || newKey;
-                // Transform gender field values
-                if (newKey === "gender") {
-                    if (value.includes("സ്ത്രീ")) {
-                        value = "F";
-                    } else if (value.includes("പുരുഷന്‍")) {
-                        value = "M";
-                    } else {
-                        value = "N";
-                    }
-                }
-
-
-                return { [newKey]: value };
-            });
-            return Object.assign({}, ...keyValues);
-        }
-
-        // Define new key names
-        const newKeyNames = {
-            "പേര്‌": "name",
-            "പൌര": "name",
-            "പേര": "name",
-            "പേ": "name",
-            "അമ്മയുടെ പേര്‍": "guardianName",
-            "അച്ഛന്റെ പേര്‌": "guardianName",
-            "അച്ചന്റെ പേര്‌": "guardianName",
-            "വിട്ടു നമ്പര്‍": "houseName",
-            "വീട്ടു നമ്പര്‍": "houseName",
-            "വീട്ടു പ": "houseName",
-            "ഭര്‍ത്താവിന്റെ പേര്": "guardianName",
-            "ഭര്‍ത്താവിന്റെ പേര്‌": "guardianName",
-            "അമ്മയുടെ പേര്‌": "guardianName",
-            "അച്ഛന്റെ പേര": "guardianName",
-            "അമ്മന്മുടെ പേര്‌": "guardianName",
-            "പ്രായം": "age",
-            "ലിംഗം": "gender",
-            'SL Number': "sNo",
-            "VoterID": "voterId",
-
-        };
-
-        const modifiedData = jsonData.map(obj => renameKeys(obj, newKeyNames));
-        modifiedData.map(async (data) => {
-            let newName = "";
-            let newGuardianName = "";
-            let newHouseName = "";
-            try {
-
-                newName = ml2en(data.name);
-                newGuardianName = ml2en(data.guardianName);
-                newHouseName = ml2en(data.houseName);
-            } catch (e) {
-                console.log("Error", e);
-            }
             const existingUser = await User.findOne({ voterId: data.voterId });
             if (!existingUser) {
                 User.create({
                     sNo: data.sNo,
-                    name: newName,
-                    guardianName: newGuardianName,
+                    name: data.name,
+                    guardianName: data.guardianName,
                     houseNo: data.houseNo,
-                    houseName: newHouseName,
+                    houseName: data.houseName,
                     gender: data.gender,
                     age: data.age,
                     voterId: data.voterId,
@@ -1305,12 +1311,146 @@ const addDataFromJson = async (req, res) => {
             }
         });
 
-        res.status(200).json(modifiedData);
+        res.status(200).json(jsonData);
     } catch (error) {
         console.error('Error handling file upload:', error.message);
         res.status(500).json({ error: 'Failed to handle file upload' });
     }
 };
+// const addDataFromJson = async (req, res) => {
+//     try {
+//         const { booth, caste, infavour, voterStatus } = req.body;
+//         const volunteer = await Volunteer.findById(req.volunteer.id);
+//         if (!volunteer.verified) {
+//             return res.status(400).json({ error: "Volunteer not verified" });
+//         }
+//         if (!volunteer) {
+//             return res.status(400).json({ error: "Volunteer not found" });
+//         }
+//         if (volunteer.boothRule.includes(booth) === false) {
+//             return res.status(400).json({ error: "Volunteer Booth not found" });
+
+//         }
+//         const jsonData = JSON.parse(req.file.buffer.toString());
+
+//         function renameKeys(obj, newKeys) {
+//             const keyValues = Object.keys(obj).map(key => {
+//                 let newKey = key;
+//                 let value = obj[key];
+
+//                 if (key.includes(" : ")) {
+//                     // Split key into separate key and value
+//                     const [newKeyName, newValue] = key.split(" : ");
+//                     newKey = newKeyName.trim(); // Remove any leading/trailing spaces
+//                     value = newValue.trim(); // Remove any leading/trailing spaces
+//                 } else if (key.startsWith("പ്രായം")) {
+//                     const value = key.split(" : ")[1];
+//                     newKey = "age";
+//                 }
+
+//                 // Check for additional characters like semicolons, commas, single quotes, and spaces
+//                 if (newKey.includes(" ; ")) {
+//                     newKey = newKey.split(" ; ")[1].trim(); // Extract the desired key
+//                 } else if (newKey.includes(" , ")) {
+//                     newKey = newKey.split(" , ")[1].trim(); // Extract the desired key
+//                 } else if (newKey.includes(" ' ")) {
+//                     newKey = newKey.split(" ' ")[1].trim(); // Extract the desired key
+//                 }
+//                 newKey = newKeys[newKey] || newKey;
+//                 // Transform gender field values
+//                 if (newKey === "gender") {
+//                     if (value.includes("സ്ത്രീ")) {
+//                         value = "F";
+//                     } else if (value.includes("പുരുഷന്‍")) {
+//                         value = "M";
+//                     } else {
+//                         value = "N";
+//                     }
+//                 }
+
+
+//                 return { [newKey]: value };
+//             });
+//             return Object.assign({}, ...keyValues);
+//         }
+
+//         // Define new key names
+//         const newKeyNames = {
+//             "പേര്‌": "name",
+//             "പൌര": "name",
+//             "പേര": "name",
+//             "പേ": "name",
+//             "അമ്മയുടെ പേര്‍": "guardianName",
+//             "അച്ഛന്റെ പേര്‌": "guardianName",
+//             "അച്ചന്റെ പേര്‌": "guardianName",
+//             "വിട്ടു നമ്പര്‍": "houseName",
+//             "വീട്ടു നമ്പര്‍": "houseName",
+//             "വീട്ടു പ": "houseName",
+//             "ഭര്‍ത്താവിന്റെ പേര്": "guardianName",
+//             "ഭര്‍ത്താവിന്റെ പേര്‌": "guardianName",
+//             "അമ്മയുടെ പേര്‌": "guardianName",
+//             "അച്ഛന്റെ പേര": "guardianName",
+//             "അമ്മന്മുടെ പേര്‌": "guardianName",
+//             "പ്രായം": "age",
+//             "ലിംഗം": "gender",
+//             'SL Number': "sNo",
+//             "VoterID": "voterId",
+//             "voterId": "voterId",
+//             "sNo": "sNo",
+//             "guardianName": "guardianName",
+//             "houseName": "houseName",
+//             "age": "age",
+//             "gender": "gender",
+//             "name": "name",
+//             "houseNo": "houseNo",
+//         };
+
+//         const modifiedData = jsonData.map(obj => renameKeys(obj, newKeyNames));
+//         modifiedData.map(async (data) => {
+//             let newName = "";
+//             let newGuardianName = "";
+//             let newHouseName = "";
+//             try {
+
+//                 newName = ml2en(data.name);
+//                 newGuardianName = ml2en(data.guardianName);
+//                 newHouseName = ml2en(data.houseName);
+//             } catch (e) {
+//                 console.log("Error", e);
+//             }
+//             const existingUser = await User.findOne({ voterId: data.voterId });
+//             if (!existingUser) {
+//                 User.create({
+//                     sNo: data.sNo,
+//                     name: newName,
+//                     guardianName: newGuardianName,
+//                     houseNo: data.houseNo,
+//                     houseName: newHouseName,
+//                     gender: data.gender,
+//                     age: data.age,
+//                     voterId: data.voterId,
+//                     district: volunteer.district,
+//                     constituency: volunteer.constituency,
+//                     assembly: volunteer.assembly,
+//                     booth,
+//                     whatsappNo: data.whatsappNo || "",
+//                     phone: data.phone || "",
+//                     email: data.email || "",
+//                     infavour: infavour || data.infavour || "",
+//                     caste: caste || data.caste || "",
+//                     voterStatus: voterStatus || data.voterStatus || "",
+//                     updatedBy: [volunteer._id],
+//                 });
+//             }
+//         });
+
+//         res.status(200).json(modifiedData);
+//     } catch (error) {
+//         console.error('Error handling file upload:', error.message);
+//         res.status(500).json({ error: 'Failed to handle file upload' });
+//     }
+// };
+
 
 const storeNotificationToken = async (req, res) => {
     try {
@@ -1441,7 +1581,7 @@ const addJsonFromPdf = async (req, res) => {
         if (!volunteer.boothRule.includes(booth)) {
             return res.status(400).json({ error: "Volunteer Booth not found" });
         }
-        const pdfData =data;
+        const pdfData = data;
         const result = await pdfData.map(async (dat) => {
             if (!data) {
                 return
@@ -1458,11 +1598,12 @@ const addJsonFromPdf = async (req, res) => {
                     name: dat.name,
                     houseNo: dat.houseNo,
                     houseName: dat.houseName,
+                    guardianName: dat.guardianName,
                     age: dat.age,
                     gender: dat.gender,
                     sNo: dat.sNo,
                     uploadedBy: req.volunteer.id,
-                    updatedBy:[req.volunteer.id],
+                    updatedBy: [req.volunteer.id],
                 })
             }
         })
@@ -1470,6 +1611,40 @@ const addJsonFromPdf = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
+    }
+}
+const getStaticsByHouseName = async (req, res) => {
+    try {
+        const { houseName, booth, houseNo } = req.query;
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.district) {
+            return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        if (!volunteer.boothRule.includes(booth)) {
+            return res.status(400).json({ error: "Volunteer Booth not found" });
+        }
+
+        const users = await User.find({ houseName: houseName, booth: booth, district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly });
+
+        //get the unique set of housename from the users
+        let uniqueHouseName = [...new Set(users.map(user => user.houseName))];
+        //create a map of housename with users in side and count
+        let houseNameMap = uniqueHouseName.map(houseName => {
+            const count = users.filter(user => user.houseName === houseName).length;
+
+            return { houseName, count };
+        })
+        res.status(200).json(houseNameMap);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+
     }
 }
 module.exports = {
@@ -1480,6 +1655,7 @@ module.exports = {
     Protected,
     UpdateUser,
     DeleteUser,
+    CreateNonEligibleUser,
     forgetPassword,
     verifyForgotPasswordOTP,
     resetPassword,
@@ -1507,6 +1683,7 @@ module.exports = {
     addWhatsAppPublic,
     getPollingPartyByVolunteer,
     getStaticsOfVotingDay,
-    addJsonFromPdf
+    addJsonFromPdf,
+    getStaticsByHouseName
 
 }

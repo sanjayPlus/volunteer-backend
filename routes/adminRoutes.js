@@ -158,6 +158,7 @@ router.get('/volunteers-not-verified',adminAuth, adminController.getVolunteersNo
 router.get('/users',adminAuth,adminController.getUsers);
 router.get('/user/:id',adminAuth,adminController.getUserById);
 router.delete('/delete-user/:id',adminAuth,adminController.deleteUser);
+router.post('/delete-bulk-users',adminAuth,adminController.deleteBulkUsers)
 router.post("/add-user-from-excel",adminAuth,upload.single('excel'), adminController.addUserFromExcel);
 router.post('/add-user',adminAuth,adminController.addUser);
 router.put('/update-user/:id',adminAuth,adminController.updateUser);

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
+        default: ""
     },
     email: {
         type: String,
@@ -13,155 +14,161 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
+        default: ""
     },
     address: {
         type: String,
     },
     district: {
         type: String,
+        default: ""
     },
-    mandalam:{
-        type:String,
-        default:""
+    mandalam: {
+        type: String,
+        default: ""
     },
-    aadhaar:{
-        type:String,
-        default:""
+    aadhaar: {
+        type: String,
+        default: ""
     },
-    aadhaarNo:{
-        type:String,
-        default:""
+    aadhaarNo: {
+        type: String,
+        default: ""
     },
-    assembly:{
-        type:String,
-        default:""
+    assembly: {
+        type: String,
+        default: ""
     },
-    constituency:{
-        type:String,
-        default:""
+    constituency: {
+        type: String,
+        default: ""
     },
-    panchayath:{
-        type:String,
-        default:""
+    panchayath: {
+        type: String,
+        default: ""
     },
-    corpoartion:{
-        type:String,
-        default:""
+    corpoartion: {
+        type: String,
+        default: ""
     },
-    municipality:{
-        type:String,
-        default:""
+    municipality: {
+        type: String,
+        default: ""
     },
-    ward:{
-        type:String,
-        default:""
+    ward: {
+        type: String,
+        default: ""
     },
-    date_of_birth:{
-        type:String,
-        default:""
+    date_of_birth: {
+        type: String,
+        default: ""
     },
-    booth:{
-        type:String,
-        default:""
+    booth: {
+        type: String,
+        default: ""
     },
-    caste:{
-        type:String,
-        default:""
+    caste: {
+        type: String,
+        default: ""
     },
-    casteType:{
-        type:String,
-        default:""
+    casteType: {
+        type: String,
+        default: ""
     },
-    profession:{
-        type:String,
-        default:""
+    profession: {
+        type: String,
+        default: ""
     },
-    voterId:{
-        type:String,
-        default:""
+    voterId: {
+        type: String,
+        default: ""
     },
-    whatsappNo:{
-        type:String,
-        default:""
+    whatsappNo: {
+        type: String,
+        default: ""
     },
-    voterStatus:{
-        type:String,
-        default:""
+    voterStatus: {
+        type: String,
+        default: ""
     },
-    infavour:{
-        type:String,
-        default:""
+    infavour: {
+        type: String,
+        default: ""
     },
-    houseNo:{
-        type:String,
-        default:""
+    houseNo: {
+        type: String,
+        default: ""
     },
-    houseName:{
-        type:String,
-        default:""
+    houseName: {
+        type: String,
+        default: ""
     },
-    guardianName:{
-        type:String,
-        default:""
+    guardianName: {
+        type: String,
+        default: ""
     },
-    gender:{
-        type:String,
-        default:""
+    gender: {
+        type: String,
+        default: ""
     },
-    age:{
-        type:String,
-        default:""
+    age: {
+        type: String,
+        default: ""
     },
-    sNo:{
-        type:String,
-        default:""
+    sNo: {
+        type: String,
+        default: ""
     },
-    localBody:String,
-    verified:{
-        type:Boolean,
-        default:false
+    localBody: String,
+    verified: {
+        type: Boolean,
+        default: false
     },
-    swingVote:String,
-    year:{
-        type:String,
-        default:""
+    swingVote: String,
+    year: {
+        type: String,
+        default: ""
     },
-    marriedStatus:{
-        type:String,
-        default:""
+    marriedStatus: {
+        type: String,
+        default: ""
     },
-    votingDay:{
-        type:String,
-        default:""
+    votingDay: {
+        type: String,
+        default: ""
     },
-    pollingParty:{
-        type:String,
-        default:""
+    pollingParty: {
+        type: String,
+        default: ""
     },
-    userVotingType:String,
-    abroadType:String,
-    hardFanVote:String,
-    party:{
-        partyType:{
-            type:String,
-            enum:["hardcore","swing",""],
-            default:""
+    userVotingType: String,
+    abroadType: String,
+    hardFanVote: String,
+    party: {
+        partyType: {
+            type: String,
+            enum: ["hardcore", "swing", ""],
+            default: ""
         },
-        partyName:{
-            type:String,
-            default:""
+        partyName: {
+            type: String,
+            default: ""
         }
     },
-    facebook:{
-        type:String,
-        default:""
+    facebook: {
+        type: String,
+        default: ""
     },
-    instagram:{
-        type:String,
-        default:""
+    instagram: {
+        type: String,
+        default: ""
     },
-    updatedBy:Array,
-    uploadedBy:String,
+    eligibleForVoting: {
+        type: Boolean,
+        default: true
+    },
+    updatedBy: Array,
+    uploadedBy: String,
 });
 
 // Virtual for age calculation based on date_of_birth
@@ -178,8 +185,8 @@ const userSchema = new mongoose.Schema({
 //     }
 //     return null; // Return null if date_of_birth is not set
 //   });
-  
-  // Setting the virtual field to appear in JSON
+
+// Setting the virtual field to appear in JSON
 //   userSchema.set('toJSON', { getters: true });
 
 module.exports = mongoose.model("User", userSchema);

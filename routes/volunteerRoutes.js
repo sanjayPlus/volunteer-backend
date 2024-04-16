@@ -30,6 +30,7 @@ router.get('/get-polling-party-by-volunteer',volunteerAuth,volunteerController.g
 router.post("/login", volunteerController.volunteerLogin);
 router.post("/add-user",volunteerAuth,volunteerController.addUser);
 router.get('/user/:id',volunteerAuth, volunteerController.getUserById);
+
 router.post("/forget-password", volunteerController.forgetPassword);
 router.post("/verify-otp", volunteerController.verifyForgotPasswordOTP);
 router.post("/reset-password",volunteerAuth, volunteerController.resetPassword);
@@ -50,6 +51,9 @@ router.post('/add-whatsapp-public',volunteerAuth,volunteerController.addWhatsApp
 router.get('/get-statics-of-voting-day',volunteerAuth,volunteerController.getStaticsOfVotingDay);
 
 router.post('/volunteer-upload-pdf',volunteerAuth,volunteerController.addJsonFromPdf);
+
+router.get('/get-statics-by-house',volunteerAuth,volunteerController.getStaticsByHouseName);
+router.post('/create-non-eligible-user',volunteerAuth,volunteerController.CreateNonEligibleUser);
 
 
 
