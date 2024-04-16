@@ -28,6 +28,7 @@ const NotificationList = require("../models/NotificationList");
 const serviceAccount = require("../firebase/firebase");
 const admin = require("firebase-admin");
 const Notification = require("../models/Notification");
+const Letter = require("../models/Letter");
 const { type } = require("os");
 const Blog = require("../models/Blog");
 const Calendar = require("../models/Calendar");
@@ -1996,6 +1997,39 @@ const deleteBlog = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
+const addletter = async (req, res) => {
+    try {
+        const {title , description , optional} = req.body
+        const letter = await Letter.create({
+            title,
+            description,
+            optional
+        })
+        await letter.save()
+        res.status(200).json({letter}) 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+    
+}
+const getletter = async (req, res) => {
+    try {
+        const letter = await Letter.find({})
+        res.status(200).json({letter}) 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
+
+const deleteletter = async (req, res) => {
+    try {
+        const letter = await Letter.findByIdAndDelete(req.params.id)
+        res.status(200).json({message:"letter deleted successfully", letter}) 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
     }
 }
 module.exports = {
@@ -2071,6 +2105,9 @@ module.exports = {
     deleteNotification,
     LoginFromDCCAdmin,
     getCasteV2,
-    addJsonFromPdf
+    addJsonFromPdf,
+    addletter,
+    getletter,
+    deleteletter,
 
 }
