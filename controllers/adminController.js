@@ -29,6 +29,8 @@ const serviceAccount = require("../firebase/firebase");
 const admin = require("firebase-admin");
 const Notification = require("../models/Notification");
 const { type } = require("os");
+const Blog = require("../models/Blog");
+const Calendar = require("../models/Calendar");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -1695,7 +1697,7 @@ const addDataFromJson = async (req, res) => {
         const { district, constituency, assembly, booth, caste, infavour, voterStatus } = req.body;
         const jsonData = JSON.parse(req.file.buffer.toString());
         jsonData.map(async (data) => {
-  
+
             const existingUser = await User.findOne({ voterId: data.voterId });
             if (!existingUser) {
                 User.create({
@@ -1885,8 +1887,8 @@ const getCasteV2 = async (req, res) => {
                 "RC",
                 "Latin",
             ],
-            
-        },{
+
+        }, {
 
             caste: "Others",
             caste_types: [
@@ -1934,6 +1936,63 @@ const addJsonFromPdf = async (req, res) => {
             }
         })
         res.status(200).json({ message: "Data added successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+const addCalendar = async (req, res) => {
+    try {
+        const { date, time, title, description, link } = req.body;
+        const calendar = await Calendar.create({ date, time, description, link, title, uploadedBy: "admin" });
+
+        res.status(200).json(calendar);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+const getCalendar = async (req, res) => {
+    try {
+        const {date}= req.query
+        let query = {
+
+            uploadedBy: "admin"
+        }
+        if(date){
+            query.date = date
+        }
+
+        const calendar = await Calendar.find(query).sort({ _id: -1 });
+        res.status(200).json(calendar);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+const deleteCalendar = async (req, res) => {
+    try {
+        const calendar = await Calendar.findByIdAndDelete(req.params.id);
+        res.status(200).json(calendar);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+const getBlog = async (req, res) => {
+    try {
+        const blog = await Blog.find();
+        res.status(200).json(blog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+const deleteBlog = async (req, res) => {
+    try {
+        const blog = await Blog.findByIdAndDelete(req.params.id);
+        res.status(200).json(blog);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
