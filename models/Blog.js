@@ -10,10 +10,10 @@ const blogSchema = new mongoose.Schema({
     link: {
         type: String,
     },
-    writter: {
+    uploadedBy: {
         type: String,
     },
-    
+
 }, {
     timestamps: true
 });
