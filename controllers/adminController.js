@@ -1998,6 +1998,7 @@ const deleteBlog = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: "Internal server error" });
     }
+}
 const addletter = async (req, res) => {
     try {
         const {title , description , optional} = req.body
