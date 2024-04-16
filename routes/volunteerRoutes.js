@@ -57,6 +57,7 @@ router.post('/create-non-eligible-user',volunteerAuth,volunteerController.Create
 
 
 router.get('/get-blog',volunteerAuth,volunteerController.getBlog);
+
 router.post('/add-blog',volunteerAuth,volunteerController.addBlog);
 router.delete('/delete-blog/:id',volunteerAuth,volunteerController.deleteBlog);
 

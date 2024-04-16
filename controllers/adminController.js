@@ -2006,6 +2006,15 @@ const getBlog = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+const getAllBlogs = async (req, res) => {
+    try {
+        const blog = await Blog.find({}).sort({ _id: -1 });
+        res.status(200).json(blog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
 const deleteBlog = async (req, res) => {
     try {
         const blog = await Blog.findByIdAndDelete(req.params.id);
@@ -2133,4 +2142,5 @@ module.exports = {
     getCalendar,
     deleteCalendar,
     addCalendar,
+    getAllBlogs
 }
