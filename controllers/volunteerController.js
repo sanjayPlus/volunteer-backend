@@ -1667,7 +1667,18 @@ const getBlog = async (req, res) => {
         res.status(500).json({ error: "internal server error" });
     }
 }
-
+const deleteBlog = async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id);
+        if(blog.uploadedBy == req.volunteer.id){
+            await Blog.findByIdAndDelete(req.params.id);
+        }
+        res.status(200).json(blog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
 module.exports = {
     register,
     addUser,
