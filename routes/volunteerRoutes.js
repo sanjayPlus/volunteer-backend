@@ -56,5 +56,14 @@ router.get('/get-statics-by-house',volunteerAuth,volunteerController.getStaticsB
 router.post('/create-non-eligible-user',volunteerAuth,volunteerController.CreateNonEligibleUser);
 
 
+router.get('/get-blog',volunteerAuth,volunteerController.getBlog);
+router.post('/add-blog',volunteerAuth,volunteerController.addBlog);
+router.delete('/delete-blog/:id',volunteerAuth,volunteerController.deleteBlog);
+
+router.get('/get-calendar',volunteerAuth,volunteerController.getCalendar);
+router.post('/add-calendar',volunteerAuth,volunteerController.addCalendar);
+router.delete('/delete-calendar/:id',volunteerAuth,volunteerController.deleteCalendar);
+
+
 
 module.exports = router;
