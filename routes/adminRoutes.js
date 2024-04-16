@@ -273,5 +273,7 @@ router.post('/letter',adminAuth,adminController.addletter);
 router.get('/letter',adminController.getletter);
 router.delete('/letter/:id',adminAuth,adminController.deleteletter);
 
+router.get('/get-mal-date',adminController.getMalDate);
+
 
 module.exports = router;

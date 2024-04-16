@@ -33,6 +33,7 @@ const { type } = require("os");
 const Blog = require("../models/Blog");
 const Calendar = require("../models/Calendar");
 
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // Replace with your Firebase project config
@@ -2059,6 +2060,21 @@ const deleteletter = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
+const getMalDate = async (req, res) => {
+    try{
+        //send json file inside helpers folder
+            fs.readFile('./helpers/date.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+                res.status(200).json(JSON.parse(data))
+            })
+    }catch(error){
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }   
+}
 module.exports = {
     Login,
     Protected,
@@ -2142,5 +2158,6 @@ module.exports = {
     getCalendar,
     deleteCalendar,
     addCalendar,
-    getAllBlogs
+    getAllBlogs,
+    getMalDate
 }
