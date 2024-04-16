@@ -18,6 +18,7 @@ const Notification = require("../models/Notification");
 const { createCanvas, loadImage } = require('canvas');
 const WhatsAppPublic = require("../models/WhatsAppPublic");
 const Blog = require("../models/Blog");
+const Calendar = require("../models/Calendar");
 
 const register = async (req, res) => {
     try {
@@ -1679,6 +1680,38 @@ const deleteBlog = async (req, res) => {
         res.status(500).json({ error: "internal server error" });
     }
 }
+const addCalendar = async (req, res) => {
+    try {
+        const { date, time, title, description, link } = req.body;
+        const calendar = await Calendar.create({ date, time, description, link, title, uploadedBy: req.volunteer.id });
+        res.status(200).json(calendar);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
+
+const getCalendar = async (req, res) => {
+    try {
+        const calendar = await Calendar.find({ uploadedBy: req.volunteer.id }).sort({ _id: -1 });
+        res.status(200).json(calendar);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
+const deleteCalendar = async (req, res) => {
+    try {
+        const calendar = await Calendar.findById(req.params.id);
+        if(calendar.uploadedBy == req.volunteer.id){
+            await Calendar.findByIdAndDelete(req.params.id);
+        }
+        res.status(200).json(calendar);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
 module.exports = {
     register,
     addUser,
@@ -1716,6 +1749,11 @@ module.exports = {
     getPollingPartyByVolunteer,
     getStaticsOfVotingDay,
     addJsonFromPdf,
-    getStaticsByHouseName
-
+    getStaticsByHouseName,
+    addBlog,
+    getBlog,
+    deleteBlog,
+    addCalendar,
+    getCalendar,
+    deleteCalendar
 }
