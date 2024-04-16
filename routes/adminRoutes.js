@@ -261,7 +261,16 @@ router.get('/get-caste-v2',adminController.getCasteV2);
 router.post('/admin-upload-pdf',adminAuth,adminController.addJsonFromPdf);
 
 router.get('/get-calendar',adminController.getCalendar);
+router.post('/add-calendar',adminAuth,adminController.addCalendar);
+router.delete('/delete-calendar/:id',adminAuth,adminController.deleteCalendar);
+
+router.get('/get-blog',adminController.getBlog);
+router.post('/add-blog',adminAuth,adminController.addBlog);
+router.delete('/delete-blog/:id',adminAuth,adminController.deleteBlog);
+
 router.post('/letter',adminAuth,adminController.addletter);
 router.get('/letter',adminController.getletter);
 router.delete('/letter/:id',adminAuth,adminController.deleteletter);
+
+
 module.exports = router;

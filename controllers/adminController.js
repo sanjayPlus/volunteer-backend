@@ -1981,9 +1981,25 @@ const deleteCalendar = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+const addBlog = async (req, res) => {
+    try {
+        const {title , description , optional} = req.body
+        const blog = await Blog.create({
+            title,
+            description,
+            optional,
+            uploadedBy: "admin"
+        })
+        await blog.save()
+        res.status(200).json({blog}) 
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
 const getBlog = async (req, res) => {
     try {
-        const blog = await Blog.find();
+        const blog = await Blog.find({uploadedBy: "admin"}).sort({ _id: -1 });
         res.status(200).json(blog);
     } catch (error) {
         console.error(error);
@@ -2111,5 +2127,10 @@ module.exports = {
     addletter,
     getletter,
     deleteletter,
-
+    addBlog,
+    getBlog,
+    deleteBlog,
+    getCalendar,
+    deleteCalendar,
+    addCalendar,
 }

@@ -17,6 +17,7 @@ var ml2en = require('ml2en');
 const Notification = require("../models/Notification");
 const { createCanvas, loadImage } = require('canvas');
 const WhatsAppPublic = require("../models/WhatsAppPublic");
+const Blog = require("../models/Blog");
 
 const register = async (req, res) => {
     try {
@@ -1647,6 +1648,26 @@ const getStaticsByHouseName = async (req, res) => {
 
     }
 }
+const addBlog = async (req, res) => {
+    try {
+        const { title, description, link } = req.body;
+        const blog = await Blog.create({ title, description, link, uploadedBy: req.volunteer.id });
+        res.status(200).json(blog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
+const getBlog = async (req, res) => {
+    try {
+        const blog = await Blog.find({ uploadedBy: req.volunteer.id }).sort({ _id: -1 });
+        res.status(200).json(blog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "internal server error" });
+    }
+}
+
 module.exports = {
     register,
     addUser,
