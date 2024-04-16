@@ -1983,11 +1983,11 @@ const deleteCalendar = async (req, res) => {
 }
 const addBlog = async (req, res) => {
     try {
-        const {title , description , optional} = req.body
+        const {title , description , link} = req.body
         const blog = await Blog.create({
             title,
             description,
-            optional,
+            link,
             uploadedBy: "admin"
         })
         await blog.save()
