@@ -1691,13 +1691,23 @@ const addCalendar = async (req, res) => {
     }
 }
 
+
 const getCalendar = async (req, res) => {
     try {
-        const calendar = await Calendar.find({ uploadedBy: req.volunteer.id }).sort({ _id: -1 });
+        const {date}= req.query
+        let query = {
+
+            uploadedBy: req.volunteer.id
+        }
+        if(date){
+            query.date = date
+        }
+
+        const calendar = await Calendar.find(query).sort({ _id: -1 });
         res.status(200).json(calendar);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "internal server error" });
+        res.status(500).json({ error: "Internal server error" });
     }
 }
 const deleteCalendar = async (req, res) => {
