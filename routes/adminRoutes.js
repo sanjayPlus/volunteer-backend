@@ -266,12 +266,15 @@ router.post('/add-calendar',adminAuth,adminController.addCalendar);
 router.delete('/delete-calendar/:id',adminAuth,adminController.deleteCalendar);
 
 router.get('/get-blog',adminController.getBlog);
+router.get('/get-all-blogs',adminController.getAllBlogs);
 router.post('/add-blog',adminAuth,adminController.addBlog);
 router.delete('/delete-blog/:id',adminAuth,adminController.deleteBlog);
 
 router.post('/letter',adminAuth,adminController.addletter);
 router.get('/letter',adminController.getletter);
 router.delete('/letter/:id',adminAuth,adminController.deleteletter);
+
+router.get('/get-mal-date',adminController.getMalDate);
 
 
 module.exports = router;

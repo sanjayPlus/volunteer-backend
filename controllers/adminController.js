@@ -33,6 +33,7 @@ const { type } = require("os");
 const Blog = require("../models/Blog");
 const Calendar = require("../models/Calendar");
 
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // Replace with your Firebase project config
@@ -2052,6 +2053,15 @@ const getBlog = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+const getAllBlogs = async (req, res) => {
+    try {
+        const blog = await Blog.find({}).sort({ _id: -1 });
+        res.status(200).json(blog);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
 const deleteBlog = async (req, res) => {
     try {
         const blog = await Blog.findByIdAndDelete(req.params.id);
@@ -2095,6 +2105,21 @@ const deleteletter = async (req, res) => {
         console.error(error.message);
         res.status(500).json({ error: "internal server error" })
     }
+}
+const getMalDate = async (req, res) => {
+    try{
+        //send json file inside helpers folder
+            fs.readFile('./helpers/date.json', 'utf8', (err, data) => {
+                if (err) {
+                    console.error(err)
+                    return
+                }
+                res.status(200).json(JSON.parse(data))
+            })
+    }catch(error){
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }   
 }
 module.exports = {
     Login,
@@ -2180,4 +2205,6 @@ module.exports = {
     getCalendar,
     deleteCalendar,
     addCalendar,
+    getAllBlogs,
+    getMalDate
 }
