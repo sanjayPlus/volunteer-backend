@@ -57,6 +57,9 @@ const HistorySchema = new mongoose.Schema({
         type: String
     },constituency: {
         type: String
+    },
+    uploadedBy: {
+        type: String
     }
 });
 

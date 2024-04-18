@@ -1712,6 +1712,80 @@ const deleteCalendar = async (req, res) => {
         res.status(500).json({ error: "internal server error" });
     }
 }
+
+const addHistory = async (req, res) => {
+    try {
+        const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters, district, loksabha, assembly, constituency, booth } = req.body;
+        const history = await History.create({
+            title,
+            description,
+            link,
+            optional,
+            year,
+            party,
+            election_type,
+            no_of_votes,
+            no_of_voters,
+            district,
+            loksabha,
+            assembly,
+            constituency,
+            booth,
+            uploadedBy: req.volunteer.id
+        })
+        await history.save();
+        res.status(200).json({ message: "History added successfully", history });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
+const getHistory = async (req, res) => {
+    try {
+        const { district, loksabha, assembly, constituency, booth } = req.query
+        let query = {};
+        if (district) {
+            query.district = district
+        }
+        if (loksabha) {
+            query.loksabha = loksabha
+        }
+        if (assembly) {
+            query.assembly = assembly
+        }
+        if (constituency) {
+            query.constituency = constituency
+        }
+        if (booth) {
+            query.booth = booth
+        }
+        query.uploadedBy = req.volunteer.id
+        const history = await History.find(query);
+        res.status(200).json({ history });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
+const deleteHistory = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const history = await History.findById(id);
+        if (!history) {
+            return res.status(404).json({ message: "History not found" });
+        }
+        if(history.uploadedBy !== req.volunteer.id){
+            return res.status(404).json({ message: "History not found" });
+        }
+        await History.deleteOne({ _id: id });
+        res.status(200).json({ message: "History deleted successfully" });
+    } catch {
+        console.error("Error deleting :", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+
 module.exports = {
     register,
     addUser,
@@ -1755,5 +1829,8 @@ module.exports = {
     deleteBlog,
     addCalendar,
     getCalendar,
-    deleteCalendar
+    deleteCalendar,
+    addHistory,
+    getHistory,
+    deleteHistory
 }

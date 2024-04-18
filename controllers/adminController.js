@@ -1320,7 +1320,8 @@ const addHistory = async (req, res) => {
             loksabha,
             assembly,
             constituency,
-            booth
+            booth,
+            uploadedBy: "admin"
         })
         await history.save();
         res.status(200).json({ message: "History added successfully", history });
@@ -1348,6 +1349,7 @@ const getHistory = async (req, res) => {
         if (booth) {
             query.booth = booth
         }
+        query.uploadedBy = "admin"
         const history = await History.find(query);
         res.status(200).json({ history });
     } catch (error) {

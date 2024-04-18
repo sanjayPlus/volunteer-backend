@@ -65,6 +65,9 @@ router.get('/get-calendar',volunteerAuth,volunteerController.getCalendar);
 router.post('/add-calendar',volunteerAuth,volunteerController.addCalendar);
 router.delete('/delete-calendar/:id',volunteerAuth,volunteerController.deleteCalendar);
 
+router.post('/add-history',volunteerAuth,volunteerController.addHistory);
+router.get('/get-history',volunteerAuth,volunteerController.getHistory);
+router.post('/delete-history',volunteerAuth,volunteerController.deleteHistory);
 
 
 module.exports = router;
