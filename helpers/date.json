@@ -489,7 +489,7 @@
                     "tithi": 8
                 },
                 {
-                    "holiday":"sunday",
+                    "holiday":true,
                     "year": 2024,
                     "month": "February",
                     "mlMonth": "ഫെബ്രുവരി",
