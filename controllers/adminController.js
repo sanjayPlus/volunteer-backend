@@ -1465,6 +1465,52 @@ const deletePolingParty = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+
+const UpdatePolling = async (req, res) => {
+    try {
+        const polling = await VotePolling.findById(req.params.id);
+        const{ district, assembly, constituency, booth, name, party, optional, loksabha, symbol} = req.body
+        const imObj = req.file;
+        if (district) {
+            polling.district = district
+        }
+        
+        if (assembly) {
+            polling.assembly = assembly
+        }
+        if (constituency) {
+            polling.constituency = constituency
+        }
+        if (booth) {
+            polling.booth = booth
+        }
+        if (name) {
+            polling.name = name
+        }
+        if(party){
+            polling.party = party
+        }
+        if(optional){
+            polling.optional = optional
+        }
+        if(loksabha){
+            polling.loksabha = loksabha
+        }
+        if(symbol){
+            polling.symbol = symbol
+        }
+        if (imObj) {
+            polling.image = `${process.env.DOMAIN}/PolingImage/${imObj.filename}`
+        }
+        
+
+        await polling.save();
+        res.status(200).json({ "updated": polling });
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
 const getStaticsOfPolling = async (req, res) => {
     try {
         const { district, assembly, constituency, booth } = req.query;
@@ -2138,6 +2184,7 @@ module.exports = {
     getPolingParty,
     addPolingParty,
     deletePolingParty,
+    UpdatePolling,
     getStaticsOfPolling,
     addWhatsAppPublic,
     getWhatsAppPublic,

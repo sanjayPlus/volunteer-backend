@@ -239,6 +239,7 @@ router.delete('/ads/:id',adminAuth,adminController.deleteAds);
 router.post('/add-poling-party',adminAuth,PolingImage.single('image'),adminController.addPolingParty);
 router.get('/poling-party',adminController.getPolingParty);
 router.delete('/poling-party/:id',adminAuth,adminController.deletePolingParty);
+router.put('/update-polling/:id',adminAuth,PolingImage.single('image'),adminController.UpdatePolling);
 
 router.get('/get-statistics-polling-party',adminAuth,adminController.getStaticsOfPolling);
 
