@@ -1726,7 +1726,7 @@ const deleteCalendar = async (req, res) => {
 const addHistory = async (req, res) => {
     try {
         const { title, description, link, optional, year, party, election_type, no_of_votes, no_of_voters, district, loksabha, assembly, constituency, booth } = req.body;
-        const history = await History.create({
+        const addhistory = await History.create({
             title,
             description,
             link,
@@ -1743,8 +1743,8 @@ const addHistory = async (req, res) => {
             booth,
             uploadedBy: req.volunteer.id
         })
-        await history.save();
-        res.status(200).json({ message: "History added successfully", history });
+        await addhistory.save();
+        res.status(200).json({ message: "History added successfully", addhistory });
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ error: "internal server error" })
