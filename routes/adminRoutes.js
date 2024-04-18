@@ -242,6 +242,7 @@ router.delete('/poling-party/:id',adminAuth,adminController.deletePolingParty);
 router.put('/update-polling/:id',adminAuth,PolingImage.single('image'),adminController.UpdatePolling);
 
 router.get('/get-statistics-polling-party',adminAuth,adminController.getStaticsOfPolling);
+router.get('/get-single-poll/:id',adminAuth,adminController.getSinglePoll);
 
 router.post('/add-whatsapp-public',adminAuth,adminController.addWhatsAppPublic);
 router.get('/whatsapp-public',adminController.getWhatsAppPublic);

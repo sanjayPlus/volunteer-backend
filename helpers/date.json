@@ -14,13 +14,15 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 17,
+                    "malayalamDay": 16,
                     "naksatra": "മകം",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
+
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Mannam Jayanthi",
                     "year": 2024,
                     "month": "January",
                     "mlMonth": "ജനുവരി",
@@ -28,7 +30,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 18,
+                    "malayalamDay": 17,
                     "naksatra": "പൂരം",
                     "paksa": "Krsnapaksa",
                     "tithi": 6
@@ -42,7 +44,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 19,
+                    "malayalamDay": 18,
                     "naksatra": "ഉത്രം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
@@ -56,7 +58,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 20,
+                    "malayalamDay": 19,
                     "naksatra": "അത്തം",
                     "paksa": "Krsnapaksa",
                     "tithi": 8
@@ -70,7 +72,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 21,
+                    "malayalamDay": 20,
                     "naksatra": "ചിത്ര",
                     "paksa": "Krsnapaksa",
                     "tithi": 9
@@ -84,13 +86,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 22,
+                    "malayalamDay": 21,
                     "naksatra": "ചോതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "January",
                     "mlMonth": "ജനുവരി",
@@ -98,7 +100,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 23,
+                    "malayalamDay": 22,
                     "naksatra": "വിശാഖം",
                     "paksa": "Krsnapaksa",
                     "tithi": 11
@@ -112,7 +114,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 24,
+                    "malayalamDay": 23,
                     "naksatra": "അനിഴം",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
@@ -126,7 +128,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 25,
+                    "malayalamDay": 24,
                     "naksatra": "തൃക്കേട്ട",
                     "paksa": "Krsnapaksa",
                     "tithi": 13
@@ -140,7 +142,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 26,
+                    "malayalamDay": 25,
                     "naksatra": "മൂലം",
                     "paksa": "Krsnapaksa",
                     "tithi": 14
@@ -154,7 +156,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 27,
+                    "malayalamDay": 26,
                     "naksatra": "പൂരാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 15
@@ -168,7 +170,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 28,
+                    "malayalamDay": 27,
                     "naksatra": "ഉത്രാടം",
                     "paksa": "Suklapaksa",
                     "tithi": 1
@@ -182,13 +184,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 29,
+                    "malayalamDay": 28,
                     "naksatra": "തിരുവോണം",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "January",
                     "mlMonth": "ജനുവരി",
@@ -196,7 +198,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ധനു",
-                    "malayalamDay": 30,
+                    "malayalamDay": 29,
                     "naksatra": "അവിട്ടം",
                     "paksa": "Suklapaksa",
                     "tithi": 3
@@ -225,7 +227,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 2,
-                    "naksatra": "പൂരുരുട്ടാതി",
+                    "naksatra": "ഉത്രട്ടാതി",
                     "paksa": "Suklapaksa",
                     "tithi": 5
                 },
@@ -239,7 +241,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 3,
-                    "naksatra": "ഉത്രട്ടാതി",
+                    "naksatra": "രേവതി",
                     "paksa": "Suklapaksa",
                     "tithi": 7
                 },
@@ -253,7 +255,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 4,
-                    "naksatra": "രേവതി",
+                    "naksatra": "അശ്വതി",
                     "paksa": "Suklapaksa",
                     "tithi": 8
                 },
@@ -267,7 +269,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 5,
-                    "naksatra": "അശ്വതി",
+                    "naksatra": "ഭരണി",
                     "paksa": "Suklapaksa",
                     "tithi": 9
                 },
@@ -281,12 +283,12 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 6,
-                    "naksatra": "ഭരണി",
+                    "naksatra": "കാർത്തിക",
                     "paksa": "Suklapaksa",
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "January",
                     "mlMonth": "ജനുവരി",
@@ -295,7 +297,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 7,
-                    "naksatra": "കാർത്തിക",
+                    "naksatra": "രോഹിണി",
                     "paksa": "Suklapaksa",
                     "tithi": 11
                 },
@@ -309,7 +311,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 8,
-                    "naksatra": "രോഹിണി",
+                    "naksatra": "മകയിരം",
                     "paksa": "Suklapaksa",
                     "tithi": 12
                 },
@@ -323,7 +325,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 9,
-                    "naksatra": "മകയിരം",
+                    "naksatra": "തിരുവാതിര",
                     "paksa": "Suklapaksa",
                     "tithi": 13
                 },
@@ -337,7 +339,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 10,
-                    "naksatra": "തിരുവാതിര",
+                    "naksatra": "പുണർതം",
                     "paksa": "Suklapaksa",
                     "tithi": 14
                 },
@@ -356,7 +358,8 @@
                     "tithi": 0
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Republic Day" ,   
                     "year": 2024,
                     "month": "January",
                     "mlMonth": "ജനുവരി",
@@ -384,7 +387,7 @@
                     "tithi": 2
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "January",
                     "mlMonth": "ജനുവരി",
@@ -487,7 +490,7 @@
                     "tithi": 8
                 },
                 {
-                    "holiday":false,
+                    "holiday":"sunday",
                     "year": 2024,
                     "month": "February",
                     "mlMonth": "ഫെബ്രുവരി",
@@ -538,7 +541,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 24,
-                    "naksatra": "മൂലം",
+                    "naksatra": "പൂരാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
                 },
@@ -552,7 +555,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 25,
-                    "naksatra": "പൂരാടം",
+                    "naksatra": "ഉത്രാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 13
                 },
@@ -566,7 +569,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മകരം",
                     "malayalamDay": 26,
-                    "naksatra": "ഉത്രാടം",
+                    "naksatra": "തിരുവോണം",
                     "paksa": "Krsnapaksa",
                     "tithi": 14
                 },
@@ -585,7 +588,7 @@
                     "tithi": 1
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "February",
                     "mlMonth": "ഫെബ്രുവരി",
@@ -620,8 +623,8 @@
                     "date": 13,
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
-                    "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 1,
+                    "malayalamMonth": "മകരം",
+                    "malayalamDay": 30,
                     "naksatra": "ഉത്രട്ടാതി",
                     "paksa": "Suklapaksa",
                     "tithi": 4
@@ -635,7 +638,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 2,
+                    "malayalamDay": 1,
                     "naksatra": "രേവതി",
                     "paksa": "Suklapaksa",
                     "tithi": 5
@@ -649,7 +652,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 3,
+                    "malayalamDay": 2,
                     "naksatra": "അശ്വതി",
                     "paksa": "Suklapaksa",
                     "tithi": 6
@@ -663,7 +666,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 4,
+                    "malayalamDay": 3,
                     "naksatra": "ഭരണി",
                     "paksa": "Suklapaksa",
                     "tithi": 7
@@ -677,13 +680,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 5,
+                    "malayalamDay": 4,
                     "naksatra": "കാർത്തിക",
                     "paksa": "Suklapaksa",
                     "tithi": 8
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "February",
                     "mlMonth": "ഫെബ്രുവരി",
@@ -691,7 +694,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 6,
+                    "malayalamDay": 5,
                     "naksatra": "രോഹിണി",
                     "paksa": "Suklapaksa",
                     "tithi": 9
@@ -705,7 +708,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 7,
+                    "malayalamDay": 6,
                     "naksatra": "മകയിരം",
                     "paksa": "Suklapaksa",
                     "tithi": 10
@@ -719,7 +722,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 8,
+                    "malayalamDay": 7,
                     "naksatra": "തിരുവാതിര",
                     "paksa": "Suklapaksa",
                     "tithi": 11
@@ -733,7 +736,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 9,
+                    "malayalamDay": 8,
                     "naksatra": "പുണർതം",
                     "paksa": "Suklapaksa",
                     "tithi": 12
@@ -747,7 +750,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 10,
+                    "malayalamDay": 9,
                     "naksatra": "പൂയം",
                     "paksa": "Suklapaksa",
                     "tithi": 13
@@ -761,7 +764,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 11,
+                    "malayalamDay": 10,
                     "naksatra": "ആയില്യം",
                     "paksa": "Suklapaksa",
                     "tithi": 14
@@ -775,13 +778,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 12,
+                    "malayalamDay": 11,
                     "naksatra": "മകം",
                     "paksa": "Krsnapaksa",
                     "tithi": 0
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "February",
                     "mlMonth": "ഫെബ്രുവരി",
@@ -789,7 +792,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 13,
+                    "malayalamDay": 12,
                     "naksatra": "പൂരം",
                     "paksa": "Krsnapaksa",
                     "tithi": 1
@@ -803,7 +806,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 14,
+                    "malayalamDay": 13,
                     "naksatra": "ഉത്രം",
                     "paksa": "Krsnapaksa",
                     "tithi": 2
@@ -817,7 +820,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 15,
+                    "malayalamDay": 14,
                     "naksatra": "അത്തം",
                     "paksa": "Krsnapaksa",
                     "tithi": 3
@@ -831,7 +834,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 16,
+                    "malayalamDay": 15,
                     "naksatra": "അത്തം",
                     "paksa": "Krsnapaksa",
                     "tithi": 4
@@ -845,7 +848,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 17,
+                    "malayalamDay": 16,
                     "naksatra": "ചിത്ര",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
@@ -864,7 +867,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 18,
+                    "malayalamDay": 17,
                     "naksatra": "ചോതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 6
@@ -878,13 +881,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 19,
+                    "malayalamDay": 18,
                     "naksatra": "വിശാഖം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -892,7 +895,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 20,
+                    "malayalamDay": 19,
                     "naksatra": "അനിഴം",
                     "paksa": "Krsnapaksa",
                     "tithi": 8
@@ -906,7 +909,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 21,
+                    "malayalamDay": 20,
                     "naksatra": "തൃക്കേട്ട",
                     "paksa": "Krsnapaksa",
                     "tithi": 9
@@ -920,7 +923,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 22,
+                    "malayalamDay": 21,
                     "naksatra": "മൂലം",
                     "paksa": "Krsnapaksa",
                     "tithi": 10
@@ -934,7 +937,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 23,
+                    "malayalamDay": 22,
                     "naksatra": "പൂരാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 11
@@ -948,13 +951,14 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 24,
+                    "malayalamDay": 23,
                     "naksatra": "ഉത്രാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Shivaratri",
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -962,7 +966,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 25,
+                    "malayalamDay": 24,
                     "naksatra": "തിരുവോണം",
                     "paksa": "Krsnapaksa",
                     "tithi": 13
@@ -976,13 +980,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 26,
+                    "malayalamDay": 25,
                     "naksatra": "അവിട്ടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 14
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -990,8 +994,8 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 27,
-                    "naksatra": "ചതയം",
+                    "malayalamDay": 26,
+                    "naksatra": "പൂരുരുട്ടാതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 15
                 },
@@ -1004,8 +1008,8 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 28,
-                    "naksatra": "പൂരുരുട്ടാതി",
+                    "malayalamDay": 27,
+                    "naksatra": "ഉത്രട്ടാതി",
                     "paksa": "Suklapaksa",
                     "tithi": 1
                 },
@@ -1018,8 +1022,8 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 29,
-                    "naksatra": "ഉത്രട്ടാതി",
+                    "malayalamDay": 28,
+                    "naksatra": "രേവതി",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
@@ -1032,8 +1036,8 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "കുംഭം",
-                    "malayalamDay": 30,
-                    "naksatra": "രേവതി",
+                    "malayalamDay": 29,
+                    "naksatra": "അശ്വതി",
                     "paksa": "Suklapaksa",
                     "tithi": 3
                 },
@@ -1080,7 +1084,7 @@
                     "tithi": 7
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -1159,7 +1163,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മീനം",
                     "malayalamDay": 9,
-                    "naksatra": "ആയില്യം",
+                    "naksatra": "മകം",
                     "paksa": "Suklapaksa",
                     "tithi": 13
                 },
@@ -1173,12 +1177,12 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മീനം",
                     "malayalamDay": 10,
-                    "naksatra": "മകം",
+                    "naksatra": "പൂരം",
                     "paksa": "Suklapaksa",
                     "tithi": 14
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -1234,7 +1238,8 @@
                     "tithi": 2
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Maundy Thursday",
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -1248,7 +1253,8 @@
                     "tithi": 3
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Good Friday",
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -1276,7 +1282,8 @@
                     "tithi": 5
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Easter",
                     "year": 2024,
                     "month": "March",
                     "mlMonth": "മാർച്ച്‌",
@@ -1379,7 +1386,7 @@
                     "tithi": 12
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "April",
                     "mlMonth": "ഏപ്രിൽ ",
@@ -1421,7 +1428,8 @@
                     "tithi": 1
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Eid ul Fitr",
                     "year": 2024,
                     "month": "April",
                     "mlMonth": "ഏപ്രിൽ ",
@@ -1430,7 +1438,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മീനം",
                     "malayalamDay": 28,
-                    "naksatra": "അശ്വതി",
+                    "naksatra": "ഭരണി",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
@@ -1444,7 +1452,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മീനം",
                     "malayalamDay": 29,
-                    "naksatra": "ഭരണി",
+                    "naksatra": "കാർത്തിക",
                     "paksa": "Suklapaksa",
                     "tithi": 3
                 },
@@ -1458,7 +1466,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മീനം",
                     "malayalamDay": 30,
-                    "naksatra": "കാർത്തിക",
+                    "naksatra": "രോഹിണി",
                     "paksa": "Suklapaksa",
                     "tithi": 4
                 },
@@ -1470,14 +1478,15 @@
                     "date": 13,
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
-                    "malayalamMonth": "മേടം",
-                    "malayalamDay": 1,
-                    "naksatra": "രോഹിണി",
+                    "malayalamMonth": "മീനം",
+                    "malayalamDay": 31,
+                    "naksatra": "മകയിരം",
                     "paksa": "Suklapaksa",
                     "tithi": 5
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Ambedkar's Birthday, Vishu",
                     "year": 2024,
                     "month": "April",
                     "mlMonth": "ഏപ്രിൽ ",
@@ -1485,8 +1494,8 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 2,
-                    "naksatra": "മകയിരം",
+                    "malayalamDay": 1,
+                    "naksatra": "തിരുവാതിര",
                     "paksa": "Suklapaksa",
                     "tithi": 6
                 },
@@ -1499,8 +1508,8 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 3,
-                    "naksatra": "തിരുവാതിര",
+                    "malayalamDay": 2,
+                    "naksatra": "പുണർതം",
                     "paksa": "Suklapaksa",
                     "tithi": 7
                 },
@@ -1513,8 +1522,8 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 4,
-                    "naksatra": "പുണർതം",
+                    "malayalamDay": 3,
+                    "naksatra": "പൂയം",
                     "paksa": "Suklapaksa",
                     "tithi": 8
                 },
@@ -1527,8 +1536,8 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 5,
-                    "naksatra": "പൂയം",
+                    "malayalamDay": 4,
+                    "naksatra": "ആയില്യം",
                     "paksa": "Suklapaksa",
                     "tithi": 9
                 },
@@ -1541,7 +1550,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 6,
+                    "malayalamDay": 5,
                     "naksatra": "ആയില്യം",
                     "paksa": "Suklapaksa",
                     "tithi": 10
@@ -1555,7 +1564,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 7,
+                    "malayalamDay": 6,
                     "naksatra": "മകം",
                     "paksa": "Suklapaksa",
                     "tithi": 11
@@ -1569,13 +1578,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 8,
+                    "malayalamDay": 7,
                     "naksatra": "പൂരം",
                     "paksa": "Suklapaksa",
                     "tithi": 12
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "April",
                     "mlMonth": "ഏപ്രിൽ ",
@@ -1583,7 +1592,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 9,
+                    "malayalamDay": 8,
                     "naksatra": "ഉത്രം",
                     "paksa": "Suklapaksa",
                     "tithi": 13
@@ -1597,7 +1606,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 10,
+                    "malayalamDay": 9,
                     "naksatra": "അത്തം",
                     "paksa": "Suklapaksa",
                     "tithi": 14
@@ -1611,7 +1620,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 11,
+                    "malayalamDay": 10,
                     "naksatra": "ചിത്ര",
                     "paksa": "Krsnapaksa",
                     "tithi": 0
@@ -1625,7 +1634,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 12,
+                    "malayalamDay": 11,
                     "naksatra": "ചോതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 1
@@ -1639,7 +1648,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 13,
+                    "malayalamDay": 12,
                     "naksatra": "വിശാഖം",
                     "paksa": "Krsnapaksa",
                     "tithi": 2
@@ -1653,7 +1662,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 14,
+                    "malayalamDay": 13,
                     "naksatra": "അനിഴം",
                     "paksa": "Krsnapaksa",
                     "tithi": 3
@@ -1667,13 +1676,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 15,
-                    "naksatra": "അനിഴം",
+                    "malayalamDay": 14,
+                    "naksatra": "തൃക്കേട്ട",
                     "paksa": "Krsnapaksa",
                     "tithi": 4
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "April",
                     "mlMonth": "ഏപ്രിൽ ",
@@ -1681,8 +1690,8 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 16,
-                    "naksatra": "തൃക്കേട്ട",
+                    "malayalamDay": 15,
+                    "naksatra": "മൂലം",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
                 },
@@ -1695,8 +1704,8 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 17,
-                    "naksatra": "മൂലം",
+                    "malayalamDay": 16,
+                    "naksatra": "പൂരാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 6
                 },
@@ -1709,8 +1718,8 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 18,
-                    "naksatra": "പൂരാടം",
+                    "malayalamDay": 17,
+                    "naksatra": "ഉത്രാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
                 }
@@ -1720,7 +1729,8 @@
             "name": "May",
             "days": [
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"May Day",
                     "year": 2024,
                     "month": "May",
                     "mlMonth": "മെയ്‌",
@@ -1728,8 +1738,8 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 19,
-                    "naksatra": "ഉത്രാടം",
+                    "malayalamDay": 18,
+                    "naksatra": "തിരുവോണം",
                     "paksa": "Krsnapaksa",
                     "tithi": 8
                 },
@@ -1742,8 +1752,8 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 20,
-                    "naksatra": "തിരുവോണം",
+                    "malayalamDay": 19,
+                    "naksatra": "അവിട്ടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 9
                 },
@@ -1756,7 +1766,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 21,
+                    "malayalamDay": 20,
                     "naksatra": "ചതയം",
                     "paksa": "Krsnapaksa",
                     "tithi": 10
@@ -1770,13 +1780,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 22,
+                    "malayalamDay": 21,
                     "naksatra": "പൂരുരുട്ടാതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 11
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "May",
                     "mlMonth": "മെയ്‌",
@@ -1784,7 +1794,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 23,
+                    "malayalamDay": 22,
                     "naksatra": "ഉത്രട്ടാതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
@@ -1798,7 +1808,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 24,
+                    "malayalamDay": 23,
                     "naksatra": "രേവതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 13
@@ -1812,7 +1822,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 25,
+                    "malayalamDay": 24,
                     "naksatra": "അശ്വതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 14
@@ -1826,7 +1836,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 26,
+                    "malayalamDay": 25,
                     "naksatra": "ഭരണി",
                     "paksa": "Krsnapaksa",
                     "tithi": 15
@@ -1840,7 +1850,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 27,
+                    "malayalamDay": 26,
                     "naksatra": "കാർത്തിക",
                     "paksa": "Suklapaksa",
                     "tithi": 1
@@ -1854,7 +1864,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 28,
+                    "malayalamDay": 27,
                     "naksatra": "രോഹിണി",
                     "paksa": "Suklapaksa",
                     "tithi": 3
@@ -1868,13 +1878,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 29,
+                    "malayalamDay": 28,
                     "naksatra": "മകയിരം",
                     "paksa": "Suklapaksa",
                     "tithi": 4
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "May",
                     "mlMonth": "മെയ്‌",
@@ -1882,7 +1892,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 30,
+                    "malayalamDay": 29,
                     "naksatra": "തിരുവാതിര",
                     "paksa": "Suklapaksa",
                     "tithi": 5
@@ -1896,7 +1906,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "മേടം",
-                    "malayalamDay": 31,
+                    "malayalamDay": 30,
                     "naksatra": "പുണർതം",
                     "paksa": "Suklapaksa",
                     "tithi": 6
@@ -1909,8 +1919,8 @@
                     "date": 14,
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
-                    "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 1,
+                    "malayalamMonth": "മേടം",
+                    "malayalamDay": 31,
                     "naksatra": "പൂയം",
                     "paksa": "Suklapaksa",
                     "tithi": 7
@@ -1924,7 +1934,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 2,
+                    "malayalamDay": 1,
                     "naksatra": "ആയില്യം",
                     "paksa": "Suklapaksa",
                     "tithi": 8
@@ -1938,7 +1948,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 3,
+                    "malayalamDay": 2,
                     "naksatra": "മകം",
                     "paksa": "Suklapaksa",
                     "tithi": 9
@@ -1952,7 +1962,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 4,
+                    "malayalamDay": 3,
                     "naksatra": "പൂരം",
                     "paksa": "Suklapaksa",
                     "tithi": 9
@@ -1966,13 +1976,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 5,
+                    "malayalamDay": 4,
                     "naksatra": "ഉത്രം",
                     "paksa": "Suklapaksa",
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "May",
                     "mlMonth": "മെയ്‌",
@@ -1980,7 +1990,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 6,
+                    "malayalamDay": 5,
                     "naksatra": "അത്തം",
                     "paksa": "Suklapaksa",
                     "tithi": 11
@@ -1994,8 +2004,8 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 7,
-                    "naksatra": "അത്തം",
+                    "malayalamDay": 6,
+                    "naksatra": "ചിത്ര",
                     "paksa": "Suklapaksa",
                     "tithi": 12
                 },
@@ -2008,8 +2018,8 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 8,
-                    "naksatra": "ചിത്ര",
+                    "malayalamDay": 7,
+                    "naksatra": "ചോതി",
                     "paksa": "Suklapaksa",
                     "tithi": 13
                 },
@@ -2022,7 +2032,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 9,
+                    "malayalamDay": 8,
                     "naksatra": "ചോതി",
                     "paksa": "Suklapaksa",
                     "tithi": 14
@@ -2036,7 +2046,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 10,
+                    "malayalamDay": 9,
                     "naksatra": "വിശാഖം",
                     "paksa": "Krsnapaksa",
                     "tithi": 0
@@ -2050,7 +2060,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 11,
+                    "malayalamDay": 10,
                     "naksatra": "അനിഴം",
                     "paksa": "Krsnapaksa",
                     "tithi": 1
@@ -2064,13 +2074,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 12,
+                    "malayalamDay": 11,
                     "naksatra": "തൃക്കേട്ട",
                     "paksa": "Krsnapaksa",
                     "tithi": 2
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "May",
                     "mlMonth": "മെയ്‌",
@@ -2078,7 +2088,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 13,
+                    "malayalamDay": 12,
                     "naksatra": "മൂലം",
                     "paksa": "Krsnapaksa",
                     "tithi": 3
@@ -2092,7 +2102,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 14,
+                    "malayalamDay": 13,
                     "naksatra": "പൂരാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 4
@@ -2106,7 +2116,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 15,
+                    "malayalamDay": 14,
                     "naksatra": "ഉത്രാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
@@ -2120,7 +2130,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 16,
+                    "malayalamDay": 15,
                     "naksatra": "തിരുവോണം",
                     "paksa": "Krsnapaksa",
                     "tithi": 6
@@ -2134,7 +2144,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 17,
+                    "malayalamDay": 16,
                     "naksatra": "അവിട്ടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
@@ -2148,7 +2158,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 18,
+                    "malayalamDay": 17,
                     "naksatra": "ചതയം",
                     "paksa": "Krsnapaksa",
                     "tithi": 8
@@ -2167,13 +2177,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 19,
-                    "naksatra": "പൂരുരുട്ടാതി",
+                    "malayalamDay": 18,
+                    "naksatra": "ഉത്രട്ടാതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 9
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "June",
                     "mlMonth": "ജൂണ്‍",
@@ -2181,8 +2191,8 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 20,
-                    "naksatra": "ഉത്രട്ടാതി",
+                    "malayalamDay": 19,
+                    "naksatra": "രേവതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 11
                 },
@@ -2195,8 +2205,8 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 21,
-                    "naksatra": "രേവതി",
+                    "malayalamDay": 20,
+                    "naksatra": "അശ്വതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
                 },
@@ -2209,7 +2219,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 22,
+                    "malayalamDay": 21,
                     "naksatra": "ഭരണി",
                     "paksa": "Krsnapaksa",
                     "tithi": 13
@@ -2223,7 +2233,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 23,
+                    "malayalamDay": 22,
                     "naksatra": "കാർത്തിക",
                     "paksa": "Krsnapaksa",
                     "tithi": 14
@@ -2237,7 +2247,7 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 24,
+                    "malayalamDay": 23,
                     "naksatra": "രോഹിണി",
                     "paksa": "Krsnapaksa",
                     "tithi": 15
@@ -2251,7 +2261,7 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 25,
+                    "malayalamDay": 24,
                     "naksatra": "മകയിരം",
                     "paksa": "Suklapaksa",
                     "tithi": 1
@@ -2265,13 +2275,13 @@
                     "weekdayName": "ശനി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 26,
+                    "malayalamDay": 25,
                     "naksatra": "തിരുവാതിര",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "June",
                     "mlMonth": "ജൂണ്‍",
@@ -2279,7 +2289,7 @@
                     "weekdayName": "ഞായർ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 27,
+                    "malayalamDay": 26,
                     "naksatra": "പുണർതം",
                     "paksa": "Suklapaksa",
                     "tithi": 3
@@ -2293,7 +2303,7 @@
                     "weekdayName": "തിങ്കൾ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 28,
+                    "malayalamDay": 27,
                     "naksatra": "പൂയം",
                     "paksa": "Suklapaksa",
                     "tithi": 4
@@ -2307,7 +2317,7 @@
                     "weekdayName": "ചൊവ്വ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 29,
+                    "malayalamDay": 28,
                     "naksatra": "ആയില്യം",
                     "paksa": "Suklapaksa",
                     "tithi": 5
@@ -2321,7 +2331,7 @@
                     "weekdayName": "ബുധൻ",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 30,
+                    "malayalamDay": 29,
                     "naksatra": "മകം",
                     "paksa": "Suklapaksa",
                     "tithi": 6
@@ -2335,8 +2345,8 @@
                     "weekdayName": "വ്യാഴം",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 31,
-                    "naksatra": "മകം",
+                    "malayalamDay": 30,
+                    "naksatra": "പൂരം",
                     "paksa": "Suklapaksa",
                     "tithi": 7
                 },
@@ -2349,8 +2359,8 @@
                     "weekdayName": "വെള്ളി",
                     "malayalamYear": 1199,
                     "malayalamMonth": "ഇടവം",
-                    "malayalamDay": 32,
-                    "naksatra": "പൂരം",
+                    "malayalamDay": 31,
+                    "naksatra": "ഉത്രം",
                     "paksa": "Suklapaksa",
                     "tithi": 8
                 },
@@ -2369,7 +2379,7 @@
                     "tithi": 9
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "June",
                     "mlMonth": "ജൂണ്‍",
@@ -2383,7 +2393,8 @@
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Bakrid",
                     "year": 2024,
                     "month": "June",
                     "mlMonth": "ജൂണ്‍",
@@ -2467,7 +2478,7 @@
                     "tithi": 1
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "June",
                     "mlMonth": "ജൂണ്‍",
@@ -2565,7 +2576,7 @@
                     "tithi": 8
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "June",
                     "mlMonth": "ജൂണ്‍",
@@ -2607,7 +2618,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 18,
-                    "naksatra": "ഭരണി",
+                    "naksatra": "കാർത്തിക",
                     "paksa": "Krsnapaksa",
                     "tithi": 11
                 },
@@ -2621,7 +2632,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 19,
-                    "naksatra": "കാർത്തിക",
+                    "naksatra": "രോഹിണി",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
                 },
@@ -2635,7 +2646,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 20,
-                    "naksatra": "രോഹിണി",
+                    "naksatra": "മകയിരം",
                     "paksa": "Krsnapaksa",
                     "tithi": 14
                 },
@@ -2649,7 +2660,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 21,
-                    "naksatra": "മകയിരം",
+                    "naksatra": "തിരുവാതിര",
                     "paksa": "Krsnapaksa",
                     "tithi": 15
                 },
@@ -2663,12 +2674,12 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 22,
-                    "naksatra": "തിരുവാതിര",
+                    "naksatra": "പുണർതം",
                     "paksa": "Suklapaksa",
                     "tithi": 1
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "July",
                     "mlMonth": "ജൂലൈ",
@@ -2677,7 +2688,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 23,
-                    "naksatra": "പുണർതം",
+                    "naksatra": "പൂയം",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
@@ -2691,7 +2702,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "മിഥുനം",
                     "malayalamDay": 24,
-                    "naksatra": "പൂയം",
+                    "naksatra": "ആയില്യം",
                     "paksa": "Suklapaksa",
                     "tithi": 3
                 },
@@ -2766,7 +2777,7 @@
                     "tithi": 7
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "July",
                     "mlMonth": "ജൂലൈ",
@@ -2794,7 +2805,8 @@
                     "tithi": 9
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Muharam",
                     "year": 2024,
                     "month": "July",
                     "mlMonth": "ജൂലൈ",
@@ -2831,7 +2843,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 3,
-                    "naksatra": "അനിഴം",
+                    "naksatra": "തൃക്കേട്ട",
                     "paksa": "Suklapaksa",
                     "tithi": 12
                 },
@@ -2845,7 +2857,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 4,
-                    "naksatra": "തൃക്കേട്ട",
+                    "naksatra": "മൂലം",
                     "paksa": "Suklapaksa",
                     "tithi": 13
                 },
@@ -2859,12 +2871,12 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 5,
-                    "naksatra": "മൂലം",
+                    "naksatra": "പൂരാടം",
                     "paksa": "Suklapaksa",
                     "tithi": 14
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "July",
                     "mlMonth": "ജൂലൈ",
@@ -2873,7 +2885,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 6,
-                    "naksatra": "പൂരാടം",
+                    "naksatra": "ഉത്രാടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 0
                 },
@@ -2887,7 +2899,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 7,
-                    "naksatra": "ഉത്രാടം",
+                    "naksatra": "തിരുവോണം",
                     "paksa": "Krsnapaksa",
                     "tithi": 1
                 },
@@ -2901,7 +2913,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 8,
-                    "naksatra": "തിരുവോണം",
+                    "naksatra": "അവിട്ടം",
                     "paksa": "Krsnapaksa",
                     "tithi": 2
                 },
@@ -2962,7 +2974,7 @@
                     "tithi": 7
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "July",
                     "mlMonth": "ജൂലൈ",
@@ -3051,7 +3063,8 @@
                     "tithi": 13
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Karkidaka Vavu",
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3065,7 +3078,7 @@
                     "tithi": 14
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3163,7 +3176,7 @@
                     "tithi": 6
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3172,7 +3185,7 @@
                     "malayalamYear": 1199,
                     "malayalamMonth": "കർക്കടകം",
                     "malayalamDay": 27,
-                    "naksatra": "ചിത്ര",
+                    "naksatra": "ചോതി",
                     "paksa": "Suklapaksa",
                     "tithi": 7
                 },
@@ -3219,7 +3232,8 @@
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Independence Day",
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3261,7 +3275,7 @@
                     "tithi": 13
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3289,7 +3303,8 @@
                     "tithi": 0
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Sri Narayana Guru Jayanthi",
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3298,7 +3313,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 4,
-                    "naksatra": "അവിട്ടം",
+                    "naksatra": "ചതയം",
                     "paksa": "Krsnapaksa",
                     "tithi": 1
                 },
@@ -3312,7 +3327,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 5,
-                    "naksatra": "ചതയം",
+                    "naksatra": "പൂരുരുട്ടാതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 2
                 },
@@ -3326,7 +3341,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 6,
-                    "naksatra": "പൂരുരുട്ടാതി",
+                    "naksatra": "ഉത്രട്ടാതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 3
                 },
@@ -3340,7 +3355,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 7,
-                    "naksatra": "ഉത്രട്ടാതി",
+                    "naksatra": "രേവതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 4
                 },
@@ -3354,12 +3369,12 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 8,
-                    "naksatra": "രേവതി",
+                    "naksatra": "അശ്വതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3373,7 +3388,8 @@
                     "tithi": 6
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Sri Krishna Jayanthi",
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3401,7 +3417,8 @@
                     "tithi": 8
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Ayyankali Jayanthi", 
                     "year": 2024,
                     "month": "August",
                     "mlMonth": "ഓഗസ്റ്റ്‌",
@@ -3462,7 +3479,7 @@
             "name": "September",
             "days": [
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3513,7 +3530,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 19,
-                    "naksatra": "പൂരം",
+                    "naksatra": "ഉത്രം",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
@@ -3527,7 +3544,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ചിങ്ങം",
                     "malayalamDay": 20,
-                    "naksatra": "ഉത്രം",
+                    "naksatra": "അത്തം",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
@@ -3560,7 +3577,7 @@
                     "tithi": 4
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3644,7 +3661,8 @@
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Frist Onam",
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3658,7 +3676,8 @@
                     "tithi": 11
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Thiruvonam",
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3672,7 +3691,8 @@
                     "tithi": 12
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Milad Ul Nabi, Third Onam",
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3686,7 +3706,8 @@
                     "tithi": 13
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Fourth Onam",
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3737,12 +3758,13 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 4,
-                    "naksatra": "രേവതി",
+                    "naksatra": "അശ്വതി",
                     "paksa": "Krsnapaksa",
                     "tithi": 3
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Sree Narayana Guru Samathi",
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3751,12 +3773,12 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 5,
-                    "naksatra": "അശ്വതി",
+                    "naksatra": "ഭരണി",
                     "paksa": "Krsnapaksa",
                     "tithi": 4
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3765,7 +3787,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 6,
-                    "naksatra": "ഭരണി",
+                    "naksatra": "കാർത്തിക",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
                 },
@@ -3779,7 +3801,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 7,
-                    "naksatra": "കാർത്തിക",
+                    "naksatra": "രോഹിണി",
                     "paksa": "Krsnapaksa",
                     "tithi": 6
                 },
@@ -3793,7 +3815,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 8,
-                    "naksatra": "രോഹിണി",
+                    "naksatra": "മകയിരം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
                 },
@@ -3807,7 +3829,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 9,
-                    "naksatra": "മകയിരം",
+                    "naksatra": "തിരുവാതിര",
                     "paksa": "Krsnapaksa",
                     "tithi": 8
                 },
@@ -3821,7 +3843,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 10,
-                    "naksatra": "തിരുവാതിര",
+                    "naksatra": "പുണർതം",
                     "paksa": "Krsnapaksa",
                     "tithi": 9
                 },
@@ -3835,7 +3857,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 11,
-                    "naksatra": "പുണർതം",
+                    "naksatra": "പൂയം",
                     "paksa": "Krsnapaksa",
                     "tithi": 10
                 },
@@ -3849,12 +3871,12 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 12,
-                    "naksatra": "പൂയം",
+                    "naksatra": "ആയില്യം",
                     "paksa": "Krsnapaksa",
                     "tithi": 11
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "September",
                     "mlMonth": "സെപ്റ്റംബർ",
@@ -3863,7 +3885,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 13,
-                    "naksatra": "ആയില്യം",
+                    "naksatra": "മകം",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
                 },
@@ -3901,7 +3923,8 @@
                     "tithi": 14
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Gandhi Jayanti",
                     "year": 2024,
                     "month": "October",
                     "mlMonth": "ഒക്ടോബർ",
@@ -4036,12 +4059,13 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 25,
-                    "naksatra": "പൂരാടം",
+                    "naksatra": "ഉത്രാടം",
                     "paksa": "Suklapaksa",
                     "tithi": 9
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Mahanavami",
                     "year": 2024,
                     "month": "October",
                     "mlMonth": "ഒക്ടോബർ",
@@ -4050,12 +4074,13 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "കന്നി",
                     "malayalamDay": 26,
-                    "naksatra": "ഉത്രാടം",
+                    "naksatra": "തിരുവോണം",
                     "paksa": "Suklapaksa",
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Vijayadashami",
                     "year": 2024,
                     "month": "October",
                     "mlMonth": "ഒക്ടോബർ",
@@ -4153,7 +4178,7 @@
                     "tithi": 2
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "October",
                     "mlMonth": "ഒക്ടോബർ",
@@ -4190,7 +4215,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "തുലാം",
                     "malayalamDay": 6,
-                    "naksatra": "മകയിരം",
+                    "naksatra": "തിരുവാതിര",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
                 },
@@ -4204,7 +4229,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "തുലാം",
                     "malayalamDay": 7,
-                    "naksatra": "തിരുവാതിര",
+                    "naksatra": "പുണർതം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
                 },
@@ -4251,7 +4276,7 @@
                     "tithi": 10
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "October",
                     "mlMonth": "ഒക്ടോബർ",
@@ -4307,7 +4332,8 @@
                     "tithi": 13
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Deepavali",
                     "year": 2024,
                     "month": "October",
                     "mlMonth": "ഒക്ടോബർ",
@@ -4347,14 +4373,14 @@
                     "date": 2,
                     "weekdayName": "ശനി",
                     "malayalamYear": 1200,
-                    "malayalamMonth": "തുലാം",
+                    "malayalamMonth": "വിശാഖം",
                     "malayalamDay": 17,
                     "naksatra": "ചോതി",
                     "paksa": "Suklapaksa",
                     "tithi": 1
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "November",
                     "mlMonth": "നവംബർ",
@@ -4363,7 +4389,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "തുലാം",
                     "malayalamDay": 18,
-                    "naksatra": "വിശാഖം",
+                    "naksatra": "അനിഴം",
                     "paksa": "Suklapaksa",
                     "tithi": 2
                 },
@@ -4452,7 +4478,7 @@
                     "tithi": 8
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "November",
                     "mlMonth": "നവംബർ",
@@ -4503,7 +4529,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "തുലാം",
                     "malayalamDay": 28,
-                    "naksatra": "ഉത്രട്ടാതി",
+                    "naksatra": "രേവതി",
                     "paksa": "Suklapaksa",
                     "tithi": 12
                 },
@@ -4517,7 +4543,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "തുലാം",
                     "malayalamDay": 29,
-                    "naksatra": "രേവതി",
+                    "naksatra": "അശ്വതി",
                     "paksa": "Suklapaksa",
                     "tithi": 13
                 },
@@ -4550,7 +4576,7 @@
                     "tithi": 1
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "November",
                     "mlMonth": "നവംബർ",
@@ -4648,7 +4674,7 @@
                     "tithi": 8
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "November",
                     "mlMonth": "നവംബർ",
@@ -4699,7 +4725,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "വൃശ്ചികം",
                     "malayalamDay": 12,
-                    "naksatra": "അത്തം",
+                    "naksatra": "ചിത്ര",
                     "paksa": "Krsnapaksa",
                     "tithi": 12
                 },
@@ -4751,7 +4777,7 @@
             "name": "December",
             "days": [
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "December",
                     "mlMonth": "ഡിസംബർ",
@@ -4849,7 +4875,7 @@
                     "tithi": 6
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "December",
                     "mlMonth": "ഡിസംബർ",
@@ -4947,7 +4973,7 @@
                     "tithi": 14
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "December",
                     "mlMonth": "ഡിസംബർ",
@@ -4956,7 +4982,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "വൃശ്ചികം",
                     "malayalamDay": 30,
-                    "naksatra": "രോഹിണി",
+                    "naksatra": "മകയിരം",
                     "paksa": "Krsnapaksa",
                     "tithi": 0
                 },
@@ -4970,7 +4996,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 1,
-                    "naksatra": "മകയിരം",
+                    "naksatra": "തിരുവാതിര",
                     "paksa": "Krsnapaksa",
                     "tithi": 1
                 },
@@ -4984,7 +5010,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 2,
-                    "naksatra": "തിരുവാതിര",
+                    "naksatra": "പുണർതം",
                     "paksa": "Krsnapaksa",
                     "tithi": 2
                 },
@@ -4998,7 +5024,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 3,
-                    "naksatra": "പുണർതം",
+                    "naksatra": "പൂയം",
                     "paksa": "Krsnapaksa",
                     "tithi": 3
                 },
@@ -5012,7 +5038,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 4,
-                    "naksatra": "പൂയം",
+                    "naksatra": "ആയില്യം",
                     "paksa": "Krsnapaksa",
                     "tithi": 4
                 },
@@ -5026,7 +5052,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 5,
-                    "naksatra": "ആയില്യം",
+                    "naksatra": "മകം",
                     "paksa": "Krsnapaksa",
                     "tithi": 5
                 },
@@ -5040,12 +5066,12 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 6,
-                    "naksatra": "മകം",
+                    "naksatra": "പൂരം",
                     "paksa": "Krsnapaksa",
                     "tithi": 6
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "December",
                     "mlMonth": "ഡിസംബർ",
@@ -5054,7 +5080,7 @@
                     "malayalamYear": 1200,
                     "malayalamMonth": "ധനു",
                     "malayalamDay": 7,
-                    "naksatra": "പൂരം",
+                    "naksatra": "ഉത്രം",
                     "paksa": "Krsnapaksa",
                     "tithi": 7
                 },
@@ -5087,7 +5113,8 @@
                     "tithi": 9
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
+                    "holidayname":"Christmas Day",
                     "year": 2024,
                     "month": "December",
                     "mlMonth": "ഡിസംബർ",
@@ -5143,7 +5170,7 @@
                     "tithi": 13
                 },
                 {
-                    "holiday":false,
+                    "holiday":true,
                     "year": 2024,
                     "month": "December",
                     "mlMonth": "ഡിസംബർ",

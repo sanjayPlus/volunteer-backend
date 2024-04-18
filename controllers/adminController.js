@@ -423,6 +423,7 @@ const addUser = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
+
 const updateUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -1540,7 +1541,16 @@ const getStaticsOfPolling = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
-
+const getSinglePoll = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const polling = await VotePolling.findById(id);
+        res.status(200).json({ polling });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
 const addWhatsAppPublic = async (req, res) => {
     try {
         const { link, booth, assembly, constituency, district, optional, membersNo } = req.body;
@@ -2186,6 +2196,7 @@ module.exports = {
     deletePolingParty,
     UpdatePolling,
     getStaticsOfPolling,
+    getSinglePoll,
     addWhatsAppPublic,
     getWhatsAppPublic,
     getWhatsAppPublicCount,
