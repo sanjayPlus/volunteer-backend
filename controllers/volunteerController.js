@@ -19,6 +19,7 @@ const { createCanvas, loadImage } = require('canvas');
 const WhatsAppPublic = require("../models/WhatsAppPublic");
 const Blog = require("../models/Blog");
 const Calendar = require("../models/Calendar");
+const History = require("../models/History");
 
 const register = async (req, res) => {
     try {
