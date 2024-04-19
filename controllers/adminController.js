@@ -2015,15 +2015,26 @@ const addCalendar = async (req, res) => {
 }
 const getCalendar = async (req, res) => {
     try {
-        const {date}= req.query
+          const {date,month,week}= req.query
         let query = {
-
             uploadedBy: "admin"
         }
         if(date){
             query.date = date
         }
-
+       //IF month is given then get all the data of that month . i need to get the data of that month
+        if(month){  
+            query.date = { $regex: month, $options: 'i' }
+        }
+        //if week then get all the data of that week there are 7 days in a week so we can get the data of that week
+        if(week){
+                const date = new Date(week)
+                const start = date.getDate() - date.getDay();
+                const end = start + 6;
+                const startDate = new Date(date.setDate(start)).toISOString().split('T')[0]
+                const endDate = new Date(date.setDate(end)).toISOString().split('T')[0]
+                query.date = { $gte: startDate, $lte: endDate };
+        }
         const calendar = await Calendar.find(query).sort({ _id: -1 });
         res.status(200).json(calendar);
     } catch (error) {
