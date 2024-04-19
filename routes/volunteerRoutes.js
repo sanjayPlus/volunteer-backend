@@ -67,7 +67,7 @@ router.delete('/delete-calendar/:id',volunteerAuth,volunteerController.deleteCal
 
 router.post('/add-history',volunteerAuth,volunteerController.addHistory);
 router.get('/get-history',volunteerAuth,volunteerController.getHistory);
-router.post('/delete-history',volunteerAuth,volunteerController.deleteHistory);
+router.delete('/delete-history/:id',volunteerAuth,volunteerController.deleteHistory);
 
 
 module.exports = router;
