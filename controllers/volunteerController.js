@@ -1797,7 +1797,7 @@ const deleteHistory = async (req, res) => {
 }
 const getHouseNameWithUsers = async (req, res) => {
     try {
-        const {booth } = req.params;
+        const {booth } = req.query;
     
         const volunteer = await Volunteer.findById(req.volunteer.id);
         if (!volunteer) {
