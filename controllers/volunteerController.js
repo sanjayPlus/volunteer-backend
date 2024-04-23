@@ -1817,9 +1817,11 @@ const getHouseNameWithUsers = async (req, res) => {
             //get the unique house names
             const uniqueHouseName = [...new Set(users.map(user => user.houseName))];
             const usersWithHouseName = users.map(user => {
-               
+                const houseName = user.houseName;
                 return {
-                    houseName:users.filter(user => user.houseName === houseName)
+                    houseName:  houseName,
+                    count: users.filter(user => user.houseName === houseName).length,
+                    users: users.filter(user => user.houseName === houseName)
                 }
             })
           
