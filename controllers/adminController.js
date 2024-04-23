@@ -1962,6 +1962,8 @@ const getCasteV2 = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+
 const addJsonFromPdf = async (req, res) => {
     try {
         const { data, booth, district, assembly, constituency } = req.body;
@@ -2074,6 +2076,7 @@ const getAllBlogs = async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 }
+
 const deleteBlog = async (req, res) => {
     try {
         const blog = await Blog.findByIdAndDelete(req.params.id);
@@ -2099,6 +2102,7 @@ const addletter = async (req, res) => {
     }
     
 }
+
 const getletter = async (req, res) => {
     try {
         const letter = await Letter.find({})
@@ -2118,6 +2122,7 @@ const deleteletter = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }
 }
+
 const getMalDate = async (req, res) => {
     try{
         //send json file inside helpers folder

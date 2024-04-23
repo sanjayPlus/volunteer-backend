@@ -1795,7 +1795,40 @@ const deleteHistory = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+const getHouseNameWithUsers = async (req, res) => {
+    try {
+        const {booth } = req.body;
+    
+        const volunteer = await Volunteer.findById(req.volunteer.id);
+        if (!volunteer) {
+            return res.status(400).json({ error: "Volunteer not found" });
+        }
+        if (!volunteer.verified) {
+            return res.status(400).json({ error: "Volunteer not verified" });
+        }
+        if (!volunteer.district) {
+            return res.status(400).json({ error: "Volunteer District not found" });
+        }
+        if (!volunteer.boothRule.includes(booth)) {
+            return res.status(400).json({ error: "Volunteer Booth not found" });
+        }
 
+        const users = await User.find({ booth: booth, district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly });
+            //get the unique house names
+            const uniqueHouseName = [...new Set(users.map(user => user.houseName))];
+            const usersWithHouseName = users.map(user => {
+               
+                return {
+                    houseName:users.filter(user => user.houseName === houseName)
+                }
+            })
+          
+            res.status(200).json({ uniqueHouseName, usersWithHouseName });
+    } catch (error) {
+      console.error("Error deleting :", error.message);
+        res.status(500).json({ error: "Internal Server Error" });  
+    }
+} 
 
 module.exports = {
     register,
@@ -1843,5 +1876,6 @@ module.exports = {
     deleteCalendar,
     addHistory,
     getHistory,
-    deleteHistory
+    deleteHistory,
+    getHouseNameWithUsers
 }

@@ -55,7 +55,7 @@ const HistorySchema = new mongoose.Schema({
     },
     booth: {
         type: String
-    },constituency: {
+    }, constituency: {
         type: String
     },
     uploadedBy: {
