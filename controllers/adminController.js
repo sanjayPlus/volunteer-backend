@@ -2149,6 +2149,21 @@ const getMalDate = async (req, res) => {
         res.status(500).json({ error: "internal server error" })
     }   
 }
+const getCustomerCare = async (req, res) => {
+    try{
+        res.status(200).json({details:{
+            phone:"9281749650",
+            email:"info@plusitpark.com",
+            whatsapp:"9281749650",
+            facebook:"https://www.facebook.com/",
+            instagram:"https://www.instagram.com/",
+            
+        }})
+    }catch(error){
+        console.error(error.message);
+        res.status(500).json({ error: "internal server error" })
+    }
+}
 module.exports = {
     Login,
     Protected,
@@ -2235,5 +2250,6 @@ module.exports = {
     deleteCalendar,
     addCalendar,
     getAllBlogs,
-    getMalDate
+    getMalDate,
+    getCustomerCare
 }

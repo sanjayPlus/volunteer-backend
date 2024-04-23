@@ -277,5 +277,7 @@ router.delete('/letter/:id',adminAuth,adminController.deleteletter);
 
 router.get('/get-mal-date',adminController.getMalDate);
 
+router.get('/customer-care',adminController.getCustomerCare);
+
 
 module.exports = router;
