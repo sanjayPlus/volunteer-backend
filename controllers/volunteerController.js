@@ -1797,7 +1797,7 @@ const deleteHistory = async (req, res) => {
 }
 const getHouseNameWithUsers = async (req, res) => {
     try {
-        const {booth } = req.query;
+        const { booth } = req.query;
     
         const volunteer = await Volunteer.findById(req.volunteer.id);
         if (!volunteer) {
@@ -1814,23 +1814,23 @@ const getHouseNameWithUsers = async (req, res) => {
         }
 
         const users = await User.find({ booth: booth, district: volunteer.district, constituency: volunteer.constituency, assembly: volunteer.assembly });
-            //get the unique house names
-            const uniqueHouseName = [...new Set(users.map(user => user.houseName))];
-            const usersWithHouseName = users.map(user => {
-                const houseName = user.houseName;
-                return {
-                    houseName:  houseName,
-                    count: users.filter(user => user.houseName === houseName).length,
-                    users: users.filter(user => user.houseName === houseName)
-                }
-            })
+        //get the unique house names
+        const uniqueHouseNames = [...new Set(users.map(user => user.houseName))];
+        const usersWithHouseName = uniqueHouseNames.map(houseName => {
+            const usersInHouse = users.filter(user => user.houseName === houseName);
+            return {
+                houseName: houseName,
+                count: usersInHouse.length,
+                users: usersInHouse
+            }
+        });
           
-            res.status(200).json({ uniqueHouseName, usersWithHouseName });
+        res.status(200).json({ uniqueHouseNames, usersWithHouseName });
     } catch (error) {
       console.error("Error deleting :", error.message);
         res.status(500).json({ error: "Internal Server Error" });  
     }
-} 
+}
 
 module.exports = {
     register,
