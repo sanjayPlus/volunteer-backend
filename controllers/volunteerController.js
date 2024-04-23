@@ -488,8 +488,8 @@ const CreateNonEligibleUser = async (req, res) => {
     try {
         const { name, houseNo, gender, age, voterId, booth, guardianName, instagram, facebook, whatsappNo, infavour, caste, casteType, partyName, partyType, voterStatus, phone } = req.body;
         const volunteer = await Volunteer.findById(req.volunteer.id);
-        if(!booth){
-            return res.status(400).json({error: "Please provide a valid booth"});
+        if (!booth) {
+            return res.status(400).json({ error: "Please provide a valid booth" });
         }
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -514,7 +514,7 @@ const CreateNonEligibleUser = async (req, res) => {
             district: volunteer.district,
             constituency: volunteer.constituency,
             assembly: volunteer.assembly,
-            sNo:"1"
+            sNo: "1"
         });
         await user.save();
         res.status(200).json({ message: "User created successfully", user });
@@ -531,7 +531,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone, houseName } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -570,7 +570,11 @@ const getUsers = async (req, res) => {
                 query['voterId'] = new RegExp(search, 'i');
             } else if (houseNo) {
                 query['houseNo'] = search;
-            } else if (sNoSearch) {
+            } else if (houseName) {
+                query['houseName'] = search;
+            }
+
+            else if (sNoSearch) {
 
                 query['sNo'] = new RegExp(search, 'i');
             }
@@ -1672,7 +1676,7 @@ const getBlog = async (req, res) => {
 const deleteBlog = async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
-        if(blog.uploadedBy == req.volunteer.id){
+        if (blog.uploadedBy == req.volunteer.id) {
             await Blog.findByIdAndDelete(req.params.id);
         }
         res.status(200).json(blog);
@@ -1695,12 +1699,12 @@ const addCalendar = async (req, res) => {
 
 const getCalendar = async (req, res) => {
     try {
-        const {date}= req.query
+        const { date } = req.query
         let query = {
 
             uploadedBy: req.volunteer.id
         }
-        if(date){
+        if (date) {
             query.date = date
         }
 
@@ -1714,7 +1718,7 @@ const getCalendar = async (req, res) => {
 const deleteCalendar = async (req, res) => {
     try {
         const calendar = await Calendar.findById(req.params.id);
-        if(calendar.uploadedBy == req.volunteer.id){
+        if (calendar.uploadedBy == req.volunteer.id) {
             await Calendar.findByIdAndDelete(req.params.id);
         }
         res.status(200).json(calendar);
@@ -1785,7 +1789,7 @@ const deleteHistory = async (req, res) => {
         if (!history) {
             return res.status(404).json({ message: "History not found" });
         }
-        if(history.uploadedBy !== req.volunteer.id){
+        if (history.uploadedBy !== req.volunteer.id) {
             return res.status(404).json({ message: "History not found" });
         }
         await History.deleteOne({ _id: id });
@@ -1798,7 +1802,7 @@ const deleteHistory = async (req, res) => {
 const getHouseNameWithUsers = async (req, res) => {
     try {
         const { booth } = req.query;
-    
+
         const volunteer = await Volunteer.findById(req.volunteer.id);
         if (!volunteer) {
             return res.status(400).json({ error: "Volunteer not found" });
@@ -1824,11 +1828,11 @@ const getHouseNameWithUsers = async (req, res) => {
                 users: usersInHouse
             }
         });
-          
+
         res.status(200).json({ uniqueHouseNames, usersWithHouseName });
     } catch (error) {
-      console.error("Error deleting :", error.message);
-        res.status(500).json({ error: "Internal Server Error" });  
+        console.error("Error deleting :", error.message);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
