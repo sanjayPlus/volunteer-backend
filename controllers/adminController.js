@@ -2152,9 +2152,9 @@ const getMalDate = async (req, res) => {
 const getCustomerCare = async (req, res) => {
     try{
         res.status(200).json({details:{
-            phone:"9281749650",
+            phone:"8281749650",
             email:"info@plusitpark.com",
-            whatsapp:"9281749650",
+            whatsapp:"8281749650",
             facebook:"https://www.facebook.com/",
             instagram:"https://www.instagram.com/",
             
