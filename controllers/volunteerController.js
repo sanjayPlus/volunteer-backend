@@ -531,7 +531,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone, houseName } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone, houseName,fromAge,toAge } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -648,6 +648,12 @@ const getUsers = async (req, res) => {
         } else {
             query['eligibleForVoting'] = true;
         }
+        if(fromAge && toAge){
+            query['age'] = {
+                $gte: fromAge,
+                $lte: toAge
+            }
+        }
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
                 // Get users with votingDay Not ""
@@ -687,7 +693,7 @@ const getUsers = async (req, res) => {
 };
 const getUsersCount = async (req, res) => {
     try {
-        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, eligibleForVoting, isVotingDone } = req.query;
+        const { booth, search, gender, caste, infavour, age, voterStatus, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, eligibleForVoting, isVotingDone, fromAge, toAge } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -785,6 +791,12 @@ const getUsersCount = async (req, res) => {
             query['eligibleForVoting'] = false
         } else {
             query['eligibleForVoting'] = true;
+        }
+        if(fromAge && toAge){
+            query['age'] = {
+                $gte: fromAge,
+                $lte: toAge
+            }
         }
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
