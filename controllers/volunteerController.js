@@ -812,7 +812,7 @@ const getUsersCount = async (req, res) => {
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
         }
-        console.log(users)
+
         res.status(200).json({
             count: users.length,
         });
