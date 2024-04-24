@@ -648,10 +648,17 @@ const getUsers = async (req, res) => {
         } else {
             query['eligibleForVoting'] = true;
         }
-        if(fromAge && toAge){
-            query['age'] = {
-                $gte: fromAge,
-                $lte: toAge
+        if (fromAge && toAge) {
+            // Ensure both fromAge and toAge are converted to numbers
+            const fromAgeNum = parseInt(fromAge);
+            const toAgeNum = parseInt(toAge);
+
+            // Check if conversion is successful
+            if (!isNaN(fromAgeNum) && !isNaN(toAgeNum)) {
+                query['age'] = {
+                    $gte: fromAgeNum,
+                    $lte: toAgeNum
+                };
             }
         }
         if (isVotingDone != "2" && isVotingDone != "2") {
@@ -792,10 +799,17 @@ const getUsersCount = async (req, res) => {
         } else {
             query['eligibleForVoting'] = true;
         }
-        if(fromAge && toAge){
-            query['age'] = {
-                $gte: fromAge,
-                $lte: toAge
+        if (fromAge && toAge) {
+            // Ensure both fromAge and toAge are converted to numbers
+            const fromAgeNum = parseInt(fromAge);
+            const toAgeNum = parseInt(toAge);
+
+            // Check if conversion is successful
+            if (!isNaN(fromAgeNum) && !isNaN(toAgeNum)) {
+                query['age'] = {
+                    $gte: fromAgeNum,
+                    $lte: toAgeNum
+                };
             }
         }
         if (isVotingDone != "2" && isVotingDone != "2") {
