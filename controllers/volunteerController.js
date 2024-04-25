@@ -531,7 +531,7 @@ const Protected = async (req, res) => {
 }
 const getUsers = async (req, res) => {
     try {
-        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone, houseName,fromAge,toAge } = req.query;
+        const { booth, search, page, perPage, gender, caste, infavour, age, voterStatus, sNo, voterId, verified, marriedStatus, swingVote, year, abroadType, hardFanVote, userVotingType, houseNo, partyType, partyName, votingDay, casteType, sNoSearch, sNoAndNameSearch, eligibleForVoting, isVotingDone, houseName, fromAge, toAge } = req.query;
         const query = {};
         const volunteer = await Volunteer.findById(req.volunteer.id);
 
@@ -650,9 +650,9 @@ const getUsers = async (req, res) => {
         }
         if (fromAge && toAge) {
             query['age'] = { $gte: fromAge, $lte: toAge };
-            
+
         }
-        
+
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
                 // Get users with votingDay Not ""
@@ -792,16 +792,10 @@ const getUsersCount = async (req, res) => {
             query['eligibleForVoting'] = true;
         }
         if (fromAge && toAge) {
-            // Ensure toAge is at least three digits by padding with zeros if necessary
-            if (toAge.length === 2) {
-                toAge = '0' + toAge;
+            if (fromAge.length === toAge.length) {
+                query['age'] = { $gte: fromAge, $lte: toAge };
             }
-        
-            query['age'] = { 
-                $gte:fromAge, // convert fromAge to a number
-                $lte: toAge    // convert toAge to a number
-            };                      
-        }  
+        }
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
                 // Get users with votingDay Not ""
@@ -815,6 +809,11 @@ const getUsersCount = async (req, res) => {
 
         if (users.length === 0) {
             return res.status(404).json({ error: "No users found" });
+        }
+        if(fromAge && toAge){
+            if(fromAge.length !== toAge.length){
+                users = users.filter(user => user.age >= fromAge && user.age <= toAge);
+            }
         }
 
         res.status(200).json({
