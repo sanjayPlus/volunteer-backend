@@ -798,8 +798,8 @@ const getUsersCount = async (req, res) => {
             }
         
             query['age'] = { 
-                $gte: parseInt(fromAge), // convert fromAge to a number
-                $lte: parseInt(toAge)    // convert toAge to a number
+                $gte:fromAge, // convert fromAge to a number
+                $lte: toAge    // convert toAge to a number
             };                      
         }  
         if (isVotingDone != "2" && isVotingDone != "2") {
