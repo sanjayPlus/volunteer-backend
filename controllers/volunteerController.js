@@ -811,8 +811,9 @@ const getUsersCount = async (req, res) => {
             return res.status(404).json({ error: "No users found" });
         }
         if(fromAge && toAge){
+            console.log(fromAge, toAge)
             if(fromAge.length !== toAge.length){
-                users = users.filter(user => user.age >= fromAge && user.age <= toAge);
+                users = users.filter(user => user.age >= parseInt(fromAge) && user.age <= parseInt(toAge));
             }
         }
 
