@@ -792,18 +792,16 @@ const getUsersCount = async (req, res) => {
             query['eligibleForVoting'] = true;
         }
         if (fromAge && toAge) {
-            // Ensure both fromAge and toAge are converted to numbers
-            const fromAgeNum = parseInt(fromAge);
-            const toAgeNum = parseInt(toAge);
-
-            // Check if conversion is successful
-            if (!isNaN(fromAgeNum) && !isNaN(toAgeNum)) {
-                query['age'] = {
-                    $gte: fromAgeNum,
-                    $lte: toAgeNum
-                };
+            // Ensure toAge is at least three digits by padding with zeros if necessary
+            if (toAge.length === 2) {
+                toAge = '0' + toAge;
             }
-        }
+        
+            query['age'] = { 
+                $gte: parseInt(fromAge), // convert fromAge to a number
+                $lte: parseInt(toAge)    // convert toAge to a number
+            };                      
+        }  
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
                 // Get users with votingDay Not ""
