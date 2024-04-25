@@ -649,23 +649,13 @@ const getUsers = async (req, res) => {
             query['eligibleForVoting'] = true;
         }
         if (fromAge && toAge) {
-            // Ensure both fromAge and toAge are formatted to three digits
-            const fromAgeStr = ('00' + fromAge).slice(-3);
-            const toAgeStr = ('00' + toAge).slice(-3);
-            
-            // Convert formatted strings to numbers
-            const fromAgeNum = parseInt(fromAgeStr);
-            const toAgeNum = parseInt(toAgeStr);
-        
-            console.log(fromAgeNum, toAgeNum);
-        
-            // Check if conversion is successful
-            if (!isNaN(fromAgeNum) && !isNaN(toAgeNum)) {
-                query['age'] = {
-                    $gt: fromAgeNum,
-                    $lt: toAgeNum
-                };
+            query['age'] = {
+                $and: [
+                    { $gte: fromAge },
+                    { $lte: toAge }
+                ]
             }
+            
         }
         
         if (isVotingDone != "2" && isVotingDone != "2") {
