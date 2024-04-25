@@ -649,17 +649,9 @@ const getUsers = async (req, res) => {
             query['eligibleForVoting'] = true;
         }
         if (fromAge && toAge) {
-            // Ensure toAge is at least three digits by padding with zeros if necessary
-            if (toAge.length === 2) {
-                toAge = '0' + toAge;
-            }
-        
-            query['age'] = { 
-                $gte: parseInt(fromAge), // convert fromAge to a number
-                $lte: parseInt(toAge)    // convert toAge to a number
-            };                      
-        }  
-        
+            query['age'] = { $gte: fromAge, $lte: toAge };
+            
+        }
         
         if (isVotingDone != "2" && isVotingDone != "2") {
             if (isVotingDone == "1") {
